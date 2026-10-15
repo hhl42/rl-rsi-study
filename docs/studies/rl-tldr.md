@@ -25,7 +25,9 @@ Table 2 reports the following on the Synthetic-API (SAPI) frontier-difficulty sp
 | SFT on 100 successful rollouts | 20.8% | 9.5M / 217k |
 | SFT on deduplicated task–insight pairs | 16.9% | 4.6M / 68k |
 
-The table reports standard deviation of 0.6 percentage points. Short insights reduce policy-update work, but they do not match the best listed score. The same table explicitly excludes roughly one billion tokens of rollout collection from these update counts. It therefore does not establish an equally large reduction in end-to-end cost.
+The table reports standard deviation of 0.6 percentage points. Short insights reduce policy-update work, but they do not match the best listed score. SFT on 100 successful rollouts scores almost the same as SFT on 3,500 (20.8% versus 20.9%). In this setting, finding a small set of useful successes may matter more than increasing the number of demonstrations. This is a hypothesis for our data selection, not a general sample-efficiency law.
+
+The same table explicitly excludes roughly one billion tokens of rollout collection from these update counts. It therefore does not establish an equally large reduction in end-to-end cost.
 
 Transfer is uneven: section 4 reports improvements in API tasks but overfitting on Leetcode. SAPI is proprietary, which limits independent access to that part of the evidence.
 

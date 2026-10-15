@@ -2,15 +2,21 @@
 
 Third Moment Research is a useful case for comparing a task supplier with a managed improvement service. Our aim is to understand the customer problem and delivery requirements, then test whether a narrower opportunity fits this team.
 
-Sources reviewed on 2026-10-14: the [company product site](https://thirdmomentresearch.com/) and the [OpenAI case study](https://openai.com/index/third-moment-research/), published that day. These establish public positioning and reported operations, not independently measured business performance.
+Sources checked on 2026-10-14 describe three different things. Keep their evidence separate.
 
 ## Public offering
 
-The company advertises managed, OpenAI API-compatible inference endpoints tailored to customer workflows. It describes collecting request trajectories, diagnosing failures, asking customers which issues to address, and improving the model or harness. Customers receive a revised endpoint and evaluation results. Serving, evaluation, post-training, and versioning are part of the advertised service. [Company site](https://thirdmomentresearch.com/)
+The [company product site](https://thirdmomentresearch.com/) advertises managed, OpenAI API-compatible endpoints tailored to a customer's workflow. It describes collecting trajectories, diagnosing failures, having the customer choose issues to fix, and returning an improved endpoint with evaluation results. Serving, RL post-training, harness changes, and versioning are advertised parts of the service. This establishes an offer, not measured customer outcomes.
 
-The OpenAI case study describes synthetic scenarios derived from weaknesses in agent behavior. It reports quantitative research as an early application, 10,000 concurrent agents, and research sessions lasting 36–48 hours. These are operating-scale claims, not evidence of revenue or profitability. [Case study](https://openai.com/index/third-moment-research/)
+## Internal research described by OpenAI
 
-The pages reviewed do not establish pricing, customer count, contract economics, data ownership terms, or an independently validated improvement rate. They also do not specify which training methods apply to which customer deployment. We should not infer those details from the phrase self-improving.
+The [OpenAI case study](https://openai.com/index/third-moment-research/) describes agents improving a baseline trading system built by Third Moment's own engineers. It reports 10,000 concurrent agents and research sessions of 36–48 hours, using OpenAI models and Codex. Its concrete examples concern faster backtesting, changes to the surrounding harness, and environment security testing. It does not document customer endpoint results or a customer model-weight update. Its scale claims concern internal research, not adoption or revenue for the advertised service.
+
+## Hiring evidence and remaining gaps
+
+The [careers page](https://thirdmomentresearch.com/careers/) asks for experience post-training open-weight models of at least 8B parameters and names SkyRL and Miles. This supports an interest in operating a training stack. An open-weight implementation of the endpoint service is a plausible inference, but the page does not identify the deployed models or connect them to the OpenAI case study.
+
+The reviewed pages do not establish prices, named endpoint customers, contract economics, data ownership terms, or independently measured improvement. OpenAI API compatibility describes an interface; it does not identify the model provider or training method.
 
 ## Business interpretation
 

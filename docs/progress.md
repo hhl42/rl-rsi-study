@@ -4,22 +4,22 @@ This is the current worklist and decision record. Keep it useful to someone star
 
 ## Current state
 
-As of 2026-10-14, the repository contains an initial survey, a study plan, a source register, and commercial hypotheses. The [study index](studies/README.md) covers all 14 original references with study notes. A shared worksheet guides reading of the 14 added foundational sources. The three supplied paper PDFs were inspected in selected methods and results sections. The X article, subsequently supplied as a PDF, was reviewed in full. The source register distinguishes those reads from lighter orientation reviews and incomplete page retrievals.
+As of 2026-10-14, the repository contains a survey, a study plan, a source register, study notes for the original references, and a sourced initial market map. The [glossary](glossary.md) and [foundation worksheet](studies/foundations.md) support readers new to AI. The source register distinguishes selected paper sections, reviewed pages, orientation reads, and unaudited artifacts.
 
-The first [AutoEnvScaling code study](studies/autoenvscaling-code.md) is complete at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`. We traced selected generation, admission, calibration, pool, export, and training paths; 198 selected offline tests passed, and synthetic probes exposed several important contract gaps. The [research record](records/2026-10-14-autoenvscaling-code/README.md) preserves the code, outputs, environment, and repeat commands.
+The first [AutoEnvScaling code study](studies/autoenvscaling-code.md) inspected selected paths at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`. The [original record](records/2026-10-14-autoenvscaling-code/README.md) owns the offline tests and probes. The [independent review checks](records/2026-10-14-claude-review-checks/README.md) add a solver-side probe. The [review resolution](reviews/claude-init-review-1-resolution.md) records this follow-up's source checks, corrections, and recommendation-by-recommendation response.
 
-No live generation or sandbox experiment, model training, customer interview, or paper-result reproduction has been completed. The survey and opportunity matrix remain drafts. Offline behavior checks establish facts about the inspected release, not historical training results or commercial demand.
+No live generation or sandbox experiment, model training, customer interview, or paper-result reproduction has been completed. No buyer class, code-reuse path, or paid-run budget has been selected. Public market evidence and offline behavior checks help frame decisions; they do not establish demand or training benefit.
 
 ## Next work
 
 | Priority | Work | Output | State |
 | --- | --- | --- | --- |
-| 1 | Team walkthrough of the AES task lifecycle and foundation concepts | Corrections to the [systems explanation](studies/autoenvscaling.md) and a shared task example | Study ready; team walkthrough planned |
-| 2 | Define and check the task data contract before a live E1/E2 pilot | Outcome status through export, minimum scored attempts, reset behavior, and memory-selection rules; follow the [test sequence](studies/autoenvscaling.md#7-what-to-test-next) | Initial code audit and offline probes completed; contract checks next |
-| 3 | Compare suppliers and managed improvement services beyond Third Moment Research | Alternatives, buyer hypotheses, public offer and pricing evidence where available | Planned |
-| 4 | Identify accessible workflows and potential interview participants | Candidate cases and interview plan; outreach only when directed | Planned |
-| 5 | Resolve study time, experiment budget, compute access, and training partners | Resource assumptions for the first pilot | Open |
-| 6 | Select and run the smallest useful experiments from the plan | Reproducible records and updates to the opportunity comparison | Planned after pilot scope and resources are known |
+| 1 | Compare reachable buyers and their existing alternatives | One accessible problem per buyer class where possible, permitted examples, and a provisional choice with a reason to reverse it | Public map added; team access information needed |
+| 2 | Learn through small tasks and traces alongside the buyer research | H1's three to five tasks, one annotated trace, and the team's explanation of a reward and update | Exercise and teaching material ready; execution resources not agreed |
+| 3 | Prepare concrete resource proposals | Model/API access, sandbox setup, maximum spend, stop conditions, and any training partner for H1/H2 | Open; no paid runs authorized |
+| 4 | Test graders on the chosen task family | E1 defect counts, expert review effort, costs, and a usable/repairable/too-costly decision | Procedures defined; tasks and cases not yet selected |
+| 5 | Test the benefit that matters to the first buyer | E2, E3, or bounded training comparison; authorized interviews or pilot evidence | Select after the buyer and task-quality checks |
+| Conditional | If reusing AES, check how results reach training | A sandbox failure stays unscored; too little valid evidence remains inconclusive; reset and isolation checks pass | Audit findings documented; no repair project selected |
 
 ## Decisions
 
@@ -45,7 +45,7 @@ The user supplied Eli Gottlieb's *How to make a good RL task* as a PDF. Replaced
 
 The user requested a deeper systems explanation, code study, framework lessons, open questions, and next tests. Inspected the official preview at a pinned commit and completed selected offline tests and synthetic probes without running models or cloud infrastructure. Expanded the main study and added a code companion and reproducible record.
 
-The checks confirmed that a validation infrastructure failure can become a negative training reward during export, and that calibration can admit only two scored attempts after failed retries. They also clarified rubric exclusions, retained aggregate feedback in the no-trace condition, memory replacement, and differences between bridge and carry training. These are observations about the preview; their effects on the original research runs are unknown.
+The [code study](studies/autoenvscaling-code.md#3-confirmed-behavior-and-its-consequences) owns the findings and their limits. They concern the inspected preview; effects on the historical paper runs remain unknown.
 
 Prioritize explicit data contracts, independent verifier checks, and calibration stability before training. Refined E2 to hold aggregate performance information constant when measuring trace value. No product choice, live-run budget, or training reproduction has been approved by this study.
 
@@ -53,12 +53,16 @@ Prioritize explicit data contracts, independent verifier checks, and calibration
 
 The user asked Claude to review every document for accuracy, plan quality, and organization. The [review](reviews/claude-init-review-1.md) found the cited numbers accurate and confirmed the AES code findings, with a correction needed to the Third Moment Research note. It recommends putting market research and hands-on foundations before further AES work, adding environment security and a market map, and simplifying the document stack. Two supporting records were added: [review checks of the AES code study](records/2026-10-14-claude-review-checks/README.md) and an unverified [market scan](records/2026-10-14-market-scan/README.md).
 
-The recommendations have not been adopted. The worklist above is unchanged until the team decides.
+At the time of that review, its recommendations were pending. The following resolution records the changes now adopted for this study.
 
-## Findings that affect the next step
+### 2026-10-14 Resolve Claude review 1
 
-- AutoEnvScaling's paper distinguishes matched solver updates from matched total compute and documents supervised proposer initialization. Its preview adds concrete data-integrity and reproduction gaps. Use the [systems study](studies/autoenvscaling.md) for experiment choices and the [code findings](studies/autoenvscaling-code.md) before reusing an implementation path.
-- Third Moment Research's own product site makes its managed offering explicit. Use the [business note](studies/third-moment-research.md) when comparing buyers and deliverables.
-- Gottlieb's [task-factory study](studies/eli-gottlieb-reference.md) distinguishes repairing one task from improving the process that produces later tasks. Its proposed use of expert feedback informs an extension of E1; it does not establish training benefit or commercial demand.
+The user requested careful evaluation and documentation updates on points we agree with. The [resolution](reviews/claude-init-review-1-resolution.md) records each recommendation, checked evidence, and narrower interpretations where needed.
 
-Add later decisions with their evidence and effect on the plan. Move detailed experiments and interview records into linked files under `docs/records/` when they exist.
+Adopt market and buyer research alongside practical foundations as the next work. Further AES repair depends on selecting its code for an experiment. This keeps the technical study tied to a commercial decision. Added beginner teaching material, H1/H2 exercises, operational E1/E2 measures, an initial market map, security boundaries, and a glossary. Corrected source attribution and expanded important result context.
+
+Keep the short per-source notes and improve their index instead of merging them. They provide stable owners for later evidence, and several are primary reports rather than secondary material. Keep dated reviews and experiment records unchanged; remove duplication from current summaries.
+
+The first buyer remains undecided because customer access, permitted data, and a downstream evaluator are unknown. Compare model-training teams with application owners using the [access criteria](03-opportunities.md#choose-the-first-buyer-to-study), then record a provisional choice and reversal condition. The documentation changes do not authorize outreach, spending, or a training run.
+
+Add later decisions with their evidence and effect on the plan. Store completed experiments and interview records under `docs/records/`.

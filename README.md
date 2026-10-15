@@ -1,5 +1,7 @@
 # RL and RSI study
 
+RL means reinforcement learning. RSI means recursive self-improvement: earlier improvements help produce later ones.
+
 We are studying how to create tasks, environments, and feedback that improve AI agents. The team has strong systems experience and limited AI experience. Our ultimate goal is a commercial product. Our current work is study and exploration: understand the field, identify a customer problem, and test a small number of opportunities before committing to a product.
 
 **Start with [Goals and scope](docs/00-goals.md).** It owns the project's direction. AutoEnvScaling and Third Moment Research are the first detailed studies, but they do not define the limits of the search.
@@ -8,7 +10,7 @@ We are studying how to create tasks, environments, and feedback that improve AI 
 
 1. [Goals and scope](docs/00-goals.md): what we want to learn and decide.
 2. [Study plan](docs/01-study-plan.md): learning sequence, experiments, and decision points.
-3. [Survey draft](docs/02-survey.md): concepts and comparison of approaches, written for systems engineers.
+3. [Survey](docs/02-survey.md): concepts and comparison of approaches, written for systems engineers.
 4. [Commercial opportunities](docs/03-opportunities.md): possible customers, products, and evidence we need.
 5. [Progress and decisions](docs/progress.md): current state and the next useful work.
 
@@ -29,4 +31,4 @@ Useful findings, decisions, experiment designs, and unresolved questions belong 
 
 This repository is readable without a sibling checkout, an AI subscription, or a GPU. The related `ai-data-research` project develops codebase Q&A tasks. Its reusable ideas are summarized here; its private files and task packages are not copied here.
 
-The survey is an initial draft. No experiments, training runs, or customer interviews have been completed in this repository. See [progress](docs/progress.md) for the current evidence and worklist.
+Use the [glossary](docs/glossary.md) for unfamiliar terms and [progress](docs/progress.md) for completed work and next actions.

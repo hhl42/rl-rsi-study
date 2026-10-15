@@ -8,7 +8,7 @@ Sources: the author's [Impersona-Env article](https://benshi34.github.io/#/blog/
 
 A user model is fine-tuned from message history and context. It simulates conversations and supplies feedback. A judge converts that feedback into guidance; the assistant rewrites responses, producing preferred and less-preferred response pairs for Direct Preference Optimization (DPO). Both the user model and assistant receive weight updates at different stages.
 
-The author identifies a central evaluation problem: the simulator used to create training feedback can also favor the resulting assistant during evaluation. A later blinded comparison with the real user provides a different check, but one person's preferences do not establish transfer to other users. Reconstructed reasoning in the training data is a generated explanation, not direct observation of the person's thoughts.
+The author identifies a central evaluation problem: the simulator used to create training feedback can also favor the resulting assistant during evaluation. A later blinded arena provides a different check. For the DPO model it reports 113 comparisons: 50 wins, 30 losses, and 33 ties. The author is the sole human voter. These are repeated judgments by one person, not 113 independent users; they do not establish transfer to other users. Reconstructed reasoning in the training data is a generated explanation, not direct observation of the person's thoughts.
 
 ## Implication for our exploration
 

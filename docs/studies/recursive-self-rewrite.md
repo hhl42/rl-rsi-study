@@ -21,6 +21,8 @@ Table 5 reports these Terminal-Bench 2 results:
 | Success within three attempts, pass@3 | 57.0% | 53.4% | 74.2% |
 | Mean success rate across three individual runs | 51.7% | 43.8% | 70.1% |
 
+Terminal-Bench 2 has 89 tasks in this evaluation. Section 3.6 gives approximately 51 and 66 solved tasks for the base and RSR pass@3 results, but explicitly says these counts were estimated from percentages and rounded. They are not raw per-task outcomes.
+
 These metrics answer different questions. The first allows several chances; the second averages individual attempts. Neither should be presented without its attempt budget. On the paper's own long-horizon benchmark, process reward rises from 0.21 to 0.29, while all three methods complete zero of 46 tasks. Better partial progress does not establish task completion.
 
 Several evaluation sets are curated by the authors. Dataset independence and leakage filtering need closer review. A model critic is a screening mechanism, not proof that private guidance cannot influence a supposedly public trajectory.

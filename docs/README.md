@@ -7,12 +7,13 @@ Each document owns one kind of information. Link to the owner when another docum
 | Why does this project exist? What is in scope? | [Goals and scope](00-goals.md) |
 | What should we study or test, and in what order? | [Study plan](01-study-plan.md) |
 | How do the concepts and approaches fit together? | [Survey](02-survey.md) |
+| What do unfamiliar terms and model names mean? | [Glossary](glossary.md) |
 | Which customers and products should we investigate? | [Commercial opportunities](03-opportunities.md) |
 | What does each reference establish, and what should we check next? | [Study index](studies/README.md), including the AutoEnvScaling and Third Moment Research priority studies |
 | How do we collect and assess evidence? | [Research method](research-method.md) |
 | What did a particular check run, and how can it be repeated? | Dated records under `records/`, starting with the [AutoEnvScaling offline code study](records/2026-10-14-autoenvscaling-code/README.md) |
 | What has happened and what comes next? | [Progress and decisions](progress.md) |
-| What did an independent review of the repository find? | Reviews under `reviews/`, starting with [Claude review 1](reviews/claude-init-review-1.md). A review recommends; progress records what the team adopts. |
+| What did an independent review of the repository find? | Reviews under `reviews/`, starting with [Claude review 1](reviews/claude-init-review-1.md). Read its [resolution](reviews/claude-init-review-1-resolution.md) for the response to each recommendation. Progress records the resulting work order. |
 | Where are sources, and how closely were they reviewed? | [Source register](../references/README.md) |
 | How should agents work and write here? | [Shared agent guidance](../AGENTS.md) |
 

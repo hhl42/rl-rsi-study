@@ -10,6 +10,12 @@ The article follows the interaction and update loop, then discusses training and
 
 Read it with a diagram of the components that execute tools, retain trajectories, compute rewards, update weights, and distribute the updated model. Use the official documentation and a recorded code revision to verify the boundaries. Treat performance comparisons and specific class names in the article as leads requiring version-specific checks.
 
+## Evidence and integration limits
+
+The article also reports the author's Retool-RL experiment on AIME 2024 mathematics problems. The same benchmark guides optimization and selection of the reported best checkpoint. That makes it a training demonstration, not an independent transfer result.
+
+Its SkyRL example uses an environment `step()` method to turn an action into an observation, reward, and stopping signal. This is a useful candidate boundary for a task adapter. Verify the current interface, version, and how it handles tool errors in official code before implementing against it.
+
 ## Implication for our exploration
 
 Our hypothesis is that the first integration should be small enough to reveal what a task producer actually needs to supply. We should not select a distributed training architecture merely because its terminology is familiar to a systems team.

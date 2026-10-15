@@ -1,6 +1,6 @@
-# Tasks and environments for agent learning
+# Survey
 
-**Initial survey draft, 2026-10-14.** This survey explains the technical choices behind tasks, environments, and feedback for AI agents. It supports the commercial exploration in [goals](00-goals.md). The [source register](../references/README.md) records review depth, and the [study notes](studies/README.md) examine individual references. None of the cited training results has been reproduced here.
+This survey explains the technical choices behind tasks, environments, and feedback for AI agents. It supports the commercial exploration in [goals](00-goals.md). The [source register](../references/README.md) records review depth, and the [study notes](studies/README.md) examine individual references. Use the [glossary](glossary.md) for unfamiliar terms and [progress](progress.md) for completed work.
 
 The central question is how to turn useful work into repeatable learning opportunities with trustworthy feedback. A task framework must support that process. Which parts should become our product depends on who needs them, what they can already do, and what improvement they will pay for.
 
@@ -33,10 +33,12 @@ Sutton and Barto provide the formal language for this interaction. A Markov deci
 | --- | --- | --- |
 | Supervised fine-tuning, or SFT | Model weights | Examples of desired outputs or actions |
 | Preference training, such as DPO | Model weights | Pairs of preferred and less-preferred responses |
-| Reinforcement learning, or RL | Model weights | Attempts made by a policy, with rewards |
+| Online reinforcement learning, or RL | Model weights | Tasks, runnable environments, and reward functions; the trainer collects policy attempts and scores them |
 | Memory or retrieval | Information supplied to the model | Notes, documents, past experiences |
 | Harness improvement | The software around the model | Changes to tools, prompts, control flow, or context management |
 | More inference-time search | Attempts and computation used to solve a task | Additional samples, feedback, and selection |
+
+The RL row describes the online setting studied here. Its optimizer still consumes scored attempts, but a task supplier typically provides the work, execution environment, and checker. Other arrangements use recorded experience, including offline RL or SFT on successful trajectories.
 
 In SFT, the training objective increases the likelihood of the supplied target behavior. The data can contain a full solution trajectory or a shorter target. A plausible demonstration is not automatically a good one: errors and unavailable information can also be imitated.
 
@@ -54,6 +56,23 @@ For example, rewards `[0, 0, 0, 1]` distinguish one successful attempt. Rewards 
 
 Finally, learning need not change weights. Reflexion records verbal feedback in memory for later attempts. That is operationally different from training a new checkpoint, even though its title uses reinforcement-learning language. [Reflexion](https://arxiv.org/abs/2303.11366)
 
+### A worked training step
+
+Imagine four attempts to repair the same service. A hidden check requires both restored availability and preserved acknowledged writes. This is an invented teaching example, not a run result.
+
+| Attempt | What happened | Reward | Reward minus group mean |
+| --- | --- | --- | --- |
+| A | Restarted without fixing the configuration | 0 | −0.25 |
+| B | Restored responses but lost writes | 0 | −0.25 |
+| C | Changed an unrelated setting | 0 | −0.25 |
+| D | Inspected the configuration, repaired it, and preserved writes | 1 | +0.75 |
+
+The mean reward is 0.25. Subtracting it gives the advantages shown above. This simplified calculation matches the mean-centering idea used by AES; original GRPO also divides by the group's standard deviation. The optimizer uses those advantages with the probabilities of the model's generated tokens. It pushes up the likelihood of D's generated actions and down that of A–C's actions, subject to the method's update constraints.
+
+In a common tool-agent setup, generated text and tool-call tokens participate in the training loss. Tool responses are observations supplied to the model and are masked out of that loss. The implementation must specify its exact token mask. A final task reward labels an entire attempt; it does not identify which individual command caused the failure. Useful commands inside a failed attempt may also receive negative pressure.
+
+After the update, the weights have changed. New attempts may be more likely to follow behavior associated with D, but one update guarantees neither success on this task nor transfer to a new configuration failure. Test both with fresh attempts. If all four rewards were zero, the mean-centered advantages would all be zero and this outcome signal would provide no preference among them. [H2](01-study-plan.md#h2-observe-one-small-weight-update) makes these quantities visible in a real small run.
+
 ## 3 What a task framework must represent
 
 A prompt alone rarely specifies an interactive task. The service-recovery example also needs a starting configuration, permitted tools, a completion rule, and a way to restore the initial state for another attempt.
@@ -66,6 +85,7 @@ A prompt alone rarely specifies an interactive task. The service-recovery exampl
 | Action interface | Read files, edit config, run commands | Are required actions available and bounded? |
 | Observation interface | Command output and permitted service metrics | Can the agent obtain enough evidence? |
 | Termination | Submission, deadline, or resource limit | Are failure and timeout distinguished? |
+| Isolation and monitoring | Allowed network destinations, scoped credentials, shared caches and services, trusted execution logs | Can agents cross task boundaries, alter grading evidence, or contact systems outside the task? |
 | Verification | Recovery, data invariants, regression checks | Does the check measure the requested outcome? |
 | Reference solution | A known way to restore the service | Is it one valid solution rather than the only accepted form? |
 | Provenance | Parent task, source revision, generator, permissions | Can we trace origin, duplication, and allowed use? |
@@ -76,11 +96,13 @@ Keep three assets distinct. A **task** gives the agent work to do. An **environm
 
 Also distinguish three information roles. The author may see private construction evidence and the reference solution. The solver receives the task and permitted environment. The verifier receives what it needs to grade. Public development feedback and hidden evaluation checks need separate policies. Hiding everything can prevent useful debugging; revealing final answer keys can invalidate the measurement.
 
+The documented OpenAI–Hugging Face incident shows why a container alone is not a complete boundary. Our [incident note](studies/eli-gottlieb-reference.md#a-documented-isolation-failure) links the investigation and its limits. State which resources each attempt may reach, who can write grading evidence, and which observations the trusted harness records. Test these permissions separately from whether the task is solvable.
+
 Harbor already provides task, agent, sandbox, and verification concepts. It is an integration candidate. We should examine its interfaces before inventing a new package format. [Harbor documentation](https://docs.harborframework.com/)
 
 ## 4 Reward quality and learning value
 
-A test result is a measurement of the test's conditions. It is not a proof that the whole customer requirement is satisfied. A service could answer health checks while dropping writes. A patch could pass by disabling a test. A judge could reward confident wording rather than a correct explanation.
+A passing test shows that the checked conditions hold. The customer may need more than the test checks. A service could answer health checks while dropping writes. A patch could pass by disabling a test. A judge could reward confident wording rather than a correct explanation.
 
 Rubric rewards extend evaluation to outputs that require several judgments. Rubrics as Rewards studies prompt-specific criteria and both explicit score aggregation and a judge's combined score. It supplies a training connection for our existing Q&A work. Its medical and scientific experiments do not establish the same benefit for codebase Q&A. [Rubrics as Rewards, sections 2–3](https://arxiv.org/html/2507.17746v2#S2)
 
@@ -111,7 +133,7 @@ AutoEnvScaling lets a proposer inspect solver experience, build and test environ
 
 The important design question is the selection objective. Maximizing solver failure can generate impossible tasks. Maximizing admitted task count can generate duplicates or exploit admission checks. We need to assess relevance, diversity, and independent outcomes alongside the generator's immediate reward.
 
-Our [AES code study](studies/autoenvscaling-code.md) adds an implementation lesson: these judgments must survive the full data path. Offline probes found that an infrastructure failure recorded as unscored can become a negative reward during export, and calibration can admit fewer scored attempts than requested. The preview also has distinct batch and trajectory semantics in its two training paths. These observations motivate explicit outcome status, minimum evidence, and trajectory contracts; they do not establish defects in the historical paper runs.
+The [AES code findings](studies/autoenvscaling-code.md#3-confirmed-behavior-and-its-consequences) show why these judgments must survive the full data path. A framework should keep infrastructure failures separate from scored attempts, require enough valid evidence for a difficulty decision, and define what each training trace contains. Those requirements apply beyond AES.
 
 ### Improving the task-production process
 
@@ -135,7 +157,7 @@ Impersona-Env uses a simulated user to produce feedback and preference pairs for
 
 ### Different meanings of self-improvement
 
-For each RSI claim, ask which component changes, what evidence selects a change, and whether repeated rounds improve reserved outcomes at a comparable cost. Model training, harness editing, memory accumulation, and task generation can be combined, but their contributions need separate tests.
+**Recursive self-improvement (RSI)** means repeated improvement in which earlier gains help produce later gains. The term does not identify a particular training algorithm. For each RSI claim, ask which component changes, what evidence selects a change, and whether repeated rounds improve reserved outcomes at a comparable cost. Model training, harness editing, memory accumulation, and task generation can be combined, but their contributions need separate tests.
 
 Raven emphasizes orchestration and harness evolution. MiMo provides an integrated training example. TypeSafe explores structured decisions rather than general text generation. These broaden the comparison without determining our first implementation. In particular, a structured output guarantee is not a guarantee of a correct decision. [Raven](https://github.com/EverMind-AI/Raven), [MiMo release](https://mimo.mi.com/docs/en-US/news/latest/v2-6), [TypeSafe](https://typesafe.ai/blog/introducing-system-one-models-and-jev)
 
@@ -181,4 +203,4 @@ A task generator can support several businesses: supplying training environments
 
 Our systems background may help with realistic task construction, reproducibility, and efficient execution. Whether it creates a commercial advantage depends on access to valuable failures, trustworthy outcomes, and buyers. The [opportunity comparison](03-opportunities.md) owns those hypotheses.
 
-The first pinned implementation study now covers AutoEnvScaling. Further work should compare competing commercial offerings and connect independently measured task quality to downstream improvement. Customer evidence and the [next experiments](studies/autoenvscaling.md#7-what-to-test-next) will determine which technical components merit broader implementation comparisons.
+The first pinned implementation study now covers AutoEnvScaling. Further work should compare competing commercial offerings and connect independently measured task quality to downstream improvement. Customer evidence and the [study plan](01-study-plan.md) will determine which technical components merit broader implementation comparisons.

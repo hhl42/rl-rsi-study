@@ -2,7 +2,7 @@
 
 This register preserves the starting collection and adds foundations needed to assess it. Links were checked on 2026-10-14 unless noted. A source being listed does not mean all its experiments have been reviewed.
 
-**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) sets the reading order. The [study index](../docs/studies/README.md) links analysis of the original references, and the [foundation worksheet](../docs/studies/foundations.md) gives questions and exercises for F01–F14.
+**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) sets the reading order. The [study index](../docs/studies/README.md) links analysis of the original references, and the [foundation worksheet](../docs/studies/foundations.md) gives questions and exercises for the foundation readings.
 
 ## Foundational sources
 
@@ -62,6 +62,14 @@ Gao, Schulman, and Hilton, *Scaling Laws for Reward Model Overoptimization*, 202
 
 Chen et al., *Evaluating Large Language Models Trained on Code*, 2021, [paper](https://arxiv.org/abs/2107.03374). Orientation review; inspect section 2.1 during the evaluation session. Introduces HumanEval and explains pass@k estimation. This is the historical Codex model paper.
 
+### F15 RLHF teaching book
+
+Nathan Lambert, *Reinforcement Learning from Human Feedback*, [book](https://rlhfbook.com/). Orientation review of the index and selected teaching passages; not a complete book audit. Start with [training overview](https://rlhfbook.com/c/03-training-overview), [instruction tuning](https://rlhfbook.com/c/04-instruction-tuning), and [reinforcement learning](https://rlhfbook.com/c/06-policy-gradients). Use its vocabulary before checking primary papers.
+
+### F16 Spinning Up
+
+OpenAI, *Spinning Up in Deep RL*, [key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html). Introductory page reviewed for the foundation sequence. Teaching material for agent/environment interaction, policies, and trajectories; not a current language-model trainer recommendation.
+
 ## Provided papers
 
 The supplied filenames are retained. Results in our notes refer to these local v1 files, even if a later web version appears. The printed title of the first paper is RLTL;DR; its filename uses RTL-DR.
@@ -72,7 +80,7 @@ The supplied filenames are retained. Results in our notes refer to these local v
 | Scaling Trajectories for Complex Tasks through Recursive Self-Rewrite; Li et al., 2026 | [2610.02826v1](papers/2610.02826v1-Recursive-Self-Rewrite.pdf) | Selected methods and results, section 2 and sections 3.5–3.6, table 5; [study](../docs/studies/recursive-self-rewrite.md) |
 | AutoEnvScaling: Automating the Data Flywheel with Terminal Agents; Yu et al., 2026 | [2610.14163v1](papers/2610.14163v1-AutoEnvScaling.pdf) | Selected methods and results, sections 3–4, appendices G–H; [detailed study](../docs/studies/autoenvscaling.md) |
 
-AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvScaling) labels the code a private preview. On 2026-10-14, we inspected selected implementation paths at [commit 2b38259](https://github.com/MSR-Orchard/AutoEnvScaling/tree/2b38259ac0ab5983c7de21df0f50696ab43e8869), dated 2026-10-13. The [code study](../docs/studies/autoenvscaling-code.md) covers assignment, workspace, admission, calibration, pool management, export, and training adapters. The [offline record](../docs/records/2026-10-14-autoenvscaling-code/README.md) contains 198 passing selected tests and synthetic probes. No live integrations or paper training results were reproduced. The [author publication list](https://simonucl.github.io/publications/) originally provided the code link.
+AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvScaling) labels the code a private preview. On 2026-10-14, we inspected selected implementation paths at [commit 2b38259](https://github.com/MSR-Orchard/AutoEnvScaling/tree/2b38259ac0ab5983c7de21df0f50696ab43e8869), dated 2026-10-13. The [code study](../docs/studies/autoenvscaling-code.md) covers assignment, workspace, admission, calibration, pool management, export, and training adapters. The [offline record](../docs/records/2026-10-14-autoenvscaling-code/README.md) owns test counts, outputs, and synthetic probes. No live integrations or paper training results were reproduced. The [author publication list](https://simonucl.github.io/publications/) originally provided the code link.
 
 ## Provided pages and related primary material
 
@@ -81,8 +89,8 @@ AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvSca
 | Source | Role in the study | Review status |
 | --- | --- | --- |
 | [TypeSafe and Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev) | Structured decisions and calibration; adjacent product direction | Page reviewed; company claims; [study](../docs/studies/typesafe-jev.md) |
-| [MiMo RL](https://mimo.xiaomi.com/rl/) | Integrated training system | Dashboard text incomplete; used [official release](https://mimo.mi.com/docs/en-US/news/latest/v2-6) for orientation; [study](../docs/studies/mimo-rl.md) |
-| [ApprenticeBench](https://neocognition.io/blog/apprentice-bench) | Stateful work and learning with memory | Browser overview and setup reviewed; full result audit pending; [study](../docs/studies/apprentice-bench.md) |
+| [MiMo RL](https://mimo.xiaomi.com/rl/) | Integrated training system | Dashboard text incomplete; used [official release](https://mimo.mi.com/docs/en-US/news/latest/v2-6) for selected system, artifact, and cost claims; [study](../docs/studies/mimo-rl.md) |
+| [ApprenticeBench](https://neocognition.io/blog/apprentice-bench) | Stateful work and learning with memory | Browser setup, selected costs, and learning ablation reviewed; implementation audit pending; [study](../docs/studies/apprentice-bench.md) |
 | [Raven](https://github.com/EverMind-AI/Raven) | Harness evolution and orchestration | README orientation; code not audited; [study](../docs/studies/raven.md) |
 | [AutoBenchmark](https://facebookresearch.github.io/RAM/blogs/autobench/) | Benchmark generation and human direction | Main method and setup reviewed; [study](../docs/studies/autobenchmark.md) |
 | [Impersona-Env](https://benshi34.github.io/#/blog/impersona-env) | User simulation and preference training | Browser page reviewed; proof of concept; [study](../docs/studies/impersona-env.md) |
@@ -92,8 +100,22 @@ AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvSca
 | [Agentic RL II](https://linpengt.com/blog/agentic-rl-part-ii) | Orientation and further references | Selected passages; secondary technical explanation; [study](../docs/studies/agentic-rl-part-ii.md) |
 | [Agentic RL III](https://linpengt.com/blog/agentic-rl-part-iii) | Training systems orientation | Selected passages; check primary docs for implementation claims; [study](../docs/studies/agentic-rl-part-iii.md) |
 | [Third Moment product site](https://thirdmomentresearch.com/) | Public offering and delivery process | Page reviewed; added primary source; [study](../docs/studies/third-moment-research.md) |
+| [Third Moment careers](https://thirdmomentresearch.com/careers/) | Hiring requirements, distinct from product architecture evidence | Page reviewed; [study](../docs/studies/third-moment-research.md) |
 
 The X URL initially could not be retrieved. The user then supplied a PDF containing the article, which was reviewed on 2026-10-14. Its visible date is October 13; its PDF creation metadata is dated 2026-10-14. References to this article use that saved copy, not a newly retrieved live page.
+
+## Sources added during review resolution
+
+Checked on 2026-10-14. These are a narrower checked set than the leads in the original market-scan record. Detailed implications belong in the linked owning documents.
+
+| Source | Review depth and use |
+| --- | --- |
+| Ivison et al., [Tmax](https://arxiv.org/abs/2606.23321), 2026, v1 | Abstract and metadata reviewed; baseline description also checked against AES. Full method and code study pending. See [AES](../docs/studies/autoenvscaling.md). |
+| METR, [OpenAI–Hugging Face incident investigation](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/), 2026-08-26 | Relevant incident findings and scope reviewed. Primary investigation, not our reproduction. See [Gottlieb and isolation](../docs/studies/eli-gottlieb-reference.md#a-documented-isolation-failure). |
+| Epoch AI, [The state of RL environments](https://epoch.ai/gradient-updates/state-of-rl-envs), 2026-01-12 | Interview report reviewed for prices, quality priorities, and internal construction. Reported observations, not transaction audits. See [market map](../docs/03-opportunities.md#market-map). |
+| Scale, [RL environments](https://scale.com/rlenvironments) | Public offer reviewed; vendor claims, no customer-result audit. |
+| Applied Compute, [company announcement](https://www.appliedcompute.com/company/fundraise) | Description of enterprise offering reviewed; no funding or customer-performance claims adopted from it. |
+| Modal, [pricing](https://modal.com/pricing); Daytona, [pricing](https://www.daytona.io/pricing) | CPU and memory price units checked for the market map. Not a workload-cost benchmark; recheck before a spending decision. |
 
 ## Framework documentation
 

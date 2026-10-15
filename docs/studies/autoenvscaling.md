@@ -2,7 +2,9 @@
 
 AutoEnvScaling (AES) connects task construction to the failures of the model being trained. A coding agent builds executable tasks, a host checks them, and repeated solver attempts determine which tasks enter the training pool. The pool changes as the solver improves. For our team, the first opportunity to investigate is reliable task production and validation. Reproducing the full training system is a separate decision.
 
-**Evidence as of 2026-10-14:** the supplied [v1 paper](../../references/papers/2610.14163v1-AutoEnvScaling.pdf), sections 3–4 and appendices G–H; selected code at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`; 198 selected upstream offline tests; and our synthetic probes. Paper results remain author-reported. We have not run live generation, containers, model endpoints, or training. The [code study](autoenvscaling-code.md) provides pinned sources and findings; the [research record](../records/2026-10-14-autoenvscaling-code/README.md) makes our checks repeatable.
+**Evidence as of 2026-10-14:** the supplied [v1 paper](../../references/papers/2610.14163v1-AutoEnvScaling.pdf), sections 3–4 and appendices G–H; selected code at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`; and the [recorded offline checks](../records/2026-10-14-autoenvscaling-code/README.md). Paper results remain author-reported. We have not run live generation, containers, model endpoints, or training. The [code study](autoenvscaling-code.md) provides pinned sources and findings; the [research record](../records/2026-10-14-autoenvscaling-code/README.md) makes our checks repeatable.
+
+Use the [glossary](../glossary.md) for benchmark, trainer, GPU, and model-name conventions.
 
 ## 1. The system in familiar terms
 
@@ -36,7 +38,7 @@ The shared-model setting also trains the proposer from its checked submissions. 
 
 Consider an illustrative task: repair a worker that processes a retried job twice. The instruction describes the required behavior, the container contains the faulty implementation, a private reference solution fixes it, and private tests check normal execution, retries, and crash recovery. This is our example, not a reported AES experiment.
 
-**Assignment.** The host selects a parent task and summarizes recent solver attempts. The preview extracts recurring failed test names and chooses a harder or simpler direction using the fraction of attempts that fully passed. It also supplies aggregate rewards. This is a heuristic summary, not a demonstrated diagnosis of the model's underlying weakness. Repeated failures in crash recovery could guide the proposer toward a related recovery task.
+**Assignment.** The host selects a parent task and summarizes recent solver attempts. The preview extracts recurring failed test names and chooses a harder or simpler direction using the fraction of attempts that fully passed, unless the pool-removal verdict overrides that direction. It also supplies aggregate rewards. This is a heuristic summary, not a demonstrated diagnosis of the model's underlying weakness. Repeated failures in crash recovery could guide the proposer toward a related recovery task.
 
 **Construction.** The proposer receives past environments, solver traces, fixed instructions, and editable `memory/` and `tools/` directories. It can write files, execute commands, inspect failures, and revise its work. Its output is a Harbor package:
 
@@ -67,7 +69,7 @@ A **policy** is the model's rule for choosing its next output. Updating weights 
 | External proposer | The solver's weights are trained. The proposer's weights stay fixed; editable tools and memory can change its behavior. |
 | Shared model | One model serves both roles. Training uses solver and proposer attempts, with separate reward groups. |
 
-The solver reward is the fraction of tests passed. The proposer receives -1 for invalid tasks, -0.25 for valid tasks that fail calibration, and +1 for admission. This rewards usable training tasks rather than merely making the solver fail.
+The paper defines solver reward as the fraction of tests passed; the preview instead trusts the submitted verifier to implement that meaning. The proposer receives -1 for invalid tasks, -0.25 for valid tasks that fail calibration, and +1 for admission. This rewards usable training tasks rather than merely making the solver fail.
 
 Training compares attempts within a group. For solver rewards `[0, 0.5, 1, 1]`, the mean is 0.625. Subtracting it gives **advantages** `[-0.625, -0.125, 0.375, 0.375]`: a signal to favor outputs associated with better attempts and reduce those associated with worse attempts. AES groups solver attempts by environment and proposer attempts by assignment. It drops constant-reward groups because this calculation gives them no learning signal.
 
@@ -77,14 +79,27 @@ A reward of 0.75 is not a 75% full-task success rate. Four attempts that each pa
 
 ## 4. What the results establish
 
+**What is Tmax?** [Tmax](https://arxiv.org/abs/2606.23321) is an open recipe for terminal-agent data and training. Its generation recipe varies task categories, difficulty, personas, and verifiers. In AES's paper comparison, the same proposer generates a fixed Tmax pool before solver training; AES adapts its pool during training. The release substitutes existing TMax-15K tasks, as the [code study](autoenvscaling-code.md#5-what-the-release-does-not-establish) explains.
+
 These Terminal-Bench results use **avg@5**, average performance across five attempts, not pass@5, which asks whether any attempt succeeds. Comparisons use the paper's Pi harness and evaluation resources.
 
 | Comparison | Author-reported result | Limit |
 | --- | --- | --- |
 | Qwen3.5-35B-A3B, GPT-5.6-sol proposer, TB2.1 | Static Tmax 34.6 ± 1.9; AES 38.9 ± 2.4 | Table 3: 4.3 percentage points at matched solver updates; ± denotes confidence intervals. |
-| Same setting, past solver feedback removed | 35.3 ± 2.3 | Supports studying trace access. The preview still retains aggregate performance information in this condition. |
+| Same setting, past solver feedback removed | 35.3 ± 2.3 | Supports studying trace access; see the [precise ablation definition](autoenvscaling-code.md#removing-solver-feedback-does-not-remove-all-solver-information). |
+| Qwen3.5-35B-A3B, Claude Opus 5 proposer, TB2.1 | Static Tmax 35.5 ± 1.6; AES 39.3 ± 1.6; without solver trajectories 32.6 ± 1.7 | Table 3: without traces, the adaptive pipeline is 2.9 points below static Tmax. Trace value must be tested rather than assumed. |
 | Shared Qwen3.6-35B-A3B, TB2.1 | Cold-start checkpoint 41.1; AES ends at 53.3; static Tmax at 47.2 | Figure 6: 6.1 points over the static comparison. |
 | Shared model, TB4.0 | Start 1.6; AES 3.2; static Tmax 1.4 | Transfer to a harder evaluation, with low absolute success. |
+
+The abstract's 12.2-point shared-model gain is over the starting checkpoint; the controlled difference from static Tmax is 6.1 points. TB2.1 contains 89 tasks. Table 3 calls its ± values confidence intervals but does not explain their construction or report variation across repeated training runs. Evaluation sampling and training-run variation are separate uncertainties. Appendix H's cold-start comparison reports a 1.1-point change with a 95% bootstrap interval of [-4.9, 7.4]; that is a different comparison and cannot supply an interval for Table 3.
+
+Three additional results matter for product and systems decisions:
+
+| Result | Setting and evidence | What to learn |
+| --- | --- | --- |
+| Cost of generating technically valid tasks | Table 2: AES costs US$0.01–2.75 per valid environment across eight proposers. It is cheaper than plain prompting for six, but more expensive for Claude Opus 5 and GPT-6-astra. | Here valid means build, reference, and empty-agent checks pass. This is not cost per independently audited, buyer-useful task or an end-to-end training cost. |
+| Rollout collection efficiency | Figure 7 and appendix G.1: shared Qwen3.6-35B-A3B retains useful groups at 3.1× the static baseline's rate and collects each update's rollouts 42% faster on average. Hardware and rollout concurrency match over updates 0–162. | Selection of tasks can save solver work. This measures collection time, not total run time including generation and review. |
+| Learning to ask for missing information | Section 4.5, Table 5: after the same 75-trajectory cold start, Qwen3.6-35B-A3B reaches 6.8% held-out HiL-Bench task success with 100 official training tasks, versus 33.9% with 500 generated tasks. | A buyer-relevant behavior, but task quantity changes fivefold. The comparison does not isolate generation quality at equal data volume. |
 
 Matched solver updates do **not** match total compute or elapsed time. Generation, calibration, review, and discarded attempts add work. Full AES and static runs reach 288 solver updates. The no-proposer-training ablation ends at 160; at that common endpoint, their TB2.1 scores are 48.9, 44.9, and 40.1 respectively. Comparing unequal endpoints would overstate the isolated effect. Source: appendix G.1.
 
@@ -97,13 +112,13 @@ These are candidate requirements, not a decision to build a general platform.
 | Requirement | Why it matters | Smallest useful implementation |
 | --- | --- | --- |
 | Version the whole task | Instructions, environment, reference solution, and verifier jointly define the outcome. | Immutable artifact digest plus parent and split metadata; reuse Harbor packaging initially. |
-| Preserve outcome status through export | An unavailable sandbox provides no evidence that the task or solver is bad. Our probe found this distinction lost in one AES export path. | Separate execution status, validation verdict, and optional reward; verify them at the training boundary. |
+| Keep execution failure separate from task failure | A failed sandbox tells us nothing about the proposed solution. | Carry the reason and any usable score through collection, review, and training; see the [failure analysis](autoenvscaling-code.md#failure-classification-and-pool-review-need-one-shared-policy). |
 | Audit the verifier independently | The author can make matching mistakes in the solution and tests. | Valid alternative solutions, plausible wrong solutions, repeated resets, and expert samples. |
 | Make calibration conditional on the solver | Difficulty depends on weights, harness, sampling, and resources. Small samples are noisy. | Store versions, valid attempt counts, raw rewards, and uncertainty; allow an inconclusive verdict. |
 | Keep lineage and cost | Accepted task count hides retries, rejections, duplicates, and human repair. | Candidate-to-attempt-to-admission records with usage and exclusion reasons. |
 | Define persistence and training contracts | Shared memory needs a selection rule. A training trajectory needs more than a readable transcript. | Version memory changes; record policy versions, token IDs, sampling probabilities, and loss masks when required by the trainer. |
 
-The preview saves editable memory before scoring and replaces shared directories with later outputs. It does not demonstrate that persistent changes improve later tasks. Read-only workspace permissions are advisory for an agent running as root; host restaging protects future inputs but is not a complete security boundary. Specify the actual state and trust contracts before reuse. See the [code findings](autoenvscaling-code.md#3-confirmed-behavior-and-its-consequences).
+The [code study](autoenvscaling-code.md#3-confirmed-behavior-and-its-consequences) owns the implementation findings on failure handling, calibration, memory, and isolation. They inform the requirements above; they do not commit us to repairing or adopting AES.
 
 Commercially, measure the cost of an independently accepted, relevant task and the improvement it enables for a buyer. Internal admission count is insufficient. Our systems skills may help with execution, evidence, and verifier debugging. Whether customers value that enough to support a product remains an open hypothesis in the [opportunity comparison](../03-opportunities.md).
 
@@ -118,14 +133,16 @@ Commercially, measure the cost of an independently accepted, relevant task and t
 
 ## 7. What to test next
 
-The completed offline audit is [recorded here](../records/2026-10-14-autoenvscaling-code/README.md). Continue in this order. Later paid or training experiments need a bounded scope and resources.
+These are AES-related experiment candidates. The [study plan](../01-study-plan.md) and [progress](../progress.md) set the project order: market comparison and practical foundations first. Repair AES only if a selected experiment will reuse its code. Paid or training experiments need a concrete resource cap.
 
 | Step | Test and controls | Output and decision |
 | --- | --- | --- |
-| 1. Enforce the data contract | Cover infrastructure failure through export, insufficient valid attempts, duplicate artifacts, reset repeatability, and conflicting memory updates. Start with synthetic inputs and one hand-built task. | Explicit invariants and failing examples. Resolve the export defect and define minimum scored attempts before training on this output. |
+| 1. If reusing AES, check result handling | Cover infrastructure failure through export, insufficient valid attempts, duplicate artifacts, reset repeatability, and conflicting memory updates. Start with synthetic inputs and one hand-built task. | Explicit invariants and failing examples. Resolve the export defect and define minimum scored attempts before training on this output. |
 | 2. Audit task quality | Apply [E1](../01-study-plan.md#e1-verify-the-verifier) to roughly 10–20 systems tasks. Test valid alternatives, meaningful mistakes, and shortcuts with independent expert judgments. | Defect types, false acceptance/rejection, repair work, and cost. Establish whether the verifier is usable. |
 | 3. Measure calibration stability | Fix solver and harness. Compare four/eight-attempt decisions with a larger fresh sample. Retain infrastructure failures separately; repeat across task families. | Decision disagreement and uncertainty versus cost. Choose thresholds from observed data. |
 | 4. Isolate trace value | Apply [E2](../01-study-plan.md#e2-generate-from-solver-failures): same parents, aggregate statistics, proposer, checks, and budget; vary raw traces and failure summaries. Count rejected work. | Independent quality, failure coverage, diversity, and cost per accepted task. Use a separate arm to remove all solver information. |
 | 5. Check transfer and commercial relevance | Try a reserved solver or harness and a buyer-relevant workflow. If justified, design bounded training against a static pool at matched total budget. | Evidence of transfer and delivery economics. Decide whether to pursue task supply, validation, or managed improvement. |
 
-The first four steps can study task production without updating model weights. A positive result would justify a training experiment; it would not yet prove training value or commercial demand.
+The first four candidates study task production without updating weights. Test demand and downstream improvement separately.
+
+Before extending AES, compare its baseline and at least one other generator. AES Table 1 and section 2 identify Tmax (prompt-based generation), RST and Environment Evolution (revision with execution feedback), SETA and AutoData (agent-based authoring), and SPADE (a shared proposer/solver model). Other leads include Endless Terminals, TermiGen, Terminal-World, Terminal-Universe, T1, SWE-Universe, CalibForge, Envs-FORGE, EnvHarness, Gym-Anything, Agent World Model, and ScaleEnv. This is a discovery list from AES, not our review of those systems. Start with Tmax because it defines the baseline; choose the next source by the question our experiment needs to answer.

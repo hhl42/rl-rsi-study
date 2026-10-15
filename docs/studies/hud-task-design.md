@@ -8,7 +8,9 @@ Source: HUD's [What is a good task?](https://www.hud.ai/research/what-is-a-good-
 
 HUD recommends starting from a real request, specifying the desired outcome, and supplying the files and tools needed to do the work. It emphasizes reproducibility and inspecting agent traces, including perfect scores that might hide shortcuts.
 
-Difficulty should come from the work itself. Ambiguous instructions, irrelevant obstacles, or stricter grading added merely to lower scores can make a task less valid. The agent may take a different path from the reference solution and still meet the actual requirement. The article is guidance for task authors; it does not itself describe a model update or establish a training gain.
+Difficulty should come from the work itself. Ambiguous instructions, irrelevant obstacles, or stricter grading added merely to lower scores can make a task less valid. The agent may take a different path from the reference solution and still meet the actual requirement. Measure difficulty for a named model and harness, with a stated number of attempts. A task has no single success rate independent of that setup. The article is guidance for task authors; it reports no controlled training gain.
+
+HUD also describes working with data vendors to convert enterprise material into training environments. That is a direct commercial comparator for our workflow-to-task candidate, not evidence that an unserved market exists.
 
 ## Applying it to our team
 

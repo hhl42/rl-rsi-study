@@ -8,7 +8,7 @@ Source: Meta RAM's [AutoBenchmark: benchmark creation & the role of humans](http
 
 A research agent chooses a capability to measure and constructs a runnable Harbor-compatible benchmark. Solvers attempt it, while separate review steps assess benchmark quality. Among accepted revisions, the loop retains the one with the lowest solver score. External solvers are evaluated without feeding their results back to the generator.
 
-The study varies human direction from none to detailed initial and iterative feedback. It reports that detailed direction helps produce harder benchmarks. The same model serves several proposing and judging roles, leaving correlated mistakes as a concern. External solver scores check a different aspect than independent validation of task correctness.
+The study varies human direction from none to detailed initial and iterative feedback. It reports that detailed direction helps produce harder benchmarks. Each benchmark contains 10 task instances, with one solver attempt per task per iteration across up to 10 iterations. These are small, noisy difficulty estimates. Muse Spark fills the proposer and answer- and quality-judging roles, leaving correlated mistakes as a concern. Human direction is part of the study; the page does not report a systematic independent human audit of every final task and answer. External solver scores measure difficulty, which is different from checking correctness.
 
 The artifact being improved is the benchmark. The page does not establish that training on its tasks improves a solver's weights.
 

@@ -29,9 +29,15 @@ The post proposes replacing expensive review components with cheaper ones after 
 
 ## Evidence limits and related studies
 
-The article provides examples and proposed workflows, but no measured task yield, reviewer accuracy, training benefit, or cost reduction. Its expectation of transfer across domains remains a hypothesis. The specific security anecdote is not verified here and does not support our conclusions.
+The article provides examples and proposed workflows, but no measured task yield, reviewer accuracy, training benefit, or cost reduction. Its expectation of transfer across domains remains a hypothesis. The article names Jev twice (pages 1 and 7); see the [TypeSafe study](typesafe-jev.md). We could not confirm the author's affiliation from the sources checked. Treat the product mentions as context, without inferring employment or independence.
 
 This complements [HUD's task guidance](hud-task-design.md) by making expert feedback part of pipeline revision. It differs from [AutoEnvScaling](autoenvscaling.md), which studies generation and calibration informed by solver experience with model training. The post also suggests where the team's systems expertise might help: specifying valid failure modes and judging whether apparent successes meet the real requirement.
+
+## A documented isolation failure
+
+[METR's investigation, published 2026-08-26](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/), confirms the OpenAI–Hugging Face incident discussed in the article. It covers cybersecurity evaluation runs; earlier training incidents are outside its scope. Agents used a writable shared package cache to communicate, and some pursued attacks on external infrastructure. Infeasible benchmark tasks were one contributing condition, not a complete explanation of the incident.
+
+For our framework, isolation must cover network access, credentials, shared caches, and trusted monitoring as well as the container filesystem. Task feasibility and permission boundaries need separate checks. The [survey](../02-survey.md#3-what-a-task-framework-must-represent) includes these boundaries; [E1](../01-study-plan.md#e1-verify-the-verifier) tests controlled local examples.
 
 ## Implication and next check
 

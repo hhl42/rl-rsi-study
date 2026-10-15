@@ -1,89 +1,114 @@
 # Study and exploration plan
 
-Use the study to choose a commercial opportunity and understand the framework it needs. [Goals and scope](00-goals.md) owns that objective. This plan combines learning, source analysis, customer research, and small experiments. Reading should resolve decisions rather than grow without a stopping point.
+Use the study to choose a commercial opportunity and understand the framework it needs. [Goals and scope](00-goals.md) owns that objective. Reading, practical exercises, and customer research should resolve decisions. The steps have outputs rather than calendar estimates; [progress](progress.md) owns the active worklist.
 
 ## Sequence and outputs
 
-Proceed through the steps by completing their outputs and resolving the questions they raise. The plan does not assign calendar durations; pace depends on team capacity, resources, and what we learn. Steps can overlap, particularly public market research and technical reading. Record resource constraints in [progress](progress.md) when they affect the next action.
-
 | Step | Work | Output and completion condition |
 | --- | --- | --- |
-| 1. Shared foundations | Learn the agent loop, training methods, rewards, and evaluation. Walk through one concrete task. | Each participant can explain what changes during learning, what a reward means, and how to test improvement on unseen tasks. |
-| 2. Focused survey | Study AutoEnvScaling and Third Moment Research. Compare static generation, rubric rewards, and memory or harness improvement. | Survey v1 with source evidence, three opportunity hypotheses, and the unknowns that could change their ranking. |
-| 3. Small experiments | Test verification, generation from failures, and one customer-relevant task family. | Reproducible results with full costs and a decision for each hypothesis. |
-| 4. Commercial and architecture decision | Combine experiment evidence with customer evidence. Compare building with using existing tools. | A recommendation to proceed, narrow, change direction, or stop; a bounded next project if proceeding. |
+| 1. Market and practical foundations | Compare public offerings while learning the agent loop and inspecting small tasks. Use the exercises below. | A sourced market map and one annotated trajectory. The team can explain task, environment, reward, and what changes during learning. |
+| 2. First buyer and problem | Compare accessible model-training teams and application owners. Identify permitted examples and a route to customer evidence. | A provisional buyer choice in progress, with evidence, the largest gap, and a condition that would reverse it. Prepare authorized interviews as soon as access allows. |
+| 3. Task quality | Run E1 on a small task family relevant to that buyer. | Defects, review effort, costs, and a decision: usable, repairable, or too costly. |
+| 4. Test the claimed benefit | Choose E2, E3, or a bounded training experiment according to the buyer's need. | A reproducible comparison that changes or confirms the opportunity ranking. |
+| 5. Commercial and architecture decision | Test E4; compare reuse with building. | Proceed, narrow, change direction, or stop. If proceeding, define the smallest project and its acceptance test. |
 
-For each study session, answer one question in writing and examine one concrete artifact: a task, reward calculation, trajectory, code path, or customer workflow. A short explanation by a teammate helps expose terms the group does not yet understand. Record useful conclusions in the owning document.
+Steps can overlap. Customer evidence need not wait for all reading or technical experiments. Public research needs staff effort but no customer contact; it cannot establish demand by itself. Outreach, paid runs, and commitments require direction beyond this documentation work. AES repair work enters the plan only if a selected experiment will reuse its implementation.
+
+## Foundations by doing
+
+The [worksheet](studies/foundations.md) connects these exercises to reading. The [glossary](glossary.md) explains terms as needed.
+
+### H1 Inspect and run a small task set
+
+Write three to five Harbor-compatible tasks by hand in a familiar systems domain, such as configuration repair. Pin their dependencies and define initial state, reset, instructions, reference solution, and verifier. Start with reference and empty solutions; record a deliberate wrong solution and a different valid repair.
+
+Once API access, sandbox resources, and a spend cap are agreed, run two existing agents with documented model and harness versions. Keep task resources and attempt budgets comparable. Repeat attempts to look for inconsistent outcomes, rather than interpreting one run as a reliable success rate. Annotate one trajectory: observations, generated actions, stopping reason, reward, elapsed time, and cost. Include failed starts and retries in accounting.
+
+**Output:** the task packages, run configuration, an annotated trace, and a short account of surprising failures. Each participant should explain whether a failure came from the agent, task, grader, or infrastructure. This is an integration exercise, not evidence of training benefit or a representative benchmark.
+
+### H2 Observe one small weight update
+
+Prepare a tiny open-weight RL exercise with a checkable toy answer. Choose a supported small model and trainer, a training set, and a separate evaluation set. Inspect groups with mixed rewards and groups where every attempt fails. Save the rewards, advantages, which tokens contribute to the training loss, and before/after results at the same sampling budget.
+
+**Before any paid run:** write down the exact model, hardware, expected run size, API and compute charges, maximum spend, and stop conditions. Request approval for that concrete proposal. This plan authorizes preparation, not spending. Until resources are agreed, use the [worked example](02-survey.md#a-worked-training-step) and an offline calculation. A toy run teaches the update mechanism; it does not validate a commercial task family.
 
 ## Reading sequence
 
-The [source register](../references/README.md) gives primary links and review depth. The [study notes](studies/README.md) explain each original reference and provide a foundation reading worksheet. The foundation readings are selected passages, not a requirement to master every derivation.
+Use teaching material for vocabulary, then primary papers to check the claims that matter. Select passages; understanding every derivation is not a prerequisite. The [source register](../references/README.md) records review depth.
 
-| Order | Read | Question to answer |
+| Order | Start here; then check | Question to answer |
 | --- | --- | --- |
-| 1 | Survey sections 1–3; Sutton and Barto chapters 1 and 3; ReAct | What are state, observation, action, policy, and reward in a terminal task? |
-| 2 | InstructGPT overview; DPO introduction and method; DeepSeek-R1 overview | What different training assets do demonstrations, preferences, and RL require? |
-| 3 | PPO sections 1–3; DeepSeekMath section 4; optional Sutton and Barto chapter 13 | How does a reward affect model weights? Why does variation across attempts matter? |
-| 4 | SWE-bench and SWE-smith introductions and task construction; Rubrics as Rewards sections 2–3; reward overoptimization | What makes an evaluation or reward trustworthy, and what can go wrong when it is optimized? |
-| 5 | AutoEnvScaling sections 3–4 and appendices G–H; [systems explanation](studies/autoenvscaling.md) and [code walkthrough](studies/autoenvscaling-code.md); POET overview | What must the generator know, and which admission, state, and training contracts make its output useful? |
-| 6 | RLTL;DR sections 4–6; Recursive Self-Rewrite sections 2 and 3.5–3.6; Reflexion overview | Which improvements need weight updates, and which come from context, feedback, or harness changes? |
-| 7 | Third Moment Research's site and case study; ApprenticeBench; Impersona-Env | What would a customer buy? How would we measure improvement in a real workflow? |
-| 8 | Harbor task and verifier docs; one of verl or SkyRL | Which interfaces can we reuse, and what would we need to add? |
+| 1 | [Spinning Up: key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html); survey sections 1–3; then Sutton and Barto chapters 1 and 3 and ReAct | What are state, observation, action, policy, and reward in H1? |
+| 2 | [RLHF book: training overview](https://rlhfbook.com/c/03-training-overview) and [instruction tuning](https://rlhfbook.com/c/04-instruction-tuning); then InstructGPT, DPO, and DeepSeek-R1 overviews | Which assets do SFT, preferences, and online RL require? |
+| 3 | [RLHF book: reinforcement learning](https://rlhfbook.com/c/06-policy-gradients) and the worked example; then PPO sections 1–3 and DeepSeekMath section 4 | How do rewards affect weights? Why does variation among attempts matter? |
+| 4 | SWE-bench and SWE-smith task construction; Rubrics as Rewards sections 2–3; reward overoptimization; [HUD](studies/hud-task-design.md) and [Gottlieb](studies/eli-gottlieb-reference.md) | Which E1 errors could make optimization reward the wrong behavior? |
+| 5 | [Tmax](https://arxiv.org/abs/2606.23321) before [AES](studies/autoenvscaling.md); AES sections 3–4 and appendices G–H; POET overview | What does adaptation add over static generation, and at what total cost? |
+| 6 | [RLTL;DR](studies/rl-tldr.md) sections 4–6; [Recursive Self-Rewrite](studies/recursive-self-rewrite.md) sections 2 and 3.5–3.6; Reflexion | Which improvements come from weights, feedback, or context? |
+| 7 | [Third Moment Research](studies/third-moment-research.md), [ApprenticeBench](studies/apprentice-bench.md), and [Impersona-Env](studies/impersona-env.md) | What would the chosen buyer purchase, and how would they accept it? |
+| 8 | Harbor task and verifier docs; one of verl or SkyRL; AES code only if reuse is proposed | What must our task package supply, and which interfaces can we reuse? |
 
-Keep TypeSafe, Raven, MiMo, and the Agentic RL articles as comparison and discovery material. Follow promising citations when they answer an open question. Do not let the newest source replace the foundations or customer investigation.
-
-Alongside the task-quality readings in order 4, read [HUD's guidance](studies/hud-task-design.md) and [Gottlieb's task-factory article](studies/eli-gottlieb-reference.md). Explain the difference between repairing one task and changing the production process so later tasks avoid the same defect. Identify which judgments need domain expertise and how we would check a proposed automated substitute.
+Use the other [study notes](studies/README.md) as targeted comparisons. For each session, answer one question in writing using one artifact: a trajectory, reward calculation, code path, or customer workflow. Record conclusions in the owning document.
 
 ## Public research and customer discovery
 
-Start the [opportunity comparison](03-opportunities.md) during step 2. For each candidate, identify a user, a buyer, the current workaround, and why existing products may be insufficient. Include training teams buying environments and application teams buying more reliable workflows. These may require different products.
+Maintain the [market map](03-opportunities.md#market-map) from public sources. Compare the buyer's current workaround and named alternatives, including internal construction. Keep vendor claims, interview evidence, and our hypotheses distinct.
 
-Prepare an interview guide using the questions in the opportunity document. Once outreach is authorized, seek concrete recent failures and their costs. Ask how a pilot would be accepted and funded. A public product page can suggest an offering; only customer evidence can establish demand for our version.
+Before choosing the first buyer, list contacts the team can legitimately reach, available problem examples, data permissions, and acceptance criteria. Use the opportunity document's interview questions when outreach is authorized. An accessible buyer with a measurable problem is a stronger starting point than a fashionable architecture.
 
 ## Proposed experiments
 
-These designs are starting points. Select the smallest subset that distinguishes the leading opportunities. A first pilot of roughly 10–20 tasks can estimate cost and reveal defects; it cannot establish broad training value. Include an existing Q&A task family where accessible and one systems task family with executable checks.
+A first pilot of roughly 10–20 tasks can expose defect types and give observed costs for those examples. It cannot establish a precise population failure rate or broad training value. Even zero errors in 15 independent checks leaves an approximate 95% upper bound near 20% under the rule of three. Related variants are correlated, so task or submission counts alone do not supply independent evidence.
 
 ### E1 Verify the verifier
 
-**Hypothesis:** We can produce tasks whose graders accept valid alternatives and reject meaningful errors with affordable human review.
+**Hypothesis:** Graders can accept valid alternatives and reject meaningful errors with affordable review.
 
-Test reference solutions, independently written valid alternatives, plausible wrong solutions, empty submissions, and deliberate shortcuts. Where the grader is an LLM, include paraphrases and irrelevant verbosity. Where it runs tests, include test tampering and solutions that pass only the visible examples. Have a domain expert resolve a blinded sample without seeing the grader's verdict first.
+Before running, write an error checklist: impossible or underspecified task; missing evidence or dependencies; incorrect reference; false acceptance; false rejection; inconsistent grading; reset contamination; leaked answers; test or reward-file tampering; and unintended access to networks, shared services, or credentials. Test isolation only in environments we control, with synthetic credentials and local stand-ins for external services.
 
-Measure false acceptance, false rejection, repeatability, build and reset failures, review time, and cost per accepted task. Retain all rejected candidates in the accounting. Decide whether the verifier is usable, needs repair, or makes this task family too costly. Passing the reference solution and rejecting an empty solution are useful checks, but insufficient evidence alone.
+Define the grader's pass threshold before measuring errors. Prepare reference solutions, independent valid alternatives, plausible wrong solutions, empty submissions, and shortcuts. For model judges, include paraphrases and irrelevant verbosity. For executable tests, include visible-example overfitting and tampering. Have a domain expert label the prepared cases without seeing the grader's verdict; retain reasons and resolve disputed labels before scoring them.
 
-If recurring defects suggest a reusable production change, retain expert decisions, reasons, and counterexamples. Compare the original and revised processes on fresh candidates under equal budgets. Keep a separate expert review sample out of the revision process, and measure quality alongside cost. This optional extension tests the task-factory hypothesis in [Gottlieb's study](studies/eli-gottlieb-reference.md); it does not by itself test downstream training benefit.
+| Measure | Procedure |
+| --- | --- |
+| False acceptance | Grader accepts an expert-labeled invalid submission; divide by all labeled invalid submissions. Report counts and affected tasks. |
+| False rejection | Grader rejects an expert-labeled valid submission; divide by all labeled valid submissions. |
+| Repeatability | Repeat a fixed submission from a fresh reset under the same configuration; report verdict disagreements and reward spread. |
+| Execution reliability | Count build, reset, verifier, and infrastructure failures separately, with attempted executions as the denominator. Do not silently turn unscored attempts into wrong answers. |
+| Review effort and cost | Record authoring, execution, expert review, repair, and rejected candidates. Divide total cost by independently accepted tasks; state what acceptance checks cover. |
+
+Decide whether the task family is usable, repairable, or too costly. Reference success and empty failure alone are insufficient. An optional extension uses retained expert reasons to revise task production, then compares old and new processes on fresh candidates under equal budgets with a separate expert review sample. This tests the [task-factory hypothesis](studies/eli-gottlieb-reference.md), not downstream training benefit.
 
 ### E2 Generate from solver failures
 
-**Hypothesis:** Access to real solver failure traces helps a proposer generate more relevant, usable tasks than the same generation system without those traces.
+**Hypothesis:** Solver traces help a proposer produce more relevant, usable tasks than the same system without those traces.
 
-Use the same proposer, tools, task seeds, admission checks, and budget in both arms. Change access to solver traces. Keep a static pool as a comparison. Hold the solver fixed initially so a changing model does not obscure the generator comparison.
+Use the same proposer, tools, seeds, admission checks, fixed solver, and total budget. Keep aggregate success statistics and assignment direction identical; vary access to raw trajectories and their failure summaries. Removing all solver-derived information is a separate comparison. Include a static pool as a baseline. The [AES code finding](studies/autoenvscaling-code.md#removing-solver-feedback-does-not-remove-all-solver-information) explains why the distinction matters.
 
-Define feedback precisely. To isolate trace value, keep aggregate performance statistics and assignment direction the same in both arms; vary access to raw trajectories and their failure summaries. A condition that removes all solver-derived information is a separate comparison. The AES preview's no-feedback setting retains aggregate statistics; the [code study](studies/autoenvscaling-code.md#removing-solver-feedback-does-not-remove-all-solver-information) explains the distinction. Its [next-test sequence](studies/autoenvscaling.md#7-what-to-test-next) gives the contract and calibration checks to do before a live pilot.
+Before generation, have an expert label observed failures by cause, such as missing pagination or unsafe restart order. Freeze the labels and a relevance rubric. A candidate is relevant only if independently solving and reviewing it shows that it exercises the intended failure, is feasible, and offers enough evidence to act. Reviewers should not know which generation arm produced it.
 
-Measure valid-task yield, failure-mode coverage, duplication, reward variation, human repair time, and total cost. Count calibration and rejected generation attempts. Evaluate with a solver that did not guide generation when feasible. This tests task production and relevance. Demonstrating training benefit requires a later weight-update experiment.
+Report **relevance yield** as relevant, valid, nonduplicate tasks divided by all generated candidates. Report **coverage** as predefined failure classes with at least one independently accepted task divided by all predefined classes. Also show counts per class: one task in every class can hide poor depth. Reserve source cases for a transfer check and keep related variants together.
+
+Measure duplication, reward variation, repair effort, and total cost, including calibration and rejected attempts. Use a solver that did not guide generation when feasible. These measures test production and relevance; a separate weight-update experiment must test training benefit. If AES code is selected, first follow its [conditional checks](studies/autoenvscaling.md#7-what-to-test-next).
 
 ### E3 Use feedback effectively
 
 **Hypothesis:** Structured feedback helps an agent recover from a specific failure at a useful cost.
 
-Compare independent retries, retries with raw verifier feedback, and retries with a short generated insight. Match total inference and environment budgets, including insight generation. Keep the task, model, and tools fixed. Inspect traces to distinguish useful guidance from leaked answers.
+Compare independent retries, retries with raw verifier feedback, and retries with a short generated insight. Match total inference and environment budgets, including insight generation. Keep task, model, and tools fixed. Inspect traces for leaked answers.
 
-Measure success, total cost, latency, and repeated failure types. Test transfer of reusable feedback to reserved related tasks separately. Improvement with feedback in context is evidence about assisted solving, not proof that model weights learned anything.
+Measure success, total cost, latency, and repeated failure types. Test transfer of reusable feedback to reserved related tasks separately. Improvement while feedback remains in context is evidence about assisted solving; evaluate without that feedback to study what weight training retained.
 
 ### E4 Test a commercial offer
 
-**Hypothesis:** A named buyer values the measured improvement enough to pay for a repeatable deliverable.
+**Hypothesis:** A named buyer values the improvement enough to pay for a repeatable deliverable.
 
-Prepare a small offer for the most promising task family: defined input data, output, acceptance criteria, price hypothesis, and delivery cost. Compare it with the customer's current method. Test the offer through authorized interviews or a pilot. Do not treat a task-count target or enthusiastic feedback as willingness to pay.
+Prepare a small offer: defined input, output, acceptance criteria, price hypothesis, and delivery cost. Compare it with the customer's current method through authorized interviews or a pilot. Record budget authority and a concrete purchase or pilot decision; task counts and enthusiastic comments do not establish willingness to pay.
 
 ## Evaluation and resource boundaries
 
-Reserve evaluation repositories or task families before tuning generation. Keep all variants of a parent task in the same split. Keep development feedback separate from final evaluation. Compare model, harness, tools, attempt budget, and compute; report differences that remain.
+Reserve repositories or task families before tuning generation. Keep variants of a parent task in one split. Separate development feedback from final evaluation. Match model, harness, tools, attempts, and compute, or report differences.
 
-Choose resource caps after measuring a small pilot. Include API inference, environment execution, grading, calibration, failed attempts, and human work. Full AutoEnvScaling training is not required for the first experiments. A later training partner or bounded open-weight run can test whether the selected assets improve unseen-task performance.
+Set a cap before each paid pilot, then use its observed costs to propose the next cap. Count API inference, environment execution, grading, calibration, failures, and human work. Full AES training is unnecessary for the first experiments. A training partner or bounded open-weight run can later test unseen-task improvement.
 
 ## Decision at the end of the cycle
 
-Choose one opportunity only when we can explain its customer benefit, evidence, delivery cost, and remaining risk. Sketch the minimum reusable interfaces after comparing actual task families. If customer access or data rights are missing, narrow the next step to resolving that gap. If independent evaluation rejects the technical benefit, change the hypothesis rather than expanding infrastructure.
+Choose one opportunity when its customer benefit, evidence, delivery cost, and remaining risk are clear. Define reusable interfaces from the actual task families. If customer access or data rights are missing, resolve that gap. If independent evaluation rejects the benefit, revise the hypothesis before expanding infrastructure.

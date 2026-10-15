@@ -2,11 +2,13 @@
 
 **Question:** What does a task framework need to provide to a large agent-training pipeline?
 
-Sources checked on 2026-10-14: the supplied [live RL page](https://mimo.xiaomi.com/rl/) and the [official MiMo-V2.6 release](https://mimo.mi.com/docs/en-US/news/latest/v2-6). The dashboard text was incomplete during retrieval. This note uses the release as an orientation source; code, configurations, and training curves have not been audited.
+Sources checked on 2026-10-14: the supplied [live RL page](https://mimo.xiaomi.com/rl/) and the [official MiMo-V2.6 release](https://mimo.mi.com/docs/en-US/news/latest/v2-6). The dashboard text was incomplete during retrieval. Selected system, artifact, and cost claims were checked in the release; code, configurations, and training curves have not been audited.
 
 ## What the source describes
 
 The release describes RL across multiple task types and harnesses, with model-weight updates. Its systems discussion includes a shared trajectory representation, separation of control and data movement, task proportions in mixed training batches, and consistency between training and inference. It also describes reward checks and evaluation for attempts to exploit graders. See the release's section on scaling RL.
+
+The release also announces more than 7,000 open-source RL environments across software engineering, vulnerability reproduction, knowledge work, and web design, with a verl-based training framework. These are concrete reuse candidates; their coverage, licenses, and runnable quality still need artifact-level checks. It reports about US$0.85M for Flash and US$2.62M for Pro for the described RL training phase, not the models' entire development cost. See the release's open-source and cost sections.
 
 The reported improvements combine task, reward, training, and systems work. They do not isolate the benefit of any one environment generator. A public training dashboard is also insufficient to establish dataset independence or reproduce a run.
 
