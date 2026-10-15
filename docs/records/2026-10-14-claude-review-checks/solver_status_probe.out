@@ -1,0 +1,29 @@
+{
+  "nonzero_exit_rate_limit_msg": {
+    "infra_error": true,
+    "trial_reward": null,
+    "trajectory_reward": null,
+    "tests": [
+      1,
+      4
+    ],
+    "export_reward": 0.25,
+    "assignment_reward": 0.25
+  },
+  "nonzero_exit_other_endpoint_msg": {
+    "infra_error": false,
+    "trial_reward": 0.25,
+    "trajectory_reward": 0.25,
+    "tests": [
+      1,
+      4
+    ],
+    "export_reward": 0.25,
+    "assignment_reward": 0.25
+  },
+  "solver_group_rewards": [
+    0.25,
+    0.25,
+    1.0
+  ]
+}

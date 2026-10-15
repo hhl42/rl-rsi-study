@@ -49,6 +49,12 @@ The checks confirmed that a validation infrastructure failure can become a negat
 
 Prioritize explicit data contracts, independent verifier checks, and calibration stability before training. Refined E2 to hold aggregate performance information constant when measuring trace value. No product choice, live-run budget, or training reproduction has been approved by this study.
 
+### 2026-10-14 Independent review of the initial repository
+
+The user asked Claude to review every document for accuracy, plan quality, and organization. The [review](reviews/claude-init-review-1.md) found the cited numbers accurate and confirmed the AES code findings, with a correction needed to the Third Moment Research note. It recommends putting market research and hands-on foundations before further AES work, adding environment security and a market map, and simplifying the document stack. Two supporting records were added: [review checks of the AES code study](records/2026-10-14-claude-review-checks/README.md) and an unverified [market scan](records/2026-10-14-market-scan/README.md).
+
+The recommendations have not been adopted. The worklist above is unchanged until the team decides.
+
 ## Findings that affect the next step
 
 - AutoEnvScaling's paper distinguishes matched solver updates from matched total compute and documents supervised proposer initialization. Its preview adds concrete data-integrity and reproduction gaps. Use the [systems study](studies/autoenvscaling.md) for experiment choices and the [code findings](studies/autoenvscaling-code.md) before reusing an implementation path.

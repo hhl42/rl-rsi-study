@@ -1,0 +1,13 @@
+closed form:
+  p=0.10 admit=0.15248088 expected_n=5.1808
+  p=0.25 admit=0.54602051 expected_n=5.8750
+  p=0.50 admit=0.84375000 expected_n=6.0000
+  p=0.75 admit=0.54602051 expected_n=5.8750
+  p=0.90 admit=0.15248088 expected_n=5.1808
+upstream calibrate() over 256 sequences:
+  p=0.10 admit=0.15248088 expected_n=5.1808
+  p=0.25 admit=0.54602051 expected_n=5.8750
+  p=0.50 admit=0.84375000 expected_n=6.0000
+  p=0.75 admit=0.54602051 expected_n=5.8750
+  p=0.90 admit=0.15248088 expected_n=5.1808
+  initial success counts that expanded: [1, 3]
