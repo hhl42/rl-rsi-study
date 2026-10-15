@@ -1,0 +1,90 @@
+{
+  "binary_calibration_model": [
+    {
+      "admission_probability": 0.15248088,
+      "expected_scored_attempts": 5.1808,
+      "true_success_probability": 0.1
+    },
+    {
+      "admission_probability": 0.54602051,
+      "expected_scored_attempts": 5.875,
+      "true_success_probability": 0.25
+    },
+    {
+      "admission_probability": 0.84375,
+      "expected_scored_attempts": 6.0,
+      "true_success_probability": 0.5
+    },
+    {
+      "admission_probability": 0.54602051,
+      "expected_scored_attempts": 5.875,
+      "true_success_probability": 0.75
+    },
+    {
+      "admission_probability": 0.15248088,
+      "expected_scored_attempts": 5.1808,
+      "true_success_probability": 0.9
+    }
+  ],
+  "calibration_after_infrastructure_failures": {
+    "mean": 0.5,
+    "requested_per_call": [
+      4,
+      2
+    ],
+    "scored_rewards": [
+      0.25,
+      0.75
+    ],
+    "std": 0.25,
+    "verdict": "admitted"
+  },
+  "infrastructure_error_export": {
+    "exported_reward": -1.0,
+    "group_rewards": [
+      -1.0,
+      1.0
+    ],
+    "pipeline_reward": null,
+    "training_sample_ids": [
+      "infra",
+      "good"
+    ],
+    "validation_infra_error": true
+  },
+  "no_solver_feedback_assignment": {
+    "common_failure": "",
+    "direction": "harder",
+    "extra": {
+      "harder_at": 0.5,
+      "mean_reward": 0.625,
+      "n_attempts": 4,
+      "removal_verdict": "in_pool",
+      "reward_std": 0.4146
+    },
+    "pass_rate": 0.5
+  },
+  "partial_reward_assignment": {
+    "direction": "simpler",
+    "mean_reward": 0.75,
+    "pass_rate": 0.0
+  },
+  "persistent_memory": {
+    "retained_text": "keep a later lesson",
+    "selection_rule": "latest copied directory; no merge or reward-based selection"
+  },
+  "revision": "2b38259ac0ab5983c7de21df0f50696ab43e8869",
+  "rubric_skipped": [
+    "binary_reward",
+    "task_readme",
+    "expert_time_estimate",
+    "category_and_tags",
+    "task_name",
+    "difficulty_explanation_quality",
+    "solution_explanation_quality",
+    "verification_explanation_quality",
+    "ctrf_reporting",
+    "separate_verifier_configured"
+  ],
+  "scope": "synthetic offline probes, not training or reproduction"
+}

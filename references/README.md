@@ -2,7 +2,7 @@
 
 This register preserves the starting collection and adds foundations needed to assess it. Links were checked on 2026-10-14 unless noted. A source being listed does not mean all its experiments have been reviewed.
 
-**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) sets the reading order.
+**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) sets the reading order. The [study index](../docs/studies/README.md) links analysis of the original references, and the [foundation worksheet](../docs/studies/foundations.md) gives questions and exercises for F01–F14.
 
 ## Foundational sources
 
@@ -68,11 +68,11 @@ The supplied filenames are retained. Results in our notes refer to these local v
 
 | Source | Local file | Review depth and location |
 | --- | --- | --- |
-| RLTL;DR: Self-improvement by Internalizing Self-generated Feedback; Kirchhof et al., 2026 | [2609.37633v1](papers/2609.37633v1-RTL-DR.pdf) | Selected methods and results, sections 4–6, table 2, appendix D; summarized in the survey |
-| Scaling Trajectories for Complex Tasks through Recursive Self-Rewrite; Li et al., 2026 | [2610.02826v1](papers/2610.02826v1-Recursive-Self-Rewrite.pdf) | Selected methods and results, section 2 and sections 3.5–3.6, table 5; summarized in the survey |
+| RLTL;DR: Self-improvement by Internalizing Self-generated Feedback; Kirchhof et al., 2026 | [2609.37633v1](papers/2609.37633v1-RTL-DR.pdf) | Selected methods and results, sections 4–6, table 2, appendix D; [study](../docs/studies/rl-tldr.md) |
+| Scaling Trajectories for Complex Tasks through Recursive Self-Rewrite; Li et al., 2026 | [2610.02826v1](papers/2610.02826v1-Recursive-Self-Rewrite.pdf) | Selected methods and results, section 2 and sections 3.5–3.6, table 5; [study](../docs/studies/recursive-self-rewrite.md) |
 | AutoEnvScaling: Automating the Data Flywheel with Terminal Agents; Yu et al., 2026 | [2610.14163v1](papers/2610.14163v1-AutoEnvScaling.pdf) | Selected methods and results, sections 3–4, appendices G–H; [detailed study](../docs/studies/autoenvscaling.md) |
 
-AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvScaling) is accessible. Its README labels the code a private preview. The README was inspected; implementation behavior and reproduction remain unchecked. The [author publication list](https://simonucl.github.io/publications/) provided the code link.
+AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvScaling) labels the code a private preview. On 2026-10-14, we inspected selected implementation paths at [commit 2b38259](https://github.com/MSR-Orchard/AutoEnvScaling/tree/2b38259ac0ab5983c7de21df0f50696ab43e8869), dated 2026-10-13. The [code study](../docs/studies/autoenvscaling-code.md) covers assignment, workspace, admission, calibration, pool management, export, and training adapters. The [offline record](../docs/records/2026-10-14-autoenvscaling-code/README.md) contains 198 passing selected tests and synthetic probes. No live integrations or paper training results were reproduced. The [author publication list](https://simonucl.github.io/publications/) originally provided the code link.
 
 ## Provided pages and related primary material
 
@@ -80,18 +80,20 @@ AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvSca
 
 | Source | Role in the study | Review status |
 | --- | --- | --- |
-| [TypeSafe and Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev) | Structured decisions and calibration; adjacent product direction | Page reviewed; company claims |
-| [MiMo RL](https://mimo.xiaomi.com/rl/) | Integrated training system | Dashboard text incomplete; used [official release](https://mimo.mi.com/docs/en-US/news/latest/v2-6) for orientation |
-| [ApprenticeBench](https://neocognition.io/blog/apprentice-bench) | Stateful work and learning with memory | Browser overview and setup reviewed; full result audit pending |
-| [Raven](https://github.com/EverMind-AI/Raven) | Harness evolution and orchestration | README orientation; code not audited |
-| [AutoBenchmark](https://facebookresearch.github.io/RAM/blogs/autobench/) | Benchmark generation and human direction | Main method and setup reviewed |
-| [Impersona-Env](https://benshi34.github.io/#/blog/impersona-env) | User simulation and preference training | Browser page reviewed; proof of concept |
-| [HUD task design](https://www.hud.ai/research/what-is-a-good-task) | Practical task validity and difficulty | Page reviewed |
-| [Eli Gottlieb post](https://x.com/GottliebEli/status/2110077216260608037) | Relevance unresolved | Retrieval returned 403; content not used |
+| [TypeSafe and Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev) | Structured decisions and calibration; adjacent product direction | Page reviewed; company claims; [study](../docs/studies/typesafe-jev.md) |
+| [MiMo RL](https://mimo.xiaomi.com/rl/) | Integrated training system | Dashboard text incomplete; used [official release](https://mimo.mi.com/docs/en-US/news/latest/v2-6) for orientation; [study](../docs/studies/mimo-rl.md) |
+| [ApprenticeBench](https://neocognition.io/blog/apprentice-bench) | Stateful work and learning with memory | Browser overview and setup reviewed; full result audit pending; [study](../docs/studies/apprentice-bench.md) |
+| [Raven](https://github.com/EverMind-AI/Raven) | Harness evolution and orchestration | README orientation; code not audited; [study](../docs/studies/raven.md) |
+| [AutoBenchmark](https://facebookresearch.github.io/RAM/blogs/autobench/) | Benchmark generation and human direction | Main method and setup reviewed; [study](../docs/studies/autobenchmark.md) |
+| [Impersona-Env](https://benshi34.github.io/#/blog/impersona-env) | User simulation and preference training | Browser page reviewed; proof of concept; [study](../docs/studies/impersona-env.md) |
+| [HUD task design](https://www.hud.ai/research/what-is-a-good-task) | Practical task validity and difficulty | Page reviewed; [study](../docs/studies/hud-task-design.md) |
+| [Eli Gottlieb: How to make a good RL task](https://x.com/GottliebEli/status/2110077216260608037) | Task intent, component agreement, and expert feedback in task factories | Supplied [PDF](posts/x-GottliebEli-2110077216260608037.pdf), all eight pages reviewed; practitioner argument; [study](../docs/studies/eli-gottlieb-reference.md) |
 | [Third Moment case study](https://openai.com/index/third-moment-research/) | Reported operations and applications | Page reviewed; published 2026-10-14; [study](../docs/studies/third-moment-research.md) |
-| [Agentic RL II](https://linpengt.com/blog/agentic-rl-part-ii) | Orientation and further references | Selected passages; secondary technical explanation |
-| [Agentic RL III](https://linpengt.com/blog/agentic-rl-part-iii) | Training systems orientation | Selected passages; check primary docs for implementation claims |
+| [Agentic RL II](https://linpengt.com/blog/agentic-rl-part-ii) | Orientation and further references | Selected passages; secondary technical explanation; [study](../docs/studies/agentic-rl-part-ii.md) |
+| [Agentic RL III](https://linpengt.com/blog/agentic-rl-part-iii) | Training systems orientation | Selected passages; check primary docs for implementation claims; [study](../docs/studies/agentic-rl-part-iii.md) |
 | [Third Moment product site](https://thirdmomentresearch.com/) | Public offering and delivery process | Page reviewed; added primary source; [study](../docs/studies/third-moment-research.md) |
+
+The X URL initially could not be retrieved. The user then supplied a PDF containing the article, which was reviewed on 2026-10-14. Its visible date is October 13; its PDF creation metadata is dated 2026-10-14. References to this article use that saved copy, not a newly retrieved live page.
 
 ## Framework documentation
 
@@ -109,4 +111,5 @@ SHA-256 values recorded on 2026-10-14 identify the exact local sources used. The
 399f9134c04149b7a7fe3f360e66b559d4afd3b806bb660c08dbe7a55d135bd7  2609.37633v1-RTL-DR.pdf
 24ae4ec47493767e335db1c7d342a90726da3114cb41b461ccc63052a85b9281  2610.02826v1-Recursive-Self-Rewrite.pdf
 b59b2abdd375e2c4d299b18401e7e832a1331f7c5cf3b4fba535acf812bd8dd5  2610.14163v1-AutoEnvScaling.pdf
+ada540b56b611ba85e1473cc8caab9bb8841ab468d1076c395b25776460ad270  x-GottliebEli-2110077216260608037.pdf
 ```

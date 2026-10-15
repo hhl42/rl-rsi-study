@@ -1,0 +1,33 @@
+{
+  "source_revision": "2b38259ac0ab5983c7de21df0f50696ab43e8869",
+  "command_scope": "19 selected offline upstream test modules; no live model, sandbox, or training run",
+  "tests": 198,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reported_duration_seconds": 9.66,
+  "warnings": [
+    "StarletteDeprecationWarning: httpx use with starlette.testclient is deprecated; recommends httpx2."
+  ],
+  "modules": [
+    "tests.test_calibration_band",
+    "tests.test_calibration_feedback",
+    "tests.test_calibration_solver",
+    "tests.test_export",
+    "tests.test_pipeline",
+    "tests.test_pool",
+    "tests.test_proposer_assignment",
+    "tests.test_proposer_episode",
+    "tests.test_proposer_workspace",
+    "tests.test_rewards",
+    "tests.test_selfplay",
+    "tests.test_training_carry",
+    "tests.test_training_carry_driver",
+    "tests.test_training_carry_proxy",
+    "tests.test_training_miles",
+    "tests.test_validation_admission",
+    "tests.test_validation_contamination",
+    "tests.test_validation_harbor_runner",
+    "tests.test_validation_rubric"
+  ]
+}

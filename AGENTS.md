@@ -18,6 +18,7 @@ Do not infer a decision to build a general platform, operate training infrastruc
 - Record material scope changes with the reason in progress, then update goals and affected documents. Goals can change with evidence or user direction.
 - Use relative links inside repository documents. Do not require a local username, absolute path, or sibling checkout.
 - Keep the stack small. Create a new document only when it owns a distinct question or a durable research record.
+- Describe plans as steps with outputs and completion criteria. Do not assign calendar durations unless the user asks for a schedule.
 
 ## Use evidence carefully
 

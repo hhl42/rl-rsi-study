@@ -1,6 +1,6 @@
 # Tasks and environments for agent learning
 
-**Initial survey draft, 2026-10-14.** This survey explains the technical choices behind tasks, environments, and feedback for AI agents. It supports the commercial exploration in [goals](00-goals.md). The [source register](../references/README.md) records review depth; none of the cited training results has been reproduced here.
+**Initial survey draft, 2026-10-14.** This survey explains the technical choices behind tasks, environments, and feedback for AI agents. It supports the commercial exploration in [goals](00-goals.md). The [source register](../references/README.md) records review depth, and the [study notes](studies/README.md) examine individual references. None of the cited training results has been reproduced here.
 
 The central question is how to turn useful work into repeatable learning opportunities with trustworthy feedback. A task framework must support that process. Which parts should become our product depends on who needs them, what they can already do, and what improvement they will pay for.
 
@@ -60,6 +60,7 @@ A prompt alone rarely specifies an interactive task. The service-recovery exampl
 
 | Component | Example | Design question |
 | --- | --- | --- |
+| Intent | Diagnose configuration faults while preserving data | Does the task exercise the capability we want to improve? |
 | Instruction | Restore service without losing acknowledged writes | Is success clear without revealing the solution? |
 | Initial state | Pinned code, faulty configuration, logs, request data | Can another worker reproduce it? |
 | Action interface | Read files, edit config, run commands | Are required actions available and bounded? |
@@ -68,6 +69,8 @@ A prompt alone rarely specifies an interactive task. The service-recovery exampl
 | Verification | Recovery, data invariants, regression checks | Does the check measure the requested outcome? |
 | Reference solution | A known way to restore the service | Is it one valid solution rather than the only accepted form? |
 | Provenance | Parent task, source revision, generator, permissions | Can we trace origin, duplication, and allowed use? |
+
+Gottlieb's task-design article makes intent explicit and argues that the prompt, environment, and verifier must agree with it. Our use of that framing is to record the target capability in author metadata, while deciding separately what the solver may see. The article is practical design guidance, not measured evidence of training benefit. [Task-factory study](studies/eli-gottlieb-reference.md)
 
 Keep three assets distinct. A **task** gives the agent work to do. An **environment** provides the state and interfaces for doing it. A **trajectory** records one attempt. A dataset may contain any combination of them. A training buyer may need executable tasks for repeated sampling, while an SFT buyer needs suitable demonstrations.
 
@@ -108,11 +111,19 @@ AutoEnvScaling lets a proposer inspect solver experience, build and test environ
 
 The important design question is the selection objective. Maximizing solver failure can generate impossible tasks. Maximizing admitted task count can generate duplicates or exploit admission checks. We need to assess relevance, diversity, and independent outcomes alongside the generator's immediate reward.
 
+Our [AES code study](studies/autoenvscaling-code.md) adds an implementation lesson: these judgments must survive the full data path. Offline probes found that an infrastructure failure recorded as unscored can become a negative reward during export, and calibration can admit fewer scored attempts than requested. The preview also has distinct batch and trajectory semantics in its two training paths. These observations motivate explicit outcome status, minimum evidence, and trajectory contracts; they do not establish defects in the historical paper runs.
+
+### Improving the task-production process
+
+Gottlieb distinguishes an inner loop that revises a task from an outer loop that changes how future tasks are produced. In his proposal, expert reviews become explicit criteria and revisions to authoring, grading, or routing. Cheaper review components may eventually replace expensive ones if they preserve judgment quality. This can change prompts and orchestration without updating model weights. [Task-factory study, PDF pages 4–7](studies/eli-gottlieb-reference.md)
+
+Our hypothesis is that retaining expert decisions and their reasons could reduce repeated repair work. A test should compare the original and revised production processes on fresh tasks, using independent expert checks and counting all costs. Better production quality would still need a separate downstream test to establish training value. The post supplies this design direction, but no measured improvement or cost reduction.
+
 ### Reusing success and failure
 
-Recursive Self-Rewrite collects successes under different harnesses. A planner and critic prepare guidance, then an executor solves the task again in a fresh environment. The verified trajectories train the model through SFT. Its results support studying trajectory reconstruction, but the comparison also changes data quantity. The main table alone does not isolate rewriting from additional training examples. On its long-horizon benchmark, improved process reward still accompanies zero completed tasks. See section 2 and table 5 of the [supplied paper](../references/papers/2610.02826v1-Recursive-Self-Rewrite.pdf).
+Recursive Self-Rewrite collects successes under different harnesses. A planner and critic prepare guidance, then an executor solves the task again in a fresh environment. The verified trajectories train the model through SFT. Its results support studying trajectory reconstruction, but the comparison also changes data quantity. The main table alone does not isolate rewriting from additional training examples. On its long-horizon benchmark, improved process reward still accompanies zero completed tasks. The [study note](studies/recursive-self-rewrite.md) examines section 2 and table 5 of the supplied paper.
 
-RLTL;DR uses verifier feedback to generate short insights for sequential attempts and trains the model to internalize those insights. Its ablations include SFT on task–insight pairs. The cost reduction there concerns policy updates; collecting trajectories still costs substantial computation. Generalization is also uneven: section 4 reports transfer on its API environments but overfitting on Leetcode. See sections 4–6 and table 2 of the [supplied paper](../references/papers/2609.37633v1-RTL-DR.pdf).
+RLTL;DR uses verifier feedback to generate short insights for sequential attempts and trains the model to internalize those insights. Its ablations include SFT on task–insight pairs. The cost reduction there concerns policy updates; collecting trajectories still costs substantial computation. Generalization is also uneven: section 4 reports transfer on its API environments but overfitting on Leetcode. The [study note](studies/rl-tldr.md) examines sections 4–6 and table 2 of the supplied paper.
 
 Together these suggest that training assets may include feedback, successful trajectories, and concise procedural guidance. They do not establish which asset a customer needs or which is cheapest to produce well.
 
@@ -170,4 +181,4 @@ A task generator can support several businesses: supplying training environments
 
 Our systems background may help with realistic task construction, reproducibility, and efficient execution. Whether it creates a commercial advantage depends on access to valuable failures, trustworthy outcomes, and buyers. The [opportunity comparison](03-opportunities.md) owns those hypotheses.
 
-The next survey revision should close three gaps: inspect selected implementations at pinned revisions, compare competing commercial offerings, and connect task-quality measures to a credible downstream validation plan. Customer evidence and experimental results will determine which gap to address first.
+The first pinned implementation study now covers AutoEnvScaling. Further work should compare competing commercial offerings and connect independently measured task quality to downstream improvement. Customer evidence and the [next experiments](studies/autoenvscaling.md#7-what-to-test-next) will determine which technical components merit broader implementation comparisons.

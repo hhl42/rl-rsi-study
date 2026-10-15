@@ -19,6 +19,8 @@ Use the [document map](docs/README.md) to find the file that owns a question. Th
 - [AutoEnvScaling](docs/studies/autoenvscaling.md): how an agent generates and calibrates training environments.
 - [Third Moment Research](docs/studies/third-moment-research.md): its public offering and what we need to understand about the business.
 
+The [study index](docs/studies/README.md) also covers the other original references and links a foundation reading worksheet. It distinguishes source findings, our interpretations, and checks still needed.
+
 ## Working in this repository
 
 GPT/Codex and Claude use the shared rules in [AGENTS.md](AGENTS.md). [CLAUDE.md](CLAUDE.md) imports that file. Humans can use the same rules for evidence and writing.

@@ -1,77 +1,131 @@
-# AutoEnvScaling study
+# AutoEnvScaling: how it works and what we should learn
 
-AutoEnvScaling is our first detailed study of an adaptive task-generation system. It connects environment construction to solver feedback and then to training. Its value for this project is the complete experimental loop, including the checks and resource costs around generation.
+AutoEnvScaling (AES) connects task construction to the failures of the model being trained. A coding agent builds executable tasks, a host checks them, and repeated solver attempts determine which tasks enter the training pool. The pool changes as the solver improves. For our team, the first opportunity to investigate is reliable task production and validation. Reproducing the full training system is a separate decision.
 
-**Evidence:** selected methods and results from the supplied [v1 paper](../../references/papers/2610.14163v1-AutoEnvScaling.pdf), especially sections 3–4 and appendices G–H. Results below are author-reported. The [official repository](https://github.com/MSR-Orchard/AutoEnvScaling) README was inspected on 2026-10-14; code behavior has not been audited or reproduced. The [source register](../../references/README.md#provided-papers) records file identity.
+**Evidence as of 2026-10-14:** the supplied [v1 paper](../../references/papers/2610.14163v1-AutoEnvScaling.pdf), sections 3–4 and appendices G–H; selected code at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`; 198 selected upstream offline tests; and our synthetic probes. Paper results remain author-reported. We have not run live generation, containers, model endpoints, or training. The [code study](autoenvscaling-code.md) provides pinned sources and findings; the [research record](../records/2026-10-14-autoenvscaling-code/README.md) makes our checks repeatable.
 
-## How the system works
+## 1. The system in familiar terms
 
-There are two roles. The **solver** attempts tasks. The **proposer** builds tasks for the solver. A host process controls admission to the training pool.
+There are three main actors. The **proposer** is a coding agent that authors tasks. The **solver** is an agent that attempts them. The **host** runs admission checks, manages the pool, and coordinates training. An agent combines a model with a **harness**: software that gives it tools, manages its conversation, and controls execution. A **rollout**, or trajectory, records one attempt, including actions, tool results, and its reward.
 
-1. The proposer receives an assignment based on a parent environment, solver performance, and a recurring failure.
-2. It inspects trajectories and existing environments. It writes an instruction, runtime environment, reference solution, and tests as a Harbor task.
-3. It builds and tests the task inside a sandbox and can revise it.
-4. Host validation checks execution, the reference solution, an empty solution, contamination, and task quality.
-5. Calibration measures whether the current solver produces a useful range of rewards on the task.
-6. Accepted tasks enter the pool. Solver training and later pool reviews produce new assignments.
+Think of the proposer as a worker submitting an executable test fixture. The host's admission service checks the submission. Solver attempts provide both training examples and evidence for the next assignment. The difference from a conventional test farm is that the solver's model weights can change, making previously useful tasks too easy.
 
-This is a concrete systems distinction from asking a model to emit a task description. The proposer can execute the artifact, observe errors, and repair it. The admission checks remain outside the parts of the workspace that it can change. Source: section 3.
+```mermaid
+flowchart TD
+    P[Versioned task pool] --> S[Solver attempts]
+    S --> T[Train solver on useful groups]
+    T --> V[Updated solver policy]
+    V --> S
+    V --> R[Review task difficulty]
+    P --> R
+    S --> A[Assignment and past trajectories]
+    R --> A
+    A --> G[Proposer builds and tests a candidate]
+    G --> C[Host validation and solver calibration]
+    C -->|Accepted| P
+    C -->|Feedback for revision| G
+    C -.-> U[Train proposer in shared-model setting]
+    U --> V
+    V -.->|Shared model| G
+    V --> E[Independent evaluation]
+```
 
-## Validation and calibration
+The shared-model setting also trains the proposer from its checked submissions. With an external proposer, that weight-update path is absent. Evaluation tasks stay outside the generation loop; feeding their failures back to the proposer would make later scores less independent.
 
-The paper's appendix G.4 specifies the following admission policy:
+## 2. Follow one task through the code
 
-| Check | Paper setting | What it establishes |
+Consider an illustrative task: repair a worker that processes a retried job twice. The instruction describes the required behavior, the container contains the faulty implementation, a private reference solution fixes it, and private tests check normal execution, retries, and crash recovery. This is our example, not a reported AES experiment.
+
+**Assignment.** The host selects a parent task and summarizes recent solver attempts. The preview extracts recurring failed test names and chooses a harder or simpler direction using the fraction of attempts that fully passed. It also supplies aggregate rewards. This is a heuristic summary, not a demonstrated diagnosis of the model's underlying weakness. Repeated failures in crash recovery could guide the proposer toward a related recovery task.
+
+**Construction.** The proposer receives past environments, solver traces, fixed instructions, and editable `memory/` and `tools/` directories. It can write files, execute commands, inspect failures, and revise its work. Its output is a Harbor package:
+
+```text
+task.toml                 task and runtime configuration
+instruction.md            solver-visible request
+environment/Dockerfile    executable starting environment
+solution/solve.sh          private reference solution
+tests/test.sh             private verifier entry point
+```
+
+The reference solution and verifier are separate from the solver's starting view. The proposer sees these authoring artifacts. See the [workspace and task code](autoenvscaling-code.md#1-code-map).
+
+**Validation.** The host parses the package, runs the reference and empty agents, checks instruction overlap with held-out tasks, and requests a model-based rubric review. The environment build happens through the execution checks. A task must get full reference reward and less than 0.5 reward for doing nothing. The overlap check searches for matching sequences of 13 words; it does not establish semantic independence. The rubric reviewer defaults to the proposer's own model, so correlated mistakes remain possible.
+
+**Calibration.** The current solver attempts a valid task. The default starts with four attempts and adds attempts up to eight when the mean reward is within 0.15 of either band edge. Acceptance requires mean reward in [0.25, 0.75] and population standard deviation at least 0.1. Below-band tasks may get one extra attempt with reference-solution hints to guide revision; that attempt is excluded from calibration rewards. An initial attempt can have up to two revisions, each checked again. These are paper settings, not universal requirements.
+
+**Pool management.** Accepted tasks fill the active pool; overflow goes to a reserve. Periodic review retires tasks that become too easy, too hard, or produce constant rewards, and promotes suitable reserve tasks. Replacement requests guide further generation. The preview's pool review uses four attempts, rather than admission's adaptive four-to-eight rule. Seed tasks bypass full admission, so the seed pool is a trusted input. See the [pool walkthrough](autoenvscaling-code.md#4-pool-and-training-boundaries).
+
+Task identity, one execution attempt, calibration against a particular solver, and pool membership are different records. A task useful for today's solver may be unsuitable for tomorrow's solver without any change to its files.
+
+## 3. Why training needs varying rewards
+
+A **policy** is the model's rule for choosing its next output. Updating weights changes that rule. The paper uses two settings:
+
+| Setting | What changes |
+| --- | --- |
+| External proposer | The solver's weights are trained. The proposer's weights stay fixed; editable tools and memory can change its behavior. |
+| Shared model | One model serves both roles. Training uses solver and proposer attempts, with separate reward groups. |
+
+The solver reward is the fraction of tests passed. The proposer receives -1 for invalid tasks, -0.25 for valid tasks that fail calibration, and +1 for admission. This rewards usable training tasks rather than merely making the solver fail.
+
+Training compares attempts within a group. For solver rewards `[0, 0.5, 1, 1]`, the mean is 0.625. Subtracting it gives **advantages** `[-0.625, -0.125, 0.375, 0.375]`: a signal to favor outputs associated with better attempts and reduce those associated with worse attempts. AES groups solver attempts by environment and proposer attempts by assignment. It drops constant-reward groups because this calculation gives them no learning signal.
+
+AES uses Divergence Proximal Policy Optimization (DPPO), which constrains updates as the policy changes. Its advantages are mean-centered without GRPO's division by standard deviation. The shared-model run first uses supervised fine-tuning on 600 successful proposer trajectories from external models. Later self-training therefore does not establish independence from external demonstrations at initialization. Sources: section 3.3 and appendices G.1 and H.
+
+A reward of 0.75 is not a 75% full-task success rate. Four attempts that each pass three of four checks have mean reward 0.75, full-task success rate zero, and no reward variation. The preview uses full success rate for assignment direction and mean reward for calibration. Our framework must name these measures explicitly.
+
+## 4. What the results establish
+
+These Terminal-Bench results use **avg@5**, average performance across five attempts, not pass@5, which asks whether any attempt succeeds. Comparisons use the paper's Pi harness and evaluation resources.
+
+| Comparison | Author-reported result | Limit |
 | --- | --- | --- |
-| Build and files | Valid package and successful environment build | The package can execute under this setup |
-| Reference solution | Reward equals 1 | At least the supplied solution passes |
-| Empty solution | Reward below 0.5 | Doing nothing does not receive high reward |
-| Contamination | Flag instruction overlap of 13 consecutive words with held-out tasks | Detects a particular form of textual overlap |
-| Task review | Proposer's model applies the Harbor task rubric; binary-only reward criterion excluded | Additional model-based review |
-| Calibration | Mean reward in [0.25, 0.75], standard deviation at least 0.1 | Attempts provide differing rewards at moderate average difficulty |
+| Qwen3.5-35B-A3B, GPT-5.6-sol proposer, TB2.1 | Static Tmax 34.6 ± 1.9; AES 38.9 ± 2.4 | Table 3: 4.3 percentage points at matched solver updates; ± denotes confidence intervals. |
+| Same setting, past solver feedback removed | 35.3 ± 2.3 | Supports studying trace access. The preview still retains aggregate performance information in this condition. |
+| Shared Qwen3.6-35B-A3B, TB2.1 | Cold-start checkpoint 41.1; AES ends at 53.3; static Tmax at 47.2 | Figure 6: 6.1 points over the static comparison. |
+| Shared model, TB4.0 | Start 1.6; AES 3.2; static Tmax 1.4 | Transfer to a harder evaluation, with low absolute success. |
 
-Calibration starts with four solver rollouts and expands to eight near a mean-reward boundary. Failed assignments allow up to two revisions. These are the paper's choices, not universal requirements for our framework.
+Matched solver updates do **not** match total compute or elapsed time. Generation, calibration, review, and discarded attempts add work. Full AES and static runs reach 288 solver updates. The no-proposer-training ablation ends at 160; at that common endpoint, their TB2.1 scores are 48.9, 44.9, and 40.1 respectively. Comparing unequal endpoints would overstate the isolated effect. Source: appendix G.1.
 
-The distinction between mean reward and reward variation matters. Attempts that all score 0.5 meet the mean band but give no within-group ranking. Attempts that differ because tests are flaky also give variation, but it is not useful evidence about solver actions. Our audit should examine the cause of variation.
+The shared-model run uses 4–8 B200 GPUs, 16 environment groups of 16 trajectories per solver batch, and a 256-task pool reviewed every 16 solver updates. Released tables and plotting data do not include the original task suites, trajectories, or checkpoints needed for independent reproduction. The preview also differs from the paper in some checks and training paths. See the [release comparison](autoenvscaling-code.md#5-what-the-release-does-not-establish).
 
-The authors acknowledge that reference solutions and tests can share a mistake. A model review using the proposer's own model is not independent confirmation. Our interpretation is that independent alternatives, negative controls, and expert sampling remain valuable even after admission passes.
+## 5. What we should take into our framework
 
-## What learns
+These are candidate requirements, not a decision to build a general platform.
 
-The paper studies two settings. With an external closed-weight proposer, the proposer's weights stay fixed while its harness, tools, and memory can improve. RL updates the solver. In the shared-model setting, one open-weight policy trains on both proposer and solver trajectories.
-
-The solver reward is the fraction of tests passed. The proposer receives -1 for failed validation, -0.25 for passing validation but failing calibration, and 1 for admission. The method uses Divergence Proximal Policy Optimization, or DPPO, with advantages computed separately for the two roles. Its advantages are mean-centered without GRPO's standard-deviation normalization. Source: section 3.3 and appendix G.1.
-
-The shared-model experiment starts with supervised fine-tuning on 600 proposer trajectories from external models. Thus, its later self-training does not establish independence from external demonstrations at initialization. Source: appendix H.
-
-## Results that matter for our decisions
-
-The paper reports avg@5 for these Terminal-Bench evaluations. This averages performance over five attempts; it is different from pass@5, which asks whether any attempt succeeds. All compared methods use the paper's Pi harness and evaluation resources. Avoid comparing these figures directly with a different harness's leaderboard score.
-
-| Comparison | Reported result | Interpretation and limit |
+| Requirement | Why it matters | Smallest useful implementation |
 | --- | --- | --- |
-| Qwen3.5-35B-A3B, GPT-5.6-sol proposer, Terminal-Bench 2.1 | Static Tmax: 34.6 ± 1.9; AutoEnvScaling: 38.9 ± 2.4 | Table 3 reports a 4.3-point gain under matched training steps; the table labels ± as confidence intervals. |
-| Same setting, remove solver feedback | Score falls to 35.3 ± 2.3 | Supports examining failure traces as an input to generation. The remaining difference from static generation is small. |
-| Shared Qwen3.6-35B-A3B after cold start, Terminal-Bench 2.1 | 41.1 to 53.3; static Tmax ends at 47.2 | A 12.2-point gain over the starting checkpoint and 6.1 over the static comparison. Figure 6 and section 4.3. |
-| Shared model, Terminal-Bench 4.0 | 1.6 to 3.2; static Tmax ends at 1.4 | Improvement transfers to a harder evaluation, but absolute performance remains low. |
+| Version the whole task | Instructions, environment, reference solution, and verifier jointly define the outcome. | Immutable artifact digest plus parent and split metadata; reuse Harbor packaging initially. |
+| Preserve outcome status through export | An unavailable sandbox provides no evidence that the task or solver is bad. Our probe found this distinction lost in one AES export path. | Separate execution status, validation verdict, and optional reward; verify them at the training boundary. |
+| Audit the verifier independently | The author can make matching mistakes in the solution and tests. | Valid alternative solutions, plausible wrong solutions, repeated resets, and expert samples. |
+| Make calibration conditional on the solver | Difficulty depends on weights, harness, sampling, and resources. Small samples are noisy. | Store versions, valid attempt counts, raw rewards, and uncertainty; allow an inconclusive verdict. |
+| Keep lineage and cost | Accepted task count hides retries, rejections, duplicates, and human repair. | Candidate-to-attempt-to-admission records with usage and exclusion reasons. |
+| Define persistence and training contracts | Shared memory needs a selection rule. A training trajectory needs more than a readable transcript. | Version memory changes; record policy versions, token IDs, sampling probabilities, and loss masks when required by the trainer. |
 
-The training comparisons match solver updates, **not total compute or elapsed time**. The full and static runs reach 288 updates. The no-proposer-training ablation ends at 160; at that common endpoint the full, static, and ablation scores are 48.9, 44.9, and 40.1. Comparing the full final result with an earlier ablation endpoint would overstate the isolated effect. Source: appendix G.1.
+The preview saves editable memory before scoring and replaces shared directories with later outputs. It does not demonstrate that persistent changes improve later tasks. Read-only workspace permissions are advisory for an agent running as root; host restaging protects future inputs but is not a complete security boundary. Specify the actual state and trust contracts before reuse. See the [code findings](autoenvscaling-code.md#3-confirmed-behavior-and-its-consequences).
 
-The reported shared-model training uses 4–8 B200 GPUs. Each solver batch retains 16 environment groups with 16 trajectories per group. Groups with no reward variation are discarded and replaced. The active pool has 256 tasks and is reviewed every 16 solver updates. These settings explain why a faithful training reproduction is a separate resource decision. A small generation experiment does not require reproducing the full run.
+Commercially, measure the cost of an independently accepted, relevant task and the improvement it enables for a buyer. Internal admission count is insufficient. Our systems skills may help with execution, evidence, and verifier debugging. Whether customers value that enough to support a product remains an open hypothesis in the [opportunity comparison](../03-opportunities.md).
 
-## What to inspect in the implementation
+## 6. What remains unclear
 
-The repository README describes a preview release. Before relying on it, record a commit and trace one task through assignment, sandbox execution, validation, calibration, pool update, and result recording. Inspect how retries and failed calls affect cost and how benchmark material is excluded. Check the behavior against the paper rather than treating the README as an execution trace.
+- **Validity:** How often do admitted tasks reward shortcuts, reject valid alternatives, or rely on ambiguous instructions?
+- **Calibration:** How stable are four-to-eight-attempt decisions on fresh attempts, and how much reward variation comes from flaky execution?
+- **Transfer:** Are generated tasks useful beyond the solver and harness that calibrated them? Do they cover new families or mostly variants of known parents?
+- **Causal contribution:** How much gain comes from traces, task replacement, proposer weight updates, and editable memory separately?
+- **Execution fidelity:** Which release path reproduces the reported training behavior? Bridge and carry implementations have materially different batch and trajectory semantics.
+- **Economics:** Does improvement survive a comparison that counts all inference, environment, review, and training costs? Which buyer owns this cost today?
 
-Pay particular attention to resumable trajectories. The paper carries unfinished terminal episodes across policy updates. A reproduction needs the recorded policy version and sampling probabilities, along with environment state. Restoring files alone may not restore the experiment.
+## 7. What to test next
 
-## Questions for our experiments
+The completed offline audit is [recorded here](../records/2026-10-14-autoenvscaling-code/README.md). Continue in this order. Later paid or training experiments need a bounded scope and resources.
 
-- Does solver feedback improve diversity and relevance after accounting for its collection cost?
-- How often do admitted tasks fail an independent verifier audit?
-- Does difficulty estimated from four or eight attempts remain stable on later attempts?
-- Does selecting tasks for one solver produce useful tasks for another?
-- Do training gains persist under a total-budget comparison that includes task generation and calibration?
-- Which parts can be reused from Harbor and the released system, and which need domain expertise?
+| Step | Test and controls | Output and decision |
+| --- | --- | --- |
+| 1. Enforce the data contract | Cover infrastructure failure through export, insufficient valid attempts, duplicate artifacts, reset repeatability, and conflicting memory updates. Start with synthetic inputs and one hand-built task. | Explicit invariants and failing examples. Resolve the export defect and define minimum scored attempts before training on this output. |
+| 2. Audit task quality | Apply [E1](../01-study-plan.md#e1-verify-the-verifier) to roughly 10–20 systems tasks. Test valid alternatives, meaningful mistakes, and shortcuts with independent expert judgments. | Defect types, false acceptance/rejection, repair work, and cost. Establish whether the verifier is usable. |
+| 3. Measure calibration stability | Fix solver and harness. Compare four/eight-attempt decisions with a larger fresh sample. Retain infrastructure failures separately; repeat across task families. | Decision disagreement and uncertainty versus cost. Choose thresholds from observed data. |
+| 4. Isolate trace value | Apply [E2](../01-study-plan.md#e2-generate-from-solver-failures): same parents, aggregate statistics, proposer, checks, and budget; vary raw traces and failure summaries. Count rejected work. | Independent quality, failure coverage, diversity, and cost per accepted task. Use a separate arm to remove all solver information. |
+| 5. Check transfer and commercial relevance | Try a reserved solver or harness and a buyer-relevant workflow. If justified, design bounded training against a static pool at matched total budget. | Evidence of transfer and delivery economics. Decide whether to pursue task supply, validation, or managed improvement. |
 
-The first practical adaptation is [E2 in the study plan](../01-study-plan.md#e2-generate-from-solver-failures): hold the solver fixed and isolate the value of failure traces. Combine it with verifier auditing before attempting joint training. This tests an important component without claiming to reproduce the paper.
+The first four steps can study task production without updating model weights. A positive result would justify a training experiment; it would not yet prove training value or commercial demand.
