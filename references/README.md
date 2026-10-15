@@ -1,0 +1,112 @@
+# Source register
+
+This register preserves the starting collection and adds foundations needed to assess it. Links were checked on 2026-10-14 unless noted. A source being listed does not mean all its experiments have been reviewed.
+
+**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) sets the reading order.
+
+## Foundational sources
+
+### F01 RL foundations
+
+Sutton and Barto, *Reinforcement Learning: An Introduction*, second edition, 2018. [Publisher](https://mitpress.mit.edu/9780262039246/reinforcement-learning/). Read chapters 1 and 3 for interaction and decision processes, then chapter 13 when studying policy gradients. Publisher metadata checked; chapter study pending. The authors' book site returned an error during retrieval.
+
+### F02 PPO
+
+Schulman et al., *Proximal Policy Optimization Algorithms*, 2017, [paper](https://arxiv.org/abs/1707.06347). Orientation review. Read sections 1–3 to understand policy updates and constraints on their size. The HTML rendering was incomplete; use the paper PDF for the detailed study.
+
+### F03 InstructGPT
+
+Ouyang et al., *Training language models to follow instructions with human feedback*, 2022, [paper](https://arxiv.org/abs/2203.02155). Orientation review. Establishes the relationship among demonstrations, preference labels, reward models, and reinforcement learning from human feedback.
+
+### F04 DPO
+
+Rafailov et al., *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*, 2023, [paper](https://arxiv.org/abs/2305.18290), v3 methods consulted. Selected methods, sections 3–4. Learn how preference pairs can train a policy without the usual online RL loop.
+
+### F05 GRPO
+
+Shao et al., *DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models*, 2024, [paper](https://arxiv.org/abs/2402.03300), v3 section 4 consulted. Selected methods. Introduces Group Relative Policy Optimization. Focus on grouping attempts and estimating relative rewards.
+
+### F06 Reasoning with RL
+
+DeepSeek-AI et al., *DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning*, 2025, [paper](https://arxiv.org/abs/2501.12948). Orientation review. Compare R1-Zero, R1, and distillation rather than treating them as one recipe. Detailed result review pending.
+
+### F07 Acting through tools
+
+Yao et al., *ReAct: Synergizing Reasoning and Acting in Language Models*, 2022, [paper](https://arxiv.org/abs/2210.03629). Orientation review. Explains interleaving model reasoning and actions that obtain new observations.
+
+### F08 Learning through memory
+
+Shinn et al., *Reflexion: Language Agents with Verbal Reinforcement Learning*, 2023, [paper](https://arxiv.org/abs/2303.11366). Orientation review. Its feedback updates episodic text memory rather than model weights. Useful for interpreting broad uses of the word learning.
+
+### F09 Repository evaluation
+
+Jimenez et al., *SWE-bench: Can Language Models Resolve Real-World GitHub Issues?*, 2023, [paper](https://arxiv.org/abs/2310.06770). Orientation review. Introduces repository issue resolution as an executable evaluation. Historical model scores are not a current capability estimate.
+
+### F10 Task synthesis
+
+Yang et al., *SWE-smith: Scaling Data for Software Engineering Agents*, 2025, [paper](https://arxiv.org/abs/2504.21798), [project and artifacts](https://swesmith.com/). Orientation review. A concrete comparison for producing tasks from existing code and tests, including subsequent model training.
+
+### F11 Rubric rewards
+
+Gunjal et al., *Rubrics as Rewards: Reinforcement Learning Beyond Verifiable Domains*, 2025, [paper](https://arxiv.org/abs/2507.17746), v2 sections 2–3 consulted. Selected methods. Connects prompt-specific grading criteria to training rewards; relevant to the existing Q&A project.
+
+### F12 Generated curricula
+
+Wang et al., *Paired Open-Ended Trailblazer (POET): Endlessly Generating Increasingly Complex and Diverse Learning Environments and Their Solutions*, 2019, [paper](https://arxiv.org/abs/1901.01753). Orientation review. Earlier work on jointly generating environments and improving their solvers. Its setting differs from terminal agents.
+
+### F13 Reward overoptimization
+
+Gao, Schulman, and Hilton, *Scaling Laws for Reward Model Overoptimization*, 2022, [paper](https://arxiv.org/abs/2210.10760). Orientation review. Studies divergence between optimizing a proxy reward and performance measured by a separate reward model in a synthetic setup.
+
+### F14 Repeated sampling and evaluation
+
+Chen et al., *Evaluating Large Language Models Trained on Code*, 2021, [paper](https://arxiv.org/abs/2107.03374). Orientation review; inspect section 2.1 during the evaluation session. Introduces HumanEval and explains pass@k estimation. This is the historical Codex model paper.
+
+## Provided papers
+
+The supplied filenames are retained. Results in our notes refer to these local v1 files, even if a later web version appears. The printed title of the first paper is RLTL;DR; its filename uses RTL-DR.
+
+| Source | Local file | Review depth and location |
+| --- | --- | --- |
+| RLTL;DR: Self-improvement by Internalizing Self-generated Feedback; Kirchhof et al., 2026 | [2609.37633v1](papers/2609.37633v1-RTL-DR.pdf) | Selected methods and results, sections 4–6, table 2, appendix D; summarized in the survey |
+| Scaling Trajectories for Complex Tasks through Recursive Self-Rewrite; Li et al., 2026 | [2610.02826v1](papers/2610.02826v1-Recursive-Self-Rewrite.pdf) | Selected methods and results, section 2 and sections 3.5–3.6, table 5; summarized in the survey |
+| AutoEnvScaling: Automating the Data Flywheel with Terminal Agents; Yu et al., 2026 | [2610.14163v1](papers/2610.14163v1-AutoEnvScaling.pdf) | Selected methods and results, sections 3–4, appendices G–H; [detailed study](../docs/studies/autoenvscaling.md) |
+
+AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvScaling) is accessible. Its README labels the code a private preview. The README was inspected; implementation behavior and reproduction remain unchecked. The [author publication list](https://simonucl.github.io/publications/) provided the code link.
+
+## Provided pages and related primary material
+
+[links](links.md) is the original list. Keep it unchanged as provenance; maintain descriptions and additions here.
+
+| Source | Role in the study | Review status |
+| --- | --- | --- |
+| [TypeSafe and Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev) | Structured decisions and calibration; adjacent product direction | Page reviewed; company claims |
+| [MiMo RL](https://mimo.xiaomi.com/rl/) | Integrated training system | Dashboard text incomplete; used [official release](https://mimo.mi.com/docs/en-US/news/latest/v2-6) for orientation |
+| [ApprenticeBench](https://neocognition.io/blog/apprentice-bench) | Stateful work and learning with memory | Browser overview and setup reviewed; full result audit pending |
+| [Raven](https://github.com/EverMind-AI/Raven) | Harness evolution and orchestration | README orientation; code not audited |
+| [AutoBenchmark](https://facebookresearch.github.io/RAM/blogs/autobench/) | Benchmark generation and human direction | Main method and setup reviewed |
+| [Impersona-Env](https://benshi34.github.io/#/blog/impersona-env) | User simulation and preference training | Browser page reviewed; proof of concept |
+| [HUD task design](https://www.hud.ai/research/what-is-a-good-task) | Practical task validity and difficulty | Page reviewed |
+| [Eli Gottlieb post](https://x.com/GottliebEli/status/2110077216260608037) | Relevance unresolved | Retrieval returned 403; content not used |
+| [Third Moment case study](https://openai.com/index/third-moment-research/) | Reported operations and applications | Page reviewed; published 2026-10-14; [study](../docs/studies/third-moment-research.md) |
+| [Agentic RL II](https://linpengt.com/blog/agentic-rl-part-ii) | Orientation and further references | Selected passages; secondary technical explanation |
+| [Agentic RL III](https://linpengt.com/blog/agentic-rl-part-iii) | Training systems orientation | Selected passages; check primary docs for implementation claims |
+| [Third Moment product site](https://thirdmomentresearch.com/) | Public offering and delivery process | Page reviewed; added primary source; [study](../docs/studies/third-moment-research.md) |
+
+## Framework documentation
+
+| Source | Purpose | Review status |
+| --- | --- | --- |
+| [Harbor](https://docs.harborframework.com/) | Task packaging, execution, and verification | Documentation index reviewed; interface walkthrough pending |
+| [verl](https://verl.readthedocs.io/en/latest/) | RL training and rollout integration | Overview reviewed; no version selected |
+| [SkyRL](https://docs.skyrl.ai/docs) | Alternative training integration | Documentation entry page reviewed; detailed comparison pending |
+
+## Integrity of supplied files
+
+SHA-256 values recorded on 2026-10-14 identify the exact local sources used. These hashes establish file identity, not authenticity or correctness.
+
+```text
+399f9134c04149b7a7fe3f360e66b559d4afd3b806bb660c08dbe7a55d135bd7  2609.37633v1-RTL-DR.pdf
+24ae4ec47493767e335db1c7d342a90726da3114cb41b461ccc63052a85b9281  2610.02826v1-Recursive-Self-Rewrite.pdf
+b59b2abdd375e2c4d299b18401e7e832a1331f7c5cf3b4fba535acf812bd8dd5  2610.14163v1-AutoEnvScaling.pdf
+```
