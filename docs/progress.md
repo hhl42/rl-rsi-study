@@ -80,4 +80,10 @@ The user added the official repository and requested study notes. Reviewed selec
 
 Harness² broadens the comparison to improvement with fixed model weights. It does not replace the AES and Third Moment Research priorities or select a commercial offering. The next implementation remains a small task and verifier exercise; the study's proposed experiments are conditional candidates.
 
+### 2026-10-20 Second independent review
+
+The user asked Claude to review the changes since review 1, with emphasis on the learning path and the Harness² study. [Review 2](reviews/claude-init-review-2.md) accepts the resolution's corrections to review 1. It recommends teaching run-to-run variation and reward hacking, building the first Harbor task during the evaluation step, adding a market track, and fixing two learning-path links. It also finds that the Harness² note omits strong alternatives in the paper, such as one-time offline harness tuning and best-of-k retries.
+
+These recommendations have not been adopted. The worklist above is unchanged until the team decides.
+
 Add later decisions with their evidence and effect on the plan. Store completed experiments and interview records under `docs/records/`.

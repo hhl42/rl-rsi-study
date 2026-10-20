@@ -14,7 +14,7 @@ Each document owns one kind of information. Link to the owner when another docum
 | How do we collect and assess evidence? | [Research method](research-method.md) |
 | What did a particular check run, and how can it be repeated? | Dated records under `records/`, starting with the [AutoEnvScaling offline code study](records/2026-10-14-autoenvscaling-code/README.md) |
 | What has happened and what comes next? | [Progress and decisions](progress.md) |
-| What did an independent review of the repository find? | Reviews under `reviews/`, starting with [Claude review 1](reviews/claude-init-review-1.md). Read its [resolution](reviews/claude-init-review-1-resolution.md) for the response to each recommendation. Progress records the resulting work order. |
+| What did an independent review of the repository find? | Reviews under `reviews/`, starting with [Claude review 1](reviews/claude-init-review-1.md). Read its [resolution](reviews/claude-init-review-1-resolution.md) for the response to each recommendation. [Claude review 2](reviews/claude-init-review-2.md) covers the later changes, the learning path, and the Harness² study. Progress records the resulting work order. |
 | Where are sources, and how closely were they reviewed? | [Source register](../references/README.md) |
 | How should agents work and write here? | [Shared agent guidance](../AGENTS.md) |
 
