@@ -10,18 +10,9 @@ The learning path therefore starts with a whole-system explanation, follows one 
 
 ## Reading sequence
 
-Follow the [guided learning path](studies/foundations.md). It supplies one main resource per step, video or text alternatives, exercises, and stopping points. **Do not read the foundational source list in order.** Papers are consulted when an experiment or design choice raises a specific question.
+Follow [L1–L6 in the guided learning path](studies/foundations.md). That file alone owns the learning sequence, resources, and stopping points. M1 is its parallel market exercise. **Do not read the foundational source list in order.** Consult papers when an experiment or design choice raises a specific question.
 
-| Step | Learn | Output that shows enough understanding |
-| --- | --- | --- |
-| 1. Whole system | Language models, training versus inference, weights versus context and harness | Draw execution and training loops; identify what each improvement method changes. |
-| 2. One execution | Agent, tools, task, environment, trajectory, reset | Annotate a trace and explain the task's inputs, actions, and outcome. |
-| 3. Trustworthy measurement | Task validity, grader errors, held-out evaluation, repeated attempts, cost | Design checks for a valid repair, an alternative repair, and a misleading shortcut. |
-| 4. Task-to-training flow | SFT, preference data, RL sampling, rewards, advantages, weight updates | Work through one numerical update and explain the assets each method consumes. |
-| 5. Competing mechanisms | Manual task construction, AES, Harness²; commercial offering separately | Compare what changes, the acceptance evidence, transfer, and total cost. |
-| 6. Small implementation | Package, reset, solve, and grade a familiar task | Complete H1 progressively; another teammate can execute the package. |
-
-Skip a step when its output is already clear. Use the survey as a reference and the glossary on demand. The first five steps can use existing explanations, traces, and offline calculations; they do not depend on a GPU, customer access, or a paid API.
+The learning path builds H1's first task during L3, before the training explanation. Later, L6 runs agents on the expanded set. H1 below owns the implementation details. Introductory learning and deterministic task checks need no model API or training GPU; actual execution still needs a suitable local environment.
 
 ## How much depth we need
 
@@ -40,23 +31,23 @@ A full ML curriculum, every foundational paper, transformer implementation, and 
 
 | Step | Work | Output and completion condition |
 | --- | --- | --- |
-| 1. Learn and investigate | Follow the learning path while comparing public offerings and reachable buyer classes. | Shared execution and improvement diagrams, a sourced market map, and candidate customer problems. |
-| 2. Select a provisional problem | Compare permitted examples, buyer access, and measurable outcomes. | A provisional choice in progress, with evidence, the largest gap, and a condition that would reverse it. |
-| 3. Establish task quality | Use H1's integration experience and run E1 on a relevant small task family. | Defects, review effort, costs, and a decision: usable, repairable, or too costly. |
-| 4. Test the claimed benefit | Choose E2, E3, a Harness² comparison, or a bounded training experiment according to the buyer's need. | A reproducible comparison that changes or confirms the opportunity ranking. |
-| 5. Make a commercial and architecture decision | Test E4; compare reuse with building. | Proceed, narrow, change direction, or stop. If proceeding, define the smallest project and its acceptance test. |
+| D1. Learn and investigate | Follow the learning path while comparing public offerings and reachable buyer classes. | Shared execution and improvement diagrams, a sourced market map, and candidate customer problems. |
+| D2. Select a provisional problem | Compare permitted examples, buyer access, and measurable outcomes. | A provisional choice in progress, with evidence, the largest gap, and a condition that would reverse it. |
+| D3. Establish task quality | Use H1's integration experience and run E1 on a relevant small task family. | Defects, review effort, costs, and a decision: usable, repairable, or too costly. |
+| D4. Test the claimed benefit | Choose E2, E3, a Harness² comparison, or a bounded training experiment according to the buyer's need. | A reproducible comparison that changes or confirms the opportunity ranking. |
+| D5. Make a commercial and architecture decision | Test E4; compare reuse with building. | Proceed, narrow, change direction, or stop. If proceeding, define the smallest project and its acceptance test. |
 
 Customer research runs alongside learning. It need not wait for all six steps, and lack of customer access should not block foundational learning. Public research cannot establish demand by itself. Outreach, paid runs, and commitments require direction beyond this documentation work. AES repair work enters the plan only if a selected experiment will reuse its implementation.
 
 ## Foundations by doing
 
-These are implementation exercises after the introductory learning steps. H1 applies the task and evaluation concepts; H2 is conditional on a need to inspect weight training. Neither is a prerequisite for starting the study.
+H1 spans learning steps L3 and L6. H2 is an optional depth exercise within L4 when observing weight training would answer a useful question.
 
 ### H1 Inspect and run a small task set
 
-Start with one hand-written task in a familiar systems domain, such as configuration repair. Use Harbor as the first packaging candidate. Pin dependencies and define initial state, reset, instructions, reference solution, and verifier. Check reference and empty solutions, a deliberate wrong solution, and a different valid repair. Another teammate should be able to repeat these checks. Then expand to three to five tasks.
+**During L3:** start with one hand-written task in a familiar systems domain, such as configuration repair. Use Harbor as the first packaging candidate, following its [task format](https://docs.harborframework.com/tasks/overview) and [tutorial](https://docs.harborframework.com/tutorials/create-a-task). Pin dependencies and define initial state, reset, instructions, reference solution, and verifier. Check reference and empty solutions, a deliberate wrong solution, and a different valid repair. Repeat these deterministic checks from fresh resets. Another teammate should be able to repeat them from the package. This is L3's completion artifact.
 
-Once API access, sandbox resources, and a spend cap are agreed, run two existing agents with documented model and harness versions. Keep task resources and attempt budgets comparable. Repeat attempts to look for inconsistent outcomes, rather than interpreting one run as a reliable success rate. Annotate one trajectory: observations, generated actions, stopping reason, reward, elapsed time, and cost. Include failed starts and retries in accounting.
+**During L6:** expand to three to five tasks. Once model access, sandbox resources, and any required spend cap are agreed, run two existing agents with documented model and harness versions. Keep task resources and attempt budgets comparable. Repeat attempts to look for inconsistent outcomes, rather than interpreting one run as a reliable success rate. Annotate one trajectory: observations, generated actions, stopping reason, reward, elapsed time, and cost. Include failed starts and retries in accounting.
 
 **Output:** the task packages, run configuration, an annotated trace, and a short account of surprising failures. Each participant should explain whether a failure came from the agent, task, grader, or infrastructure. This is an integration exercise, not evidence of training benefit or a representative benchmark.
 
@@ -64,13 +55,15 @@ Once API access, sandbox resources, and a spend cap are agreed, run two existing
 
 **Optional depth step:** use this when training integration or a training-related uncertainty justifies it. It is not required before H1, E1, or harness-improvement studies. Prepare a tiny open-weight RL exercise with a checkable toy answer. Choose a supported small model and trainer, a training set, and a separate evaluation set. Inspect groups with mixed rewards and groups where every attempt fails. Save the rewards, advantages, which tokens contribute to the training loss, and before/after results at the same sampling budget.
 
-**Before any paid run:** write down the exact model, hardware, expected run size, API and compute charges, maximum spend, and stop conditions. Request approval for that concrete proposal. This plan authorizes preparation, not spending. Until resources are agreed, use the [worked example](02-survey.md#a-worked-training-step) and an offline calculation. A toy run teaches the update mechanism; it does not validate a commercial task family.
+**Existing or free compute option:** select a small notebook from [Unsloth's RL guide](https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide). Check the exact model, notebook revision, memory needs, runtime limits, and whether its outputs expose the quantities above. Use an already available local GPU or a free allocation if it fits. Free availability and successful execution are not guaranteed; we have not run a notebook. A successful small run can complete H2 without a paid run. Save the configuration and results, including an inconclusive before/after comparison if that is what the evidence shows.
+
+**Before any paid run:** write down the exact model, hardware, expected run size, API and compute charges, maximum spend, and stop conditions. Request approval for that concrete proposal. This plan authorizes preparation, not spending. If suitable resources are unavailable, use the [worked example](02-survey.md#a-worked-training-step) and an offline calculation. A toy run teaches the update mechanism; it does not validate a commercial task family.
 
 ## Public research and customer discovery
 
 Maintain the [market map](03-opportunities.md#market-map) from public sources. Compare the buyer's current workaround and named alternatives, including internal construction. Keep vendor claims, interview evidence, and our hypotheses distinct.
 
-Before choosing the first buyer, list contacts the team can legitimately reach, available problem examples, data permissions, and acceptance criteria. Use the opportunity document's interview questions when outreach is authorized. An accessible buyer with a measurable problem is a stronger starting point than a fashionable architecture.
+Use [M1's buyer brief](03-opportunities.md#buyer-brief-for-m1) as the input to D2. List reachable roles, available problem examples, data permissions, and acceptance criteria. Use the opportunity document's interview questions when outreach is authorized. An accessible buyer with a measurable problem is a stronger starting point than a fashionable architecture.
 
 ## Proposed experiments
 

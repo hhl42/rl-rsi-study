@@ -8,7 +8,7 @@ We are studying how to create tasks, environments, and feedback that improve AI 
 
 ## Start here
 
-Read [Goals and scope](docs/00-goals.md) and [Progress and decisions](docs/progress.md) for direction and current state. Then follow the [guided learning path](docs/studies/foundations.md): high-level online explanations and videos, one task execution, evaluation, practical RL, comparison, and a small task implementation. Each step says how deeply to learn and when to move on.
+Read [Goals and scope](docs/00-goals.md) and [Progress and decisions](docs/progress.md) for direction and current state. Then follow the [guided learning path](docs/studies/foundations.md): L1–L6 move from online explanations to an early task package, practical RL, comparisons, and agent runs. M1 covers buyer research alongside them. Each step says how deeply to learn and when to move on.
 
 The [study plan](docs/01-study-plan.md) connects that learning to experiments and a commercial decision. Consult the [survey](docs/02-survey.md) for explanations and the [opportunity comparison](docs/03-opportunities.md) for candidate buyers. These are references to use as questions arise.
 

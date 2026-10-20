@@ -94,7 +94,7 @@ AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvSca
 
 ## Provided pages and related primary material
 
-[links](links.md) is the original list. Keep it unchanged as provenance; maintain descriptions and additions here.
+[links](links.md) is the user-maintained collection of reference leads. The user may add or reformat entries; Git history preserves earlier versions. Preserve supplied entries unless asked to change them, and maintain descriptions, review depth, and agent-discovered additions in this register.
 
 | Source | Role in the study | Review status |
 | --- | --- | --- |
@@ -102,6 +102,7 @@ AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvSca
 | [MiMo RL](https://mimo.xiaomi.com/rl/) | Integrated training system | Dashboard text incomplete; used [official release](https://mimo.mi.com/docs/en-US/news/latest/v2-6) for selected system, artifact, and cost claims; [study](../docs/studies/mimo-rl.md) |
 | [ApprenticeBench](https://neocognition.io/blog/apprentice-bench) | Stateful work and learning with memory | Browser setup, selected costs, and learning ablation reviewed; implementation audit pending; [study](../docs/studies/apprentice-bench.md) |
 | [Raven](https://github.com/EverMind-AI/Raven) | Harness evolution and orchestration | README orientation; code not audited; [study](../docs/studies/raven.md) |
+| [Harness²](https://github.com/google-research/harness2) | Harness editing and experience across tasks | Selected paper and pinned-code review; scripted demo; [details](#harness2) |
 | [AutoBenchmark](https://facebookresearch.github.io/RAM/blogs/autobench/) | Benchmark generation and human direction | Main method and setup reviewed; [study](../docs/studies/autobenchmark.md) |
 | [Impersona-Env](https://benshi34.github.io/#/blog/impersona-env) | User simulation and preference training | Browser page reviewed; proof of concept; [study](../docs/studies/impersona-env.md) |
 | [HUD task design](https://www.hud.ai/research/what-is-a-good-task) | Practical task validity and difficulty | Page reviewed; [study](../docs/studies/hud-task-design.md) |
@@ -116,9 +117,9 @@ The X URL initially could not be retrieved. The user then supplied a PDF contain
 
 ## Harness2
 
-Added by the user to the link collection; reviewed on 2026-10-19. Xu et al., *Harness²: Recursive Agent Harnessing for an Open World*, 2026, [paper v1](https://arxiv.org/html/2610.14224v1), [project](https://harness2.github.io/), [official code](https://github.com/google-research/harness2).
+Added by the user to the link collection; reviewed on 2026-10-19 and rechecked during [review 2 resolution](../docs/reviews/claude-init-review-2-resolution.md) on 2026-10-20. Xu et al., *Harness²: Recursive Agent Harnessing for an Open World*, 2026, [paper v1](https://arxiv.org/html/2610.14224v1), [project](https://harness2.github.io/), [official code](https://github.com/google-research/harness2).
 
-Selected methods and results reviewed: sections 2–4, tables 1–3, figure 6, and relevant appendix details. Inspected selected code paths at commit `1cfe254e8d25b15f37048c3730134686abe60335`, including recursion, selection, library storage, adapter contracts, context handling, and the demo. The [study](../docs/studies/harness2.md) owns findings; the [offline record](../docs/records/2026-10-19-harness2-demo/README.md) preserves the deterministic demo result. No live model run or benchmark reproduction.
+Selected methods and results reviewed: sections 2–4, tables 1–3, figures 5–7, and appendices B–D and F. Rechecked combined-token accounting, offline and retry baselines, library ablations, and judge roles during the second review resolution. Inspected selected code paths at commit `1cfe254e8d25b15f37048c3730134686abe60335`, including recursion, selection, library storage, adapter contracts, context handling, and the demo. The [study](../docs/studies/harness2.md) owns findings; the [offline record](../docs/records/2026-10-19-harness2-demo/README.md) preserves the deterministic demo result. No live model run or benchmark reproduction.
 
 The repository uses Apache 2.0 and says it is not an officially supported Google product. Third-party code and benchmark datasets have their own terms; repository licensing alone does not establish rights to every experiment asset.
 
@@ -135,11 +136,26 @@ Checked on 2026-10-14. These are a narrower checked set than the leads in the or
 | Applied Compute, [company announcement](https://www.appliedcompute.com/company/fundraise) | Description of enterprise offering reviewed; no funding or customer-performance claims adopted from it. |
 | Modal, [pricing](https://modal.com/pricing); Daytona, [pricing](https://www.daytona.io/pricing) | CPU and memory price units checked for the market map. Not a workload-cost benchmark; recheck before a spending decision. |
 
+## Learning resources added in review 2
+
+Checked on 2026-10-20. The learning path selects passages; this list does not add required courses. Videos were not watched and notebooks were not run.
+
+| Source | Review depth and use |
+| --- | --- |
+| 3Blue1Brown, [Large Language Models explained briefly](https://www.youtube.com/watch?v=LPZh9BOjkQs) | Original video page identified; short L1 alternative. No transcript-level review. |
+| SWE-agent team, [minimal agent tutorial](https://minimal-agent.com/) | Model-call, shell-execution, and loop examples read. L2 code-reading exercise; not an audited execution boundary. |
+| Anthropic, [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), 2026 | Selected grader, repeated-attempt metric, and task-debugging passages reviewed. Primary practitioner guidance, not evidence that every zero-pass task is defective. |
+| METR, [Recent frontier models are reward hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/), 2025 | Concrete scoring/timing shortcuts and detection limits reviewed. Observations from METR's evaluations, not our reproduction or a universal frequency estimate. |
+| Anthropic, [A statistical approach to model evaluations](https://www.anthropic.com/research/statistical-approach-to-model-evals), 2024 | Error bars, sampling assumptions, and paired comparisons reviewed. L3 exercise uses invented counts, not a reported experiment. |
+| Unsloth, [RL guide and notebooks](https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide) | Notebook list and hardware discussion reviewed. Potential H2 route; compatibility and free resource availability not tested. |
+
+Lambert's official [course listing](https://rlhfbook.com/course) confirms lectures 11 and 12 and their topics. Their direct video links from review 2 could not be retrieved in this check; the learning path retains the course-page fallback. The RLHF training overview belongs in L4, not as a general language-model introduction. Epoch AI's environment-market report remains the M1 entry source; the market map labels additional supplier leads as unverified.
+
 ## Framework documentation
 
 | Source | Purpose | Review status |
 | --- | --- | --- |
-| [Harbor](https://docs.harborframework.com/) | Task packaging, execution, and verification | Documentation index reviewed; interface walkthrough pending |
+| [Harbor task format](https://docs.harborframework.com/tasks/overview), [task tutorial](https://docs.harborframework.com/tutorials/create-a-task), [Terminal-Bench examples](https://github.com/harbor-framework/terminal-bench-2) | Task packaging, execution, and verification | Format, tutorial, and example repository reviewed on 2026-10-20; no task implementation or integration run completed |
 | [verl](https://verl.readthedocs.io/en/latest/) | RL training and rollout integration | Overview reviewed; no version selected |
 | [SkyRL](https://docs.skyrl.ai/docs) | Alternative training integration | Documentation entry page reviewed; detailed comparison pending |
 

@@ -30,7 +30,23 @@ Public sources checked on 2026-10-14. This is an initial comparison, not a marke
 
 [Epoch AI's January 2026 interview report](https://epoch.ai/gradient-updates/state-of-rl-envs), based on 18 interviews, reports typical task prices of US$200–2,000, higher prices for exclusivity, and increased internal construction by labs. Respondents emphasize robustness against reward hacking. These are reported market observations, not audited transactions or quotes for our task family. They make buyer concentration and quality important questions; they do not settle which candidate wins.
 
-The [earlier market scan](records/2026-10-14-market-scan/README.md) contains more leads, including acquisition and funding claims. Those remain discovery material unless checked against original announcements. This map uses the narrower verified source set. It does not conclude that all generic environments are interchangeable or that a format alone could never support a business.
+### Additional supplier leads
+
+Added on 2026-10-20 from the [earlier market scan](records/2026-10-14-market-scan/README.md): **Mechanize, Prime Intellect, Surge, Mercor, Snorkel, and Turing**. Their current task/environment offerings, prices, and fit are **unverified leads** in this map. Inclusion is not a supplier ranking or confirmation that they offer equivalent products.
+
+Before ranking task supply, check relevant first-party product pages for the actual deliverable, target buyer, acceptance terms, and public pricing. The earlier scan's funding and acquisition claims remain unverified too. The narrower checked table above should not be mistaken for the full competitive set.
+
+### Buyer brief for M1
+
+The [M1 learning exercise](studies/foundations.md#m1-investigate-buyers-alongside-learning) supplies the input to decision D2. Add a short, sourced brief here for each serious buyer candidate, using these fields:
+
+- Buyer role, recurring failure, current workaround, and named alternatives.
+- Proposed deliverable and measurable acceptance criteria.
+- Reported prices, source dates, and what the prices cover; unknowns remain explicit.
+- Permitted examples and reachable roles. Keep private contact details in an approved location.
+- Largest evidence gap, next check, and a condition that would reverse a provisional choice.
+
+No buyer brief with confirmed team access is complete yet. Use public research to prepare it; customer contact requires separate direction.
 
 ## Choose the first buyer to study
 

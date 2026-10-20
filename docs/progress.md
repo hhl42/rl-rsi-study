@@ -4,25 +4,21 @@ This is the current worklist and decision record. Keep it useful to someone star
 
 ## Current state
 
-As of 2026-10-19, the repository contains a survey, a study plan, a source register, study notes, and a sourced initial market map. The [guided learning path](studies/foundations.md) now starts with high-level online explanations and videos. Its six steps specify required depth, a small output, and when to move on. Foundational papers are optional references for concrete questions. This documents the learning route; it does not mean the team has completed it.
+As of 2026-10-20, the repository contains a survey, a study plan, a source register, study notes, and a sourced initial market map. The [guided learning path](studies/foundations.md) now starts with high-level online explanations and videos. L1–L6 specify required depth, a small output, and when to move on. L3 builds the first task before training concepts; M1 supplies a buyer brief alongside learning. Foundational papers are optional references for concrete questions. This documents the learning route; it does not mean the team has completed it.
 
 The first [AutoEnvScaling code study](studies/autoenvscaling-code.md) inspected selected paths at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`. The [original record](records/2026-10-14-autoenvscaling-code/README.md) owns the offline tests and probes. The [independent review checks](records/2026-10-14-claude-review-checks/README.md) add a solver-side probe. The [review resolution](reviews/claude-init-review-1-resolution.md) records this follow-up's source checks, corrections, and recommendation-by-recommendation response.
 
-The new [Harness² study](studies/harness2.md) covers selected paper results and code at commit `1cfe254e8d25b15f37048c3730134686abe60335`. Its [deterministic demo](records/2026-10-19-harness2-demo/README.md) completed two local task workflows and demonstrated library persistence. Scripted edits and reflection do not establish model improvement.
+The new [Harness² study](studies/harness2.md) covers selected paper results and code at commit `1cfe254e8d25b15f37048c3730134686abe60335`. Its [deterministic demo](records/2026-10-19-harness2-demo/README.md) completed two local task workflows and demonstrated library persistence. Scripted edits and reflection do not establish model improvement. The [review 2 resolution](reviews/claude-init-review-2-resolution.md) adds weaker results, competing baselines, and corrected cost and failure-handling descriptions.
 
 No live model generation or sandbox integration experiment, model training, customer interview, or paper-result reproduction has been completed. No buyer class, code-reuse path, or paid-run budget has been selected. Public market evidence and offline behavior checks help frame decisions; they do not establish demand or training benefit.
 
 ## Next work
 
-| Priority | Work | Output | State |
-| --- | --- | --- | --- |
-| 1 | Follow learning steps 1–4: whole system, one execution, evaluation, practical training flow | Two-loop diagram, annotated trace, grader counterexamples, and a worked reward calculation | Resource selection complete; team learning outputs pending; no paid resources required |
-| Parallel | Compare reachable buyers and their existing alternatives | One accessible problem per buyer class where possible, permitted examples, and a provisional choice with a reason to reverse it | Public map available; team access information needed |
-| 2 | Compare mechanisms in learning step 5, then begin H1 with one task | AES/Harness²/manual comparison and one repeatable package; expand H1 to three to five tasks after checking the contract | Source notes and scripted demo available; task not selected |
-| 3 | Prepare a concrete resource proposal when model execution is needed | Model/API access, sandbox setup, maximum spend, and stop conditions | Open; no paid runs authorized; H2 only if training depth is needed |
-| 4 | Test graders on the chosen task family | E1 defect counts, expert review effort, costs, and a usable/repairable/too-costly decision | Procedures defined; tasks and cases not yet selected |
-| 5 | Test the benefit that matters to the first buyer | E2, E3, a Harness² comparison, or bounded training; authorized interviews or pilot evidence | Select after the buyer and task-quality checks |
-| Conditional | If reusing AES, check how results reach training | A sandbox failure stays unscored; too little valid evidence remains inconclusive; reset and isolation checks pass | Audit findings documented; no repair project selected |
+- **Now: L1–L3.** Learn the execution loop and variation, inspect real agent code, then package H1's first deterministic task with valid and invalid solutions. Resources are selected; the team's learning outputs and task package are pending.
+- **Alongside: M1 and D2.** Prepare the buyer brief using public sources, permitted examples, and reachable roles. The map includes unverified supplier leads. Team access evidence and a provisional buyer choice remain open.
+- **After the first package: L4–L6.** Work through the update example and compare methods, then expand H1 to three to five tasks. Agent runs need suitable access and resources. H2 is optional and may use fitting existing or free compute; no notebook run is complete.
+- **For a selected task family: E1, then D4.** Check grader errors and delivery costs before choosing E2, E3, a Harness² comparison, or a bounded training test. Procedures are defined; the task family and buyer acceptance criteria remain undecided.
+- **Conditional reuse work.** Repair AES or integrate Harness² only if an experiment selects it. No paid-run budget, customer outreach, or implementation-repair project has been authorized by these documentation changes.
 
 ## Decisions
 
@@ -84,6 +80,16 @@ Harness² broadens the comparison to improvement with fixed model weights. It do
 
 The user asked Claude to review the changes since review 1, with emphasis on the learning path and the Harness² study. [Review 2](reviews/claude-init-review-2.md) accepts the resolution's corrections to review 1. It recommends teaching run-to-run variation and reward hacking, building the first Harbor task during the evaluation step, adding a market track, and fixing two learning-path links. It also finds that the Harness² note omits strong alternatives in the paper, such as one-time offline harness tuning and best-of-k retries.
 
-These recommendations have not been adopted. The worklist above is unchanged until the team decides.
+At the time of this review, its recommendations were pending. The following resolution records the decisions now adopted.
+
+### 2026-10-20 Resolve Claude review 2
+
+The user requested source-checked responses and rejected the proposed six-column learning table as hard to read on GitHub. The [resolution](reviews/claude-init-review-2-resolution.md) records each recommendation and narrower conclusions where the review exceeds its evidence. The original review remains unchanged.
+
+Corrected AES's collection-time wording and Harness²'s combined-token description, function links, marker checks, and missing initial-output fallback. Expanded the comparison with weaker gains, offline tuning, retries, library ablations, judge overlap, and human setup work. These are documentation corrections, not implementation repairs or new benchmark results.
+
+Moved the first task package into L3, added randomness and statistical interpretation, supplied real agent code and reward-hacking examples, and made M1's buyer brief explicit. Learning steps live only in the foundation guide; decision stages use D1–D5. H2 can use suitable existing or free compute. Retained a short introductory route instead of assigning every suggested resource.
+
+Added narrow-table guidance, unverified supplier leads, source-list ownership, and glossary terms. No scope change to the commercial objective or initial AES/Third Moment priorities. Validation and source-access limits are recorded in the resolution.
 
 Add later decisions with their evidence and effect on the plan. Store completed experiments and interview records under `docs/records/`.

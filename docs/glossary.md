@@ -7,9 +7,11 @@ Use this as a quick reference, not a prerequisite reading list. The [survey](02-
 | Term | Meaning here |
 | --- | --- |
 | Agent; harness | An agent uses a model to act through tools. Its harness manages tools, context, execution, retries, and stopping. |
+| Executor; editor | In Harness², the executor attempts the task; the editor changes its harness using execution evidence. Both can use models with fixed weights. |
 | Task; environment | A task specifies work and success conditions. An environment supplies the starting state and interfaces for doing that work. |
 | Policy; weights | The policy chooses actions from the available history. Model weights are the learned numerical parameters that shape those choices. |
 | Token | A piece of text or structured output processed by the model; it need not be a whole word. |
+| Sampling | Drawing an output from the model's probability distribution. Fixed weights and context can still produce different outputs; sampling settings affect that variation. |
 | Episode; trajectory; rollout | An episode is one attempt. A trajectory is its recorded actions and observations. Rollout often means either generating or recording that attempt. |
 | Reward; verifier | Reward is a numerical training score. A verifier checks the outcome; its result may determine that score. |
 | Advantage | An estimate of how much better or worse an action or attempt is than a reference expectation. Group methods use other attempts on the same task as that reference. |
@@ -29,7 +31,12 @@ Use this as a quick reference, not a prerequisite reading list. The [survey](02-
 | --- | --- |
 | pass@1 | Estimated probability of success for one sampled attempt under a stated configuration. |
 | pass@k | Probability that at least one of k attempts succeeds; it allows multiple chances. |
+| best-of-k | Run k attempts and select one output. Its actual success depends on the selector; pass@k alone does not show that the selector can find a successful answer. |
+| pass^k | Probability that all k attempts succeed. For independent attempts on one task with success probability p, this is p raised to k. Do not apply that formula to a pooled average across tasks with different probabilities. |
 | avg@k | Average score over k attempts or evaluation runs, following the source's definition. It is not success within k chances. AES reports avg@5. |
+| Standard deviation; standard error | Standard deviation describes spread among observations, such as run scores. Standard error estimates uncertainty in an estimated mean. They answer different questions. |
+| Confidence interval | An interval from a procedure designed to cover the target quantity at a stated rate over repeated samples, under its assumptions. Related tasks and repeated runs require an appropriate sampling model. |
+| Paired comparison | Compare two methods on the same tasks and analyze within-task differences. Keep the task pairing when estimating uncertainty. |
 | Partial reward; full pass | Partial reward records incomplete progress. A full pass meets the task's completion rule. These support different difficulty measurements. |
 | Terminal-Bench; TB2.1; TB4.0 | Benchmarks for tool-using terminal agents; TB abbreviates Terminal-Bench and the suffix identifies a version. Different versions need not contain the same tasks. AES's TB2.1 evaluation has 89 tasks. |
 | Tmax | A static terminal-task generation recipe and the main AES baseline. See the [comparison](studies/autoenvscaling.md#4-what-the-results-establish). |

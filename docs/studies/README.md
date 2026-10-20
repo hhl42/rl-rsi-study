@@ -8,7 +8,7 @@ The [source register](../../references/README.md) owns bibliographic details and
 
 | Note | Main question | Main takeaway |
 | --- | --- | --- |
-| [Guided learning path](foundations.md) | What should a systems team learn, how deeply, and in what order? | Start with online explanations and videos; use observable outputs to decide when to move on. |
+| [Guided learning path](foundations.md) | What should a systems team learn, how deeply, and in what order? | Follow L1–L6 with an early task package and M1 buyer research; stop when each output is clear. |
 | [AutoEnvScaling](autoenvscaling.md), with [code walkthrough](autoenvscaling-code.md) | How does adaptive task generation work, and which contracts does the preview actually enforce? | Adaptation can improve useful rollout yield; validate quality independently. |
 | [Third Moment Research](third-moment-research.md) | What does a managed agent-improvement business offer? | The managed product and internal research case provide different evidence. |
 

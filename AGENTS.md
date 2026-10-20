@@ -41,7 +41,7 @@ These rules adapt the writing guidance from the related `ai-data-research` repos
 3. Avoid metaphors and compressed labels. Explain the actual relationship.
 4. State the evidence before its interpretation.
 5. Use one name for one thing. Define an unfamiliar AI term before relying on it.
-6. Use normal word order and connected paragraphs. Use tables for comparisons and lists for steps or parallel items.
+6. Use normal word order and connected paragraphs. Use tables for compact comparisons and lists for steps or parallel items. Keep tables narrow, usually two or three columns. Use short sections when prose would create tall, cramped cells on GitHub.
 7. Keep new findings in proportion. Rewrite an affected passage so it reads coherently.
 8. Keep numbers only when they help a decision. Place the relevant limitation beside the claim.
 9. Use dates for changing sources, measurements, and decisions. Avoid decorative dates and attribution in enduring rules.

@@ -189,7 +189,13 @@ Study adapters to an existing training system before building one. verl is an im
 
 ## 7 Reading results without misleading ourselves
 
+With fixed model weights, sampled outputs can still vary. Tool timing and environment state may add variation. Repeating one task estimates consistency on that task; sampling different tasks addresses a different uncertainty, generalization to a wider workload. Keep both sources of variation visible.
+
 **Pass@1** estimates success for one sampled attempt under a fixed setup. It is not necessarily the first recorded attempt. **Pass@k** measures whether at least one of k attempts succeeds. Averaging the success rates of five runs estimates single-attempt performance; it does not mean success within five attempts. A deployment also needs a way to select a correct result if it tries several. [Code evaluation paper](https://arxiv.org/abs/2107.03374)
+
+**Best-of-k** includes that selection step. **Pass^k** asks whether all k attempts succeed, which is useful when repeated reliability matters. These metrics answer different questions. [Agent evaluation guide](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+
+Compare methods on the same tasks and analyze paired differences. Report what an error bar measures: run-to-run spread, uncertainty from task sampling, or another quantity. A difference smaller than one run's standard deviation is not, by itself, a test of statistical significance. [Statistical evaluation guide](https://www.anthropic.com/research/statistical-approach-to-model-evals)
 
 Partial reward and full completion answer different questions. So do a relative percentage improvement and a percentage-point change. Keep the denominator and baseline next to the result.
 
