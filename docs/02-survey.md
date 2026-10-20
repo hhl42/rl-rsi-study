@@ -71,7 +71,7 @@ The mean reward is 0.25. Subtracting it gives the advantages shown above. This s
 
 In a common tool-agent setup, generated text and tool-call tokens participate in the training loss. Tool responses are observations supplied to the model and are masked out of that loss. The implementation must specify its exact token mask. A final task reward labels an entire attempt; it does not identify which individual command caused the failure. Useful commands inside a failed attempt may also receive negative pressure.
 
-After the update, the weights have changed. New attempts may be more likely to follow behavior associated with D, but one update guarantees neither success on this task nor transfer to a new configuration failure. Test both with fresh attempts. If all four rewards were zero, the mean-centered advantages would all be zero and this outcome signal would provide no preference among them. [H2](01-study-plan.md#h2-observe-one-small-weight-update) makes these quantities visible in a real small run.
+After the update, the weights have changed. New attempts may be more likely to follow behavior associated with D, but one update guarantees neither success on this task nor transfer to a new configuration failure. Test both with fresh attempts. If all four rewards were zero, the mean-centered advantages would all be zero and this outcome signal would provide no preference among them. The optional [H2](01-study-plan.md#h2-observe-one-small-weight-update) would make these quantities visible in a real small run when training integration becomes relevant.
 
 ## 3 What a task framework must represent
 
@@ -161,6 +161,8 @@ Impersona-Env uses a simulated user to produce feedback and preference pairs for
 
 Raven emphasizes orchestration and harness evolution. MiMo provides an integrated training example. TypeSafe explores structured decisions rather than general text generation. These broaden the comparison without determining our first implementation. In particular, a structured output guarantee is not a guarantee of a correct decision. [Raven](https://github.com/EverMind-AI/Raven), [MiMo release](https://mimo.mi.com/docs/en-US/news/latest/v2-6), [TypeSafe](https://typesafe.ai/blog/introducing-system-one-models-and-jev)
 
+Harness² provides a concrete implementation comparison. An editor changes a fixed model's execution harness, probes alternatives on the current task, and retains harnesses and lessons for later editing. Its improvement loop excludes benchmark verdicts, but independent grading is still needed to measure success. The [study](studies/harness2.md) covers the two loops, execution costs, code boundaries, and our scripted offline demo. This broadens the potential consumers of our task framework beyond weight training.
+
 ## 6 Framework boundaries to investigate
 
 The following is a candidate decomposition for experiments, not a committed architecture:
@@ -203,4 +205,4 @@ A task generator can support several businesses: supplying training environments
 
 Our systems background may help with realistic task construction, reproducibility, and efficient execution. Whether it creates a commercial advantage depends on access to valuable failures, trustworthy outcomes, and buyers. The [opportunity comparison](03-opportunities.md) owns those hypotheses.
 
-The first pinned implementation study now covers AutoEnvScaling. Further work should compare competing commercial offerings and connect independently measured task quality to downstream improvement. Customer evidence and the [study plan](01-study-plan.md) will determine which technical components merit broader implementation comparisons.
+Pinned implementation studies now cover selected paths in AutoEnvScaling and Harness². Further work should connect independently measured task quality to downstream improvement and compare commercial alternatives. Customer evidence and the [study plan](01-study-plan.md) will determine which technical components merit deeper implementation work.

@@ -8,6 +8,8 @@ Read [goals](docs/00-goals.md), the [document map](docs/README.md), and [progres
 
 The current phase is study and exploration toward a commercial product. Help the team choose an opportunity and understand the task framework it would require. AutoEnvScaling and Third Moment Research have priority, but compare alternatives. A paper result, a compelling demo, and a customer willing to pay are different kinds of evidence.
 
+Start new learning topics with a high-level explanation and suitable online text or videos. Define the required depth and an observable stopping point. Use papers to answer specific questions; do not turn the source register into a mandatory curriculum.
+
 Do not infer a decision to build a general platform, operate training infrastructure, or sell a particular product from interest in a paper. Routine reading, documentation, and reversible checks should proceed within the user's request. Research does not itself authorize customer outreach, publication, paid runs, or deployment.
 
 ## Keep the repository useful to the next reader
@@ -50,3 +52,5 @@ Explain technical ideas with concrete systems examples. Avoid assuming the reade
 ## Finish a change
 
 Check local links and heading anchors, source attribution, terminology, and agreement with goals. Read the changed passages as a new teammate would. For documentation-only work, focused checks are enough; do not invent a large test process. Report what changed and any material gap. Do not claim unrun experiments or checks passed.
+
+Commit completed changes after the relevant checks pass, unless the user explicitly asks otherwise. Stage only files relevant to the task, preserve unrelated changes, and report the commit hash in the final response.

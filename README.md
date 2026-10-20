@@ -6,22 +6,20 @@ We are studying how to create tasks, environments, and feedback that improve AI 
 
 **Start with [Goals and scope](docs/00-goals.md).** It owns the project's direction. AutoEnvScaling and Third Moment Research are the first detailed studies, but they do not define the limits of the search.
 
-## Reading order
+## Start here
 
-1. [Goals and scope](docs/00-goals.md): what we want to learn and decide.
-2. [Study plan](docs/01-study-plan.md): learning sequence, experiments, and decision points.
-3. [Survey](docs/02-survey.md): concepts and comparison of approaches, written for systems engineers.
-4. [Commercial opportunities](docs/03-opportunities.md): possible customers, products, and evidence we need.
-5. [Progress and decisions](docs/progress.md): current state and the next useful work.
+Read [Goals and scope](docs/00-goals.md) and [Progress and decisions](docs/progress.md) for direction and current state. Then follow the [guided learning path](docs/studies/foundations.md): high-level online explanations and videos, one task execution, evaluation, practical RL, comparison, and a small task implementation. Each step says how deeply to learn and when to move on.
 
-Use the [document map](docs/README.md) to find the file that owns a question. The [source register](references/README.md) contains the original references, added foundations, links, and review depth.
+The [study plan](docs/01-study-plan.md) connects that learning to experiments and a commercial decision. Consult the [survey](docs/02-survey.md) for explanations and the [opportunity comparison](docs/03-opportunities.md) for candidate buyers. These are references to use as questions arise.
+
+Use the [document map](docs/README.md) to find the file that owns a question. The [source register](references/README.md) is a library with review depth, not a mandatory reading list.
 
 ## Priority studies
 
 - [AutoEnvScaling](docs/studies/autoenvscaling.md): how an agent generates and calibrates training environments.
 - [Third Moment Research](docs/studies/third-moment-research.md): its public offering and what we need to understand about the business.
 
-The [study index](docs/studies/README.md) also covers the other original references and links a foundation reading worksheet. It distinguishes source findings, our interpretations, and checks still needed.
+The [study index](docs/studies/README.md) also covers the other references, including [Harness²](docs/studies/harness2.md), a comparison that improves execution software and stored lessons with fixed model weights. Notes distinguish source findings, our interpretations, and checks still needed.
 
 ## Working in this repository
 

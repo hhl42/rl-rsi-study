@@ -1,18 +1,20 @@
 # Source register
 
-This register preserves the starting collection and adds foundations needed to assess it. Links were checked on 2026-10-14 unless noted. A source being listed does not mean all its experiments have been reviewed.
+This register preserves the starting collection and records relevant teaching and research sources. **It is a reference library, not a curriculum. You do not need to read the foundational papers in order or finish them before experimenting.** Start with the [guided learning path](../docs/studies/foundations.md). Links were checked on 2026-10-14 unless noted. A source being listed does not mean all its experiments have been reviewed.
 
-**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) sets the reading order. The [study index](../docs/studies/README.md) links analysis of the original references, and the [foundation worksheet](../docs/studies/foundations.md) gives questions and exercises for the foundation readings.
+**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) connects learning to decisions. The [study index](../docs/studies/README.md) links source analysis; the foundation guide owns resource selection and depth.
 
 ## Foundational sources
 
+F01–F14 are optional primary references for specific questions. F15–F18 provide the online teaching resources used in the learning path. Their numbering is an identifier, not a reading order. See [when to open papers](../docs/studies/foundations.md#when-to-open-the-foundational-papers).
+
 ### F01 RL foundations
 
-Sutton and Barto, *Reinforcement Learning: An Introduction*, second edition, 2018. [Publisher](https://mitpress.mit.edu/9780262039246/reinforcement-learning/). Read chapters 1 and 3 for interaction and decision processes, then chapter 13 when studying policy gradients. Publisher metadata checked; chapter study pending. The authors' book site returned an error during retrieval.
+Sutton and Barto, *Reinforcement Learning: An Introduction*, second edition, 2018. [Publisher](https://mitpress.mit.edu/9780262039246/reinforcement-learning/). Consult chapters 1 and 3 for a more formal treatment of interaction and decision processes, or chapter 13 when policy-gradient theory is needed. Publisher metadata checked; chapter study pending. The authors' book site returned an error during retrieval.
 
 ### F02 PPO
 
-Schulman et al., *Proximal Policy Optimization Algorithms*, 2017, [paper](https://arxiv.org/abs/1707.06347). Orientation review. Read sections 1–3 to understand policy updates and constraints on their size. The HTML rendering was incomplete; use the paper PDF for the detailed study.
+Schulman et al., *Proximal Policy Optimization Algorithms*, 2017, [paper](https://arxiv.org/abs/1707.06347). Orientation review. Sections 1–3 are relevant when an implementation requires understanding policy updates and constraints on their size. The HTML rendering was incomplete; use the paper PDF for a detailed study.
 
 ### F03 InstructGPT
 
@@ -60,15 +62,23 @@ Gao, Schulman, and Hilton, *Scaling Laws for Reward Model Overoptimization*, 202
 
 ### F14 Repeated sampling and evaluation
 
-Chen et al., *Evaluating Large Language Models Trained on Code*, 2021, [paper](https://arxiv.org/abs/2107.03374). Orientation review; inspect section 2.1 during the evaluation session. Introduces HumanEval and explains pass@k estimation. This is the historical Codex model paper.
+Chen et al., *Evaluating Large Language Models Trained on Code*, 2021, [paper](https://arxiv.org/abs/2107.03374). Orientation review; section 2.1 is relevant when implementing or checking a pass@k estimator. Introduces HumanEval and explains pass@k estimation. This is the historical Codex model paper.
 
 ### F15 RLHF teaching book
 
-Nathan Lambert, *Reinforcement Learning from Human Feedback*, [book](https://rlhfbook.com/). Orientation review of the index and selected teaching passages; not a complete book audit. Start with [training overview](https://rlhfbook.com/c/03-training-overview), [instruction tuning](https://rlhfbook.com/c/04-instruction-tuning), and [reinforcement learning](https://rlhfbook.com/c/06-policy-gradients). Use its vocabulary before checking primary papers.
+Nathan Lambert, *Reinforcement Learning from Human Feedback*, [book](https://rlhfbook.com/) and [video course](https://rlhfbook.com/course). On 2026-10-19, checked the course syllabus and selected passages in [training overview](https://rlhfbook.com/c/03-training-overview), [reinforcement learning](https://rlhfbook.com/c/06-policy-gradients), and [evaluation](https://rlhfbook.com/c/16-evaluation). The [instruction-tuning chapter](https://rlhfbook.com/c/04-instruction-tuning) was also consulted in the earlier orientation. No complete book review or end-to-end viewing of the lectures. The foundation guide selects topics; the full course is optional.
 
 ### F16 Spinning Up
 
 OpenAI, *Spinning Up in Deep RL*, [key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html). Introductory page reviewed for the foundation sequence. Teaching material for agent/environment interaction, policies, and trajectories; not a current language-model trainer recommendation.
+
+### F17 Language-model overview video
+
+Andrej Karpathy, [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g). The original video and its listing on the [author's site](https://karpathy.ai/) were checked on 2026-10-19. Suggested as a first orientation to the concepts. His longer [Deep Dive into LLMs like ChatGPT](https://www.youtube.com/watch?v=7xTGNNLPyMI) is an optional expansion. Neither was watched end to end in this study. No timestamp-specific assignments or current capability claims are attributed to them.
+
+### F18 Agent execution introduction
+
+Hugging Face, [Agents Course, Unit 1](https://huggingface.co/learn/agents-course/en/unit1/introduction). Introductory concepts and [action–observation structure](https://huggingface.co/learn/agents-course/en/unit1/agent-steps-and-structure) reviewed on 2026-10-19. Use the conceptual sections; completing framework tutorials or certification is not part of our required path.
 
 ## Provided papers
 
@@ -103,6 +113,14 @@ AutoEnvScaling's [official repository](https://github.com/MSR-Orchard/AutoEnvSca
 | [Third Moment careers](https://thirdmomentresearch.com/careers/) | Hiring requirements, distinct from product architecture evidence | Page reviewed; [study](../docs/studies/third-moment-research.md) |
 
 The X URL initially could not be retrieved. The user then supplied a PDF containing the article, which was reviewed on 2026-10-14. Its visible date is October 13; its PDF creation metadata is dated 2026-10-14. References to this article use that saved copy, not a newly retrieved live page.
+
+## Harness2
+
+Added by the user to the link collection; reviewed on 2026-10-19. Xu et al., *Harness²: Recursive Agent Harnessing for an Open World*, 2026, [paper v1](https://arxiv.org/html/2610.14224v1), [project](https://harness2.github.io/), [official code](https://github.com/google-research/harness2).
+
+Selected methods and results reviewed: sections 2–4, tables 1–3, figure 6, and relevant appendix details. Inspected selected code paths at commit `1cfe254e8d25b15f37048c3730134686abe60335`, including recursion, selection, library storage, adapter contracts, context handling, and the demo. The [study](../docs/studies/harness2.md) owns findings; the [offline record](../docs/records/2026-10-19-harness2-demo/README.md) preserves the deterministic demo result. No live model run or benchmark reproduction.
+
+The repository uses Apache 2.0 and says it is not an officially supported Google product. Third-party code and benchmark datasets have their own terms; repository licensing alone does not establish rights to every experiment asset.
 
 ## Sources added during review resolution
 

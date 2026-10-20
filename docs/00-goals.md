@@ -10,6 +10,8 @@ We want to build a commercial product that helps AI agents improve through bette
 
 The immediate output is a survey supported by source notes, an opportunity comparison, and small experiment designs. Completing a survey is progress toward a decision. It is not the ultimate measure of success.
 
+Build understanding from a high-level view, then use concrete executions and small experiments. Prefer accessible online explanations and videos before research papers. The team needs deep task and evaluation knowledge and practical training knowledge; optimizer theory and training infrastructure become priorities only when a specific opportunity requires them. The [learning path](studies/foundations.md) defines the steps and depth limits.
+
 ## What success would mean
 
 At the end of the first exploration cycle, we should be able to name:

@@ -4,21 +4,24 @@ This is the current worklist and decision record. Keep it useful to someone star
 
 ## Current state
 
-As of 2026-10-14, the repository contains a survey, a study plan, a source register, study notes for the original references, and a sourced initial market map. The [glossary](glossary.md) and [foundation worksheet](studies/foundations.md) support readers new to AI. The source register distinguishes selected paper sections, reviewed pages, orientation reads, and unaudited artifacts.
+As of 2026-10-19, the repository contains a survey, a study plan, a source register, study notes, and a sourced initial market map. The [guided learning path](studies/foundations.md) now starts with high-level online explanations and videos. Its six steps specify required depth, a small output, and when to move on. Foundational papers are optional references for concrete questions. This documents the learning route; it does not mean the team has completed it.
 
 The first [AutoEnvScaling code study](studies/autoenvscaling-code.md) inspected selected paths at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`. The [original record](records/2026-10-14-autoenvscaling-code/README.md) owns the offline tests and probes. The [independent review checks](records/2026-10-14-claude-review-checks/README.md) add a solver-side probe. The [review resolution](reviews/claude-init-review-1-resolution.md) records this follow-up's source checks, corrections, and recommendation-by-recommendation response.
 
-No live generation or sandbox experiment, model training, customer interview, or paper-result reproduction has been completed. No buyer class, code-reuse path, or paid-run budget has been selected. Public market evidence and offline behavior checks help frame decisions; they do not establish demand or training benefit.
+The new [Harness² study](studies/harness2.md) covers selected paper results and code at commit `1cfe254e8d25b15f37048c3730134686abe60335`. Its [deterministic demo](records/2026-10-19-harness2-demo/README.md) completed two local task workflows and demonstrated library persistence. Scripted edits and reflection do not establish model improvement.
+
+No live model generation or sandbox integration experiment, model training, customer interview, or paper-result reproduction has been completed. No buyer class, code-reuse path, or paid-run budget has been selected. Public market evidence and offline behavior checks help frame decisions; they do not establish demand or training benefit.
 
 ## Next work
 
 | Priority | Work | Output | State |
 | --- | --- | --- | --- |
-| 1 | Compare reachable buyers and their existing alternatives | One accessible problem per buyer class where possible, permitted examples, and a provisional choice with a reason to reverse it | Public map added; team access information needed |
-| 2 | Learn through small tasks and traces alongside the buyer research | H1's three to five tasks, one annotated trace, and the team's explanation of a reward and update | Exercise and teaching material ready; execution resources not agreed |
-| 3 | Prepare concrete resource proposals | Model/API access, sandbox setup, maximum spend, stop conditions, and any training partner for H1/H2 | Open; no paid runs authorized |
+| 1 | Follow learning steps 1–4: whole system, one execution, evaluation, practical training flow | Two-loop diagram, annotated trace, grader counterexamples, and a worked reward calculation | Resource selection complete; team learning outputs pending; no paid resources required |
+| Parallel | Compare reachable buyers and their existing alternatives | One accessible problem per buyer class where possible, permitted examples, and a provisional choice with a reason to reverse it | Public map available; team access information needed |
+| 2 | Compare mechanisms in learning step 5, then begin H1 with one task | AES/Harness²/manual comparison and one repeatable package; expand H1 to three to five tasks after checking the contract | Source notes and scripted demo available; task not selected |
+| 3 | Prepare a concrete resource proposal when model execution is needed | Model/API access, sandbox setup, maximum spend, and stop conditions | Open; no paid runs authorized; H2 only if training depth is needed |
 | 4 | Test graders on the chosen task family | E1 defect counts, expert review effort, costs, and a usable/repairable/too-costly decision | Procedures defined; tasks and cases not yet selected |
-| 5 | Test the benefit that matters to the first buyer | E2, E3, or bounded training comparison; authorized interviews or pilot evidence | Select after the buyer and task-quality checks |
+| 5 | Test the benefit that matters to the first buyer | E2, E3, a Harness² comparison, or bounded training; authorized interviews or pilot evidence | Select after the buyer and task-quality checks |
 | Conditional | If reusing AES, check how results reach training | A sandbox failure stays unscored; too little valid evidence remains inconclusive; reset and isolation checks pass | Audit findings documented; no repair project selected |
 
 ## Decisions
@@ -64,5 +67,17 @@ Adopt market and buyer research alongside practical foundations as the next work
 Keep the short per-source notes and improve their index instead of merging them. They provide stable owners for later evidence, and several are primary reports rather than secondary material. Keep dated reviews and experiment records unchanged; remove duplication from current summaries.
 
 The first buyer remains undecided because customer access, permitted data, and a downstream evaluator are unknown. Compare model-training teams with application owners using the [access criteria](03-opportunities.md#choose-the-first-buyer-to-study), then record a provisional choice and reversal condition. The documentation changes do not authorize outreach, spending, or a training run.
+
+### 2026-10-19 Reorder learning around practical competence
+
+The user found the earlier plan poorly organized and prefers high-level online material and videos before papers. The earlier sequence mixed foundational learning, market decisions, implementation, and long paper lists without clear stopping points.
+
+Replaced that sequence with six learning steps and explicit depth limits. Study task and evaluation contracts closely; learn enough RL to understand the data flow and interpret results. Make a real weight-update exercise conditional on a training question. Keep buyer research alongside learning, so neither customer access nor compute blocks introductory progress. The source register remains a library rather than assigned reading. Goals, shared agent guidance, and entry documents now preserve this preference.
+
+### 2026-10-19 Add Harness² as an implementation comparison
+
+The user added the official repository and requested study notes. Reviewed selected methods, results, and pinned code; ran the provided deterministic local demo without models. Saved its summary and a reproducible record. The study distinguishes current-task harness edits from library changes across tasks, documents execution costs and information boundaries, and proposes controlled comparisons.
+
+Harness² broadens the comparison to improvement with fixed model weights. It does not replace the AES and Third Moment Research priorities or select a commercial offering. The next implementation remains a small task and verifier exercise; the study's proposed experiments are conditional candidates.
 
 Add later decisions with their evidence and effect on the plan. Store completed experiments and interview records under `docs/records/`.

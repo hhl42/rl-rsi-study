@@ -2,25 +2,59 @@
 
 Use the study to choose a commercial opportunity and understand the framework it needs. [Goals and scope](00-goals.md) owns that objective. Reading, practical exercises, and customer research should resolve decisions. The steps have outputs rather than calendar estimates; [progress](progress.md) owns the active worklist.
 
-## Sequence and outputs
+## Why this order
+
+Our first job is to decide which agent behavior a customer needs improved and whether we can measure that improvement. Then we can choose the tasks, feedback, and improvement method. Choosing a trainer or reproducing a large paper before answering those questions would leave the product question unresolved.
+
+The learning path therefore starts with a whole-system explanation, follows one execution, and studies evaluation before optimization. We need the deepest knowledge at the task boundary: what the agent sees, what it can do, how execution resets, and how outcomes are judged. We need enough training knowledge to supply useful inputs and interpret results. Operating a training system is a later, conditional choice.
+
+## Reading sequence
+
+Follow the [guided learning path](studies/foundations.md). It supplies one main resource per step, video or text alternatives, exercises, and stopping points. **Do not read the foundational source list in order.** Papers are consulted when an experiment or design choice raises a specific question.
+
+| Step | Learn | Output that shows enough understanding |
+| --- | --- | --- |
+| 1. Whole system | Language models, training versus inference, weights versus context and harness | Draw execution and training loops; identify what each improvement method changes. |
+| 2. One execution | Agent, tools, task, environment, trajectory, reset | Annotate a trace and explain the task's inputs, actions, and outcome. |
+| 3. Trustworthy measurement | Task validity, grader errors, held-out evaluation, repeated attempts, cost | Design checks for a valid repair, an alternative repair, and a misleading shortcut. |
+| 4. Task-to-training flow | SFT, preference data, RL sampling, rewards, advantages, weight updates | Work through one numerical update and explain the assets each method consumes. |
+| 5. Competing mechanisms | Manual task construction, AES, Harness²; commercial offering separately | Compare what changes, the acceptance evidence, transfer, and total cost. |
+| 6. Small implementation | Package, reset, solve, and grade a familiar task | Complete H1 progressively; another teammate can execute the package. |
+
+Skip a step when its output is already clear. Use the survey as a reference and the glossary on demand. The first five steps can use existing explanations, traces, and offline calculations; they do not depend on a GPU, customer access, or a paid API.
+
+## How much depth we need
+
+| Area | Required in this exploration | Go deeper when |
+| --- | --- | --- |
+| Language models | Explain tokens, context, learned weights, generation, and the purpose of training stages | A model architecture or adaptation choice affects our task or product. |
+| Tasks, environments, traces | Inspect and implement the execution contract, reset, versioning, and failure recording | The first task family exposes a missing interface or reliability problem. |
+| Rewards and evaluation | Design and challenge graders; detect leakage; compare transfer and cost fairly | An experiment requires a more precise statistical estimate or specialized domain judgment. |
+| RL and other training methods | Trace samples through scoring and an update; interpret simple advantages and token masks | We integrate with a trainer or must explain a training failure. Then inspect the actual loss and run H2. |
+| Training infrastructure | Recognize rollout, scoring, and optimization stages and their version boundaries | A selected opportunity requires owning throughput, scheduling, or model updates. |
+| Commercial evidence | Identify a buyer, current alternative, acceptance test, and delivery cost | Access supports an authorized interview or concrete pilot. |
+
+A full ML curriculum, every foundational paper, transformer implementation, and PPO derivation are not entry requirements. Fill a missing concept when it blocks an output above.
+
+## From learning to an opportunity decision
 
 | Step | Work | Output and completion condition |
 | --- | --- | --- |
-| 1. Market and practical foundations | Compare public offerings while learning the agent loop and inspecting small tasks. Use the exercises below. | A sourced market map and one annotated trajectory. The team can explain task, environment, reward, and what changes during learning. |
-| 2. First buyer and problem | Compare accessible model-training teams and application owners. Identify permitted examples and a route to customer evidence. | A provisional buyer choice in progress, with evidence, the largest gap, and a condition that would reverse it. Prepare authorized interviews as soon as access allows. |
-| 3. Task quality | Run E1 on a small task family relevant to that buyer. | Defects, review effort, costs, and a decision: usable, repairable, or too costly. |
-| 4. Test the claimed benefit | Choose E2, E3, or a bounded training experiment according to the buyer's need. | A reproducible comparison that changes or confirms the opportunity ranking. |
-| 5. Commercial and architecture decision | Test E4; compare reuse with building. | Proceed, narrow, change direction, or stop. If proceeding, define the smallest project and its acceptance test. |
+| 1. Learn and investigate | Follow the learning path while comparing public offerings and reachable buyer classes. | Shared execution and improvement diagrams, a sourced market map, and candidate customer problems. |
+| 2. Select a provisional problem | Compare permitted examples, buyer access, and measurable outcomes. | A provisional choice in progress, with evidence, the largest gap, and a condition that would reverse it. |
+| 3. Establish task quality | Use H1's integration experience and run E1 on a relevant small task family. | Defects, review effort, costs, and a decision: usable, repairable, or too costly. |
+| 4. Test the claimed benefit | Choose E2, E3, a Harness² comparison, or a bounded training experiment according to the buyer's need. | A reproducible comparison that changes or confirms the opportunity ranking. |
+| 5. Make a commercial and architecture decision | Test E4; compare reuse with building. | Proceed, narrow, change direction, or stop. If proceeding, define the smallest project and its acceptance test. |
 
-Steps can overlap. Customer evidence need not wait for all reading or technical experiments. Public research needs staff effort but no customer contact; it cannot establish demand by itself. Outreach, paid runs, and commitments require direction beyond this documentation work. AES repair work enters the plan only if a selected experiment will reuse its implementation.
+Customer research runs alongside learning. It need not wait for all six steps, and lack of customer access should not block foundational learning. Public research cannot establish demand by itself. Outreach, paid runs, and commitments require direction beyond this documentation work. AES repair work enters the plan only if a selected experiment will reuse its implementation.
 
 ## Foundations by doing
 
-The [worksheet](studies/foundations.md) connects these exercises to reading. The [glossary](glossary.md) explains terms as needed.
+These are implementation exercises after the introductory learning steps. H1 applies the task and evaluation concepts; H2 is conditional on a need to inspect weight training. Neither is a prerequisite for starting the study.
 
 ### H1 Inspect and run a small task set
 
-Write three to five Harbor-compatible tasks by hand in a familiar systems domain, such as configuration repair. Pin their dependencies and define initial state, reset, instructions, reference solution, and verifier. Start with reference and empty solutions; record a deliberate wrong solution and a different valid repair.
+Start with one hand-written task in a familiar systems domain, such as configuration repair. Use Harbor as the first packaging candidate. Pin dependencies and define initial state, reset, instructions, reference solution, and verifier. Check reference and empty solutions, a deliberate wrong solution, and a different valid repair. Another teammate should be able to repeat these checks. Then expand to three to five tasks.
 
 Once API access, sandbox resources, and a spend cap are agreed, run two existing agents with documented model and harness versions. Keep task resources and attempt budgets comparable. Repeat attempts to look for inconsistent outcomes, rather than interpreting one run as a reliable success rate. Annotate one trajectory: observations, generated actions, stopping reason, reward, elapsed time, and cost. Include failed starts and retries in accounting.
 
@@ -28,26 +62,9 @@ Once API access, sandbox resources, and a spend cap are agreed, run two existing
 
 ### H2 Observe one small weight update
 
-Prepare a tiny open-weight RL exercise with a checkable toy answer. Choose a supported small model and trainer, a training set, and a separate evaluation set. Inspect groups with mixed rewards and groups where every attempt fails. Save the rewards, advantages, which tokens contribute to the training loss, and before/after results at the same sampling budget.
+**Optional depth step:** use this when training integration or a training-related uncertainty justifies it. It is not required before H1, E1, or harness-improvement studies. Prepare a tiny open-weight RL exercise with a checkable toy answer. Choose a supported small model and trainer, a training set, and a separate evaluation set. Inspect groups with mixed rewards and groups where every attempt fails. Save the rewards, advantages, which tokens contribute to the training loss, and before/after results at the same sampling budget.
 
 **Before any paid run:** write down the exact model, hardware, expected run size, API and compute charges, maximum spend, and stop conditions. Request approval for that concrete proposal. This plan authorizes preparation, not spending. Until resources are agreed, use the [worked example](02-survey.md#a-worked-training-step) and an offline calculation. A toy run teaches the update mechanism; it does not validate a commercial task family.
-
-## Reading sequence
-
-Use teaching material for vocabulary, then primary papers to check the claims that matter. Select passages; understanding every derivation is not a prerequisite. The [source register](../references/README.md) records review depth.
-
-| Order | Start here; then check | Question to answer |
-| --- | --- | --- |
-| 1 | [Spinning Up: key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html); survey sections 1–3; then Sutton and Barto chapters 1 and 3 and ReAct | What are state, observation, action, policy, and reward in H1? |
-| 2 | [RLHF book: training overview](https://rlhfbook.com/c/03-training-overview) and [instruction tuning](https://rlhfbook.com/c/04-instruction-tuning); then InstructGPT, DPO, and DeepSeek-R1 overviews | Which assets do SFT, preferences, and online RL require? |
-| 3 | [RLHF book: reinforcement learning](https://rlhfbook.com/c/06-policy-gradients) and the worked example; then PPO sections 1–3 and DeepSeekMath section 4 | How do rewards affect weights? Why does variation among attempts matter? |
-| 4 | SWE-bench and SWE-smith task construction; Rubrics as Rewards sections 2–3; reward overoptimization; [HUD](studies/hud-task-design.md) and [Gottlieb](studies/eli-gottlieb-reference.md) | Which E1 errors could make optimization reward the wrong behavior? |
-| 5 | [Tmax](https://arxiv.org/abs/2606.23321) before [AES](studies/autoenvscaling.md); AES sections 3–4 and appendices G–H; POET overview | What does adaptation add over static generation, and at what total cost? |
-| 6 | [RLTL;DR](studies/rl-tldr.md) sections 4–6; [Recursive Self-Rewrite](studies/recursive-self-rewrite.md) sections 2 and 3.5–3.6; Reflexion | Which improvements come from weights, feedback, or context? |
-| 7 | [Third Moment Research](studies/third-moment-research.md), [ApprenticeBench](studies/apprentice-bench.md), and [Impersona-Env](studies/impersona-env.md) | What would the chosen buyer purchase, and how would they accept it? |
-| 8 | Harbor task and verifier docs; one of verl or SkyRL; AES code only if reuse is proposed | What must our task package supply, and which interfaces can we reuse? |
-
-Use the other [study notes](studies/README.md) as targeted comparisons. For each session, answer one question in writing using one artifact: a trajectory, reward calculation, code path, or customer workflow. Record conclusions in the owning document.
 
 ## Public research and customer discovery
 

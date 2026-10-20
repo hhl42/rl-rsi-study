@@ -6,6 +6,7 @@ Each document owns one kind of information. Link to the owner when another docum
 | --- | --- |
 | Why does this project exist? What is in scope? | [Goals and scope](00-goals.md) |
 | What should we study or test, and in what order? | [Study plan](01-study-plan.md) |
+| Which online lessons should we use, how deeply, and when can we move on? | [Guided learning path](studies/foundations.md) |
 | How do the concepts and approaches fit together? | [Survey](02-survey.md) |
 | What do unfamiliar terms and model names mean? | [Glossary](glossary.md) |
 | Which customers and products should we investigate? | [Commercial opportunities](03-opportunities.md) |
@@ -17,6 +18,6 @@ Each document owns one kind of information. Link to the owner when another docum
 | Where are sources, and how closely were they reviewed? | [Source register](../references/README.md) |
 | How should agents work and write here? | [Shared agent guidance](../AGENTS.md) |
 
-The source register owns bibliographic details. Study notes own detailed source analysis. The survey explains the wider field and links to those notes. Progress owns the active worklist, so other files need not repeat its status.
+The source register owns bibliographic details; it is not a curriculum. The foundation guide owns learning resources and exercises. Other study notes own detailed source analysis. The survey explains the wider field and links to those notes. Progress owns the active worklist, so other files need not repeat its status.
 
 When documents conflict, resolve the specific question in its owning document and repair the inconsistent summaries. The user's current direction takes precedence over earlier project decisions.
