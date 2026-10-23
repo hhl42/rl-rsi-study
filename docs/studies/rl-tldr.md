@@ -35,4 +35,4 @@ Transfer is uneven: section 4 reports improvements in API tasks but overfitting 
 
 Our hypothesis is that a task framework may need to retain structured feedback and the evidence behind it, alongside successful trajectories. Feedback could be a deliverable, but usefulness must be tested on new tasks.
 
-Start with [E3](../01-study-plan.md#e3-use-feedback-effectively): compare retries with no feedback, raw feedback, and a short insight under the same total budget. Inspect whether an insight explains a reusable mistake or merely reveals the answer. A later training experiment should compare full trajectories with insight targets and evaluate without supplying the training hints. That later step is needed to test weight learning.
+Start with [E3](../experiments.md#e3-use-feedback-effectively): compare retries with no feedback, raw feedback, and a short insight under the same total budget. Inspect whether an insight explains a reusable mistake or merely reveals the answer. A later training experiment should compare full trajectories with insight targets and evaluate without supplying the training hints. That later step is needed to test weight learning.

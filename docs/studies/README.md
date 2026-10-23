@@ -1,6 +1,6 @@
 # Study notes
 
-These notes explain what each reference contributes, what it does not establish, and what we should check next. Start with the [guided learning path](foundations.md), use the [survey](../02-survey.md) for shared concepts, and follow the [study plan](../01-study-plan.md) toward experiments. Reading a note does not complete a paper review or reproduce a result.
+These notes explain what each reference contributes, what it does not establish, and what we should check next. The [study guide](../01-study-plan.md) organizes readings and videos; the [survey](../02-survey.md) explains shared concepts. [Research experiments](../experiments.md) holds proposed comparisons. Reading a note does not complete a paper review or reproduce a result.
 
 The [source register](../../references/README.md) owns bibliographic details and review depth. Keep one note per source so later reviews have a stable home. Page format does not determine evidence quality: several pages below are original research or first-party product reports.
 
@@ -8,7 +8,7 @@ The [source register](../../references/README.md) owns bibliographic details and
 
 | Note | Main question | Main takeaway |
 | --- | --- | --- |
-| [Guided learning path](foundations.md) | What should a systems team learn, how deeply, and in what order? | Follow L1–L6 with an early task package and M1 buyer research; stop when each output is clear. |
+| [Foundations](foundations.md) | Which concepts and papers help with an AI-specific question? | Distinguish what changes during improvement; consult papers when a design choice needs them. |
 | [AutoEnvScaling](autoenvscaling.md), with [code walkthrough](autoenvscaling-code.md) | How does adaptive task generation work, and which contracts does the preview actually enforce? | Adaptation can improve useful rollout yield; validate quality independently. |
 | [Third Moment Research](third-moment-research.md) | What does a managed agent-improvement business offer? | The managed product and internal research case provide different evidence. |
 

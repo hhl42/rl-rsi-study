@@ -8,7 +8,7 @@ Read [goals](docs/00-goals.md), the [document map](docs/README.md), and [progres
 
 The current phase is study and exploration toward a commercial product. Help the team choose an opportunity and understand the task framework it would require. AutoEnvScaling and Third Moment Research have priority, but compare alternatives. A paper result, a compelling demo, and a customer willing to pay are different kinds of evidence.
 
-Start new learning topics with a high-level explanation and suitable online text or videos. Define the required depth and an observable stopping point. Use papers to answer specific questions; do not turn the source register into a mandatory curriculum.
+Write for engineering leaders with deep systems experience who already build AI projects. Organize the study guide as readings and videos by phase and step, with selected sections and optional depth. Start with high-level online material and use papers for specific questions. Do not add teaching exercises, quizzes, completion artifacts, or course-style gates. Practical work follows project needs.
 
 Do not infer a decision to build a general platform, operate training infrastructure, or sell a particular product from interest in a paper. Routine reading, documentation, and reversible checks should proceed within the user's request. Research does not itself authorize customer outreach, publication, paid runs, or deployment.
 
@@ -20,7 +20,7 @@ Do not infer a decision to build a general platform, operate training infrastruc
 - Record material scope changes with the reason in progress, then update goals and affected documents. Goals can change with evidence or user direction.
 - Use relative links inside repository documents. Do not require a local username, absolute path, or sibling checkout.
 - Keep the stack small. Create a new document only when it owns a distinct question or a durable research record.
-- Describe plans as steps with outputs and completion criteria. Do not assign calendar durations unless the user asks for a schedule.
+- Keep the study guide limited to reading and viewing. Keep research experiment proposals separate, with hypotheses, measures, and decision criteria. Do not assign calendar durations unless the user asks for a schedule.
 
 ## Use evidence carefully
 

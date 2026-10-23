@@ -36,9 +36,11 @@ Added on 2026-10-20 from the [earlier market scan](records/2026-10-14-market-sca
 
 Before ranking task supply, check relevant first-party product pages for the actual deliverable, target buyer, acceptance terms, and public pricing. The earlier scan's funding and acquisition claims remain unverified too. The narrower checked table above should not be mistaken for the full competitive set.
 
-### Buyer brief for M1
+<a id="buyer-brief-for-m1"></a>
 
-The [M1 learning exercise](studies/foundations.md#m1-investigate-buyers-alongside-learning) supplies the input to decision D2. Add a short, sourced brief here for each serious buyer candidate, using these fields:
+### Buyer evidence
+
+Use a short, sourced brief to support a provisional buyer choice. Add it here for each serious candidate, using these fields:
 
 - Buyer role, recurring failure, current workaround, and named alternatives.
 - Proposed deliverable and measurable acceptance criteria.

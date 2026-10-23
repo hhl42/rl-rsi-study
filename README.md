@@ -2,15 +2,15 @@
 
 RL means reinforcement learning. RSI means recursive self-improvement: earlier improvements help produce later ones.
 
-We are studying how to create tasks, environments, and feedback that improve AI agents. The team has strong systems experience and limited AI experience. Our ultimate goal is a commercial product. Our current work is study and exploration: understand the field, identify a customer problem, and test a small number of opportunities before committing to a product.
+We are studying how to create tasks, environments, and feedback that improve AI agents. The team has deep systems experience and already builds AI projects. Our ultimate goal is a commercial product. Our current work is study and exploration: understand the field, identify a customer problem, and test a small number of opportunities before committing to a product.
 
 **Start with [Goals and scope](docs/00-goals.md).** It owns the project's direction. AutoEnvScaling and Third Moment Research are the first detailed studies, but they do not define the limits of the search.
 
 ## Start here
 
-Read [Goals and scope](docs/00-goals.md) and [Progress and decisions](docs/progress.md) for direction and current state. Then follow the [guided learning path](docs/studies/foundations.md): L1–L6 move from online explanations to an early task package, practical RL, comparisons, and agent runs. M1 covers buyer research alongside them. Each step says how deeply to learn and when to move on.
+Read [Goals and scope](docs/00-goals.md) and [Progress and decisions](docs/progress.md) for direction and current state. The [study guide](docs/01-study-plan.md) organizes readings and videos into phases: models and agents, task quality, training, concrete improvement systems, and commercial offerings. It identifies useful sections and optional depth for engineering leaders.
 
-The [study plan](docs/01-study-plan.md) connects that learning to experiments and a commercial decision. Consult the [survey](docs/02-survey.md) for explanations and the [opportunity comparison](docs/03-opportunities.md) for candidate buyers. These are references to use as questions arise.
+Consult [Foundations](docs/studies/foundations.md) for concept reminders and optional papers, the [survey](docs/02-survey.md) for explanations, and the [opportunity comparison](docs/03-opportunities.md) for candidate buyers. [Research experiments](docs/experiments.md) preserves proposals to select when project questions warrant them.
 
 Use the [document map](docs/README.md) to find the file that owns a question. The [source register](references/README.md) is a library with review depth, not a mandatory reading list.
 

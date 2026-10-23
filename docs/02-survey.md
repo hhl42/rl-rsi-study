@@ -71,7 +71,7 @@ The mean reward is 0.25. Subtracting it gives the advantages shown above. This s
 
 In a common tool-agent setup, generated text and tool-call tokens participate in the training loss. Tool responses are observations supplied to the model and are masked out of that loss. The implementation must specify its exact token mask. A final task reward labels an entire attempt; it does not identify which individual command caused the failure. Useful commands inside a failed attempt may also receive negative pressure.
 
-After the update, the weights have changed. New attempts may be more likely to follow behavior associated with D, but one update guarantees neither success on this task nor transfer to a new configuration failure. Test both with fresh attempts. If all four rewards were zero, the mean-centered advantages would all be zero and this outcome signal would provide no preference among them. The optional [H2](01-study-plan.md#h2-observe-one-small-weight-update) would make these quantities visible in a real small run when training integration becomes relevant.
+After the update, the weights have changed. New attempts may be more likely to follow behavior associated with D, but one update guarantees neither success on this task nor transfer to a new configuration failure. Both require fresh evaluation. If all four rewards were zero, the mean-centered advantages would all be zero and this outcome signal would provide no preference among them. The [training readings](01-study-plan.md#phase-3--how-tasks-become-training-inputs) cover the update mechanism and implementation references.
 
 ## 3 What a task framework must represent
 
@@ -211,4 +211,4 @@ A task generator can support several businesses: supplying training environments
 
 Our systems background may help with realistic task construction, reproducibility, and efficient execution. Whether it creates a commercial advantage depends on access to valuable failures, trustworthy outcomes, and buyers. The [opportunity comparison](03-opportunities.md) owns those hypotheses.
 
-Pinned implementation studies now cover selected paths in AutoEnvScaling and Harness². Further work should connect independently measured task quality to downstream improvement and compare commercial alternatives. Customer evidence and the [study plan](01-study-plan.md) will determine which technical components merit deeper implementation work.
+Pinned implementation studies now cover selected paths in AutoEnvScaling and Harness². Further work should connect independently measured task quality to downstream improvement and compare commercial alternatives. Customer evidence and the [research experiment proposals](experiments.md) inform which technical components merit deeper implementation work; [progress](progress.md) records the current priorities.

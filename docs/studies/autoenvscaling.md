@@ -133,14 +133,14 @@ Commercially, measure the cost of an independently accepted, relevant task and t
 
 ## 7. What to test next
 
-These are AES-related experiment candidates. The [study plan](../01-study-plan.md) and [progress](../progress.md) set the project order: market comparison and practical foundations first. Repair AES only if a selected experiment will reuse its code. Paid or training experiments need a concrete resource cap.
+These are AES-related experiment candidates. [Progress](../progress.md) owns the active worklist; [research experiments](../experiments.md) explains how to select a comparison from a customer or project question. Repair AES only if a selected experiment will reuse its code. Paid or training experiments need a concrete resource cap.
 
 | Step | Test and controls | Output and decision |
 | --- | --- | --- |
 | 1. If reusing AES, check result handling | Cover infrastructure failure through export, insufficient valid attempts, duplicate artifacts, reset repeatability, and conflicting memory updates. Start with synthetic inputs and one hand-built task. | Explicit invariants and failing examples. Resolve the export defect and define minimum scored attempts before training on this output. |
-| 2. Audit task quality | Apply [E1](../01-study-plan.md#e1-verify-the-verifier) to roughly 10–20 systems tasks. Test valid alternatives, meaningful mistakes, and shortcuts with independent expert judgments. | Defect types, false acceptance/rejection, repair work, and cost. Establish whether the verifier is usable. |
+| 2. Audit task quality | Apply [E1](../experiments.md#e1-verify-the-verifier) to roughly 10–20 systems tasks. Test valid alternatives, meaningful mistakes, and shortcuts with independent expert judgments. | Defect types, false acceptance/rejection, repair work, and cost. Establish whether the verifier is usable. |
 | 3. Measure calibration stability | Fix solver and harness. Compare four/eight-attempt decisions with a larger fresh sample. Retain infrastructure failures separately; repeat across task families. | Decision disagreement and uncertainty versus cost. Choose thresholds from observed data. |
-| 4. Isolate trace value | Apply [E2](../01-study-plan.md#e2-generate-from-solver-failures): same parents, aggregate statistics, proposer, checks, and budget; vary raw traces and failure summaries. Count rejected work. | Independent quality, failure coverage, diversity, and cost per accepted task. Use a separate arm to remove all solver information. |
+| 4. Isolate trace value | Apply [E2](../experiments.md#e2-generate-from-solver-failures): same parents, aggregate statistics, proposer, checks, and budget; vary raw traces and failure summaries. Count rejected work. | Independent quality, failure coverage, diversity, and cost per accepted task. Use a separate arm to remove all solver information. |
 | 5. Check transfer and commercial relevance | Try a reserved solver or harness and a buyer-relevant workflow. If justified, design bounded training against a static pool at matched total budget. | Evidence of transfer and delivery economics. Decide whether to pursue task supply, validation, or managed improvement. |
 
 The first four candidates study task production without updating weights. Test demand and downstream improvement separately.

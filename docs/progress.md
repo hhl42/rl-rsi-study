@@ -1,23 +1,22 @@
 # Progress and decisions
 
-This is the current worklist and decision record. Keep it useful to someone starting without the chat history. [Goals](00-goals.md) owns scope; [the plan](01-study-plan.md) owns the study steps and experiment design.
+This is the current worklist and decision record. Keep it useful to someone starting without the chat history. [Goals](00-goals.md) owns scope; the [study guide](01-study-plan.md) owns reading and viewing; [research experiments](experiments.md) owns proposed comparisons.
 
 ## Current state
 
-As of 2026-10-20, the repository contains a survey, a study plan, a source register, study notes, and a sourced initial market map. The [guided learning path](studies/foundations.md) now starts with high-level online explanations and videos. L1–L6 specify required depth, a small output, and when to move on. L3 builds the first task before training concepts; M1 supplies a buyer brief alongside learning. Foundational papers are optional references for concrete questions. This documents the learning route; it does not mean the team has completed it.
+As of 2026-10-23, the repository contains a survey, a reading and viewing guide, a source register, study notes, research experiment proposals, and a sourced initial market map. The [study guide](01-study-plan.md) now serves engineering leaders with deep systems expertise and existing hands-on AI work. It lists sources by phase and step, with selected sections and optional depth. Practice assignments and completion gates have been removed. Foundational papers remain optional references for concrete questions.
 
 The first [AutoEnvScaling code study](studies/autoenvscaling-code.md) inspected selected paths at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`. The [original record](records/2026-10-14-autoenvscaling-code/README.md) owns the offline tests and probes. The [independent review checks](records/2026-10-14-claude-review-checks/README.md) add a solver-side probe. The [review resolution](reviews/claude-init-review-1-resolution.md) records this follow-up's source checks, corrections, and recommendation-by-recommendation response.
 
 The new [Harness² study](studies/harness2.md) covers selected paper results and code at commit `1cfe254e8d25b15f37048c3730134686abe60335`. Its [deterministic demo](records/2026-10-19-harness2-demo/README.md) completed two local task workflows and demonstrated library persistence. Scripted edits and reflection do not establish model improvement. The [review 2 resolution](reviews/claude-init-review-2-resolution.md) adds weaker results, competing baselines, and corrected cost and failure-handling descriptions.
 
-No live model generation or sandbox integration experiment, model training, customer interview, or paper-result reproduction has been completed. No buyer class, code-reuse path, or paid-run budget has been selected. Public market evidence and offline behavior checks help frame decisions; they do not establish demand or training benefit.
+No live model generation or sandbox integration experiment, model training, customer interview, or paper-result reproduction has been recorded in this repository. This does not describe the team's work in other projects. No buyer class, code-reuse path, or paid-run budget has been selected here. Public market evidence and offline behavior checks help frame decisions; they do not establish demand or training benefit.
 
 ## Next work
 
-- **Now: L1–L3.** Learn the execution loop and variation, inspect real agent code, then package H1's first deterministic task with valid and invalid solutions. Resources are selected; the team's learning outputs and task package are pending.
-- **Alongside: M1 and D2.** Prepare the buyer brief using public sources, permitted examples, and reachable roles. The map includes unverified supplier leads. Team access evidence and a provisional buyer choice remain open.
-- **After the first package: L4–L6.** Work through the update example and compare methods, then expand H1 to three to five tasks. Agent runs need suitable access and resources. H2 is optional and may use fitting existing or free compute; no notebook run is complete.
-- **For a selected task family: E1, then D4.** Check grader errors and delivery costs before choosing E2, E3, a Harness² comparison, or a bounded training test. Procedures are defined; the task family and buyer acceptance criteria remain undecided.
+- **Reading:** Use the study guide selectively, starting with the overview where useful and giving task quality and evaluation the most attention. AES, Harness², and Third Moment notes already provide detailed comparisons. The guide does not track individual reading completion.
+- **Commercial investigation:** Resolve the gaps in [buyer evidence](03-opportunities.md#buyer-evidence), including permitted examples, reachable roles, and alternatives. The map includes unverified supplier leads; a provisional buyer choice remains open.
+- **Research when a project question is selected:** Use [E1](experiments.md#e1-verify-the-verifier) to check grader errors and delivery costs before interpreting a claimed benefit. Choose E2, E3, a Harness² comparison, or a bounded training comparison according to that question. These remain proposals, with the task family and acceptance criteria undecided.
 - **Conditional reuse work.** Repair AES or integrate Harness² only if an experiment selects it. No paid-run budget, customer outreach, or implementation-repair project has been authorized by these documentation changes.
 
 ## Decisions
@@ -91,5 +90,13 @@ Corrected AES's collection-time wording and Harness²'s combined-token descripti
 Moved the first task package into L3, added randomness and statistical interpretation, supplied real agent code and reward-hacking examples, and made M1's buyer brief explicit. Learning steps live only in the foundation guide; decision stages use D1–D5. H2 can use suitable existing or free compute. Retained a short introductory route instead of assigning every suggested resource.
 
 Added narrow-table guidance, unverified supplier leads, source-list ownership, and glossary terms. No scope change to the commercial objective or initial AES/Third Moment priorities. Validation and source-access limits are recorded in the resolution.
+
+### 2026-10-23 Use a reading guide for engineering leaders
+
+The user wants readings and videos by phase and step, without exercises. The team has deep systems expertise and already builds AI projects, including `taskgen-codebase-qa`. The earlier plan's teaching assignments and completion gates did not fit that audience.
+
+Made the study plan the single reading and viewing sequence, with focused sections, alternatives, and optional depth. Foundations now holds concept reminders and a question-based paper index. Removed H1/H2 practice assignments and the L/M/D course and decision sequences. Kept E1–E4 as separate research proposals, with their measures and resource boundaries. Actual work follows project questions and the active worklist.
+
+Updated goals, shared agent guidance, entry documents, and current links. Earlier reviews and dated records remain unchanged; compatibility links explain where proposals moved or assignments were retired. The commercial objective and AES/Third Moment priorities are unchanged. This is a documentation reorganization, not a new experiment or source revalidation.
 
 Add later decisions with their evidence and effect on the plan. Store completed experiments and interview records under `docs/records/`.

@@ -10,7 +10,7 @@ We want to build a commercial product that helps AI agents improve through bette
 
 The immediate output is a survey supported by source notes, an opportunity comparison, and small experiment designs. Completing a survey is progress toward a decision. It is not the ultimate measure of success.
 
-Build understanding from a high-level view, then use concrete executions and small experiments. Prefer accessible online explanations and videos before research papers. The team needs deep task and evaluation knowledge and practical training knowledge; optimizer theory and training infrastructure become priorities only when a specific opportunity requires them. The [learning path](studies/foundations.md) defines the steps and depth limits.
+The team brings deep systems expertise and hands-on AI project experience. Use a focused reading and viewing guide to fill AI-specific gaps, beginning with high-level online explanations and videos. Study task and evaluation contracts deeply and training mechanisms enough to assess data requirements and results. Optimizer theory and training infrastructure become priorities when a project needs them. The [study guide](01-study-plan.md) owns the sequence and optional depth; practical work follows research and product questions.
 
 ## What success would mean
 
@@ -44,10 +44,10 @@ Compare them with earlier RL methods, static task generation, rubric rewards, me
 
 The related `ai-data-research` repository develops codebase Q&A tasks with private author evidence and rubric-based grading. Its documentation separates task quality, grading reliability, and training usefulness. It currently treats model training as a downstream activity.
 
-We can learn from its task packaging, author and solver separation, negative controls, and operational experience. This repository owns the broader exploration. It should be understandable without access to the sibling repository. Do not assume the existing task family is the best commercial direction, or that its assets may be redistributed.
+We can learn from its task packaging, author and solver separation, negative controls, and operational experience. The team also identifies `taskgen-codebase-qa` as current hands-on AI work. This repository owns the broader exploration and should be understandable without access to sibling projects. Do not assume an existing task family is the best commercial direction, or that its assets may be redistributed.
 
 ## Constraints and assumptions to resolve
 
-The team's systems background is established. Current AI training experience is limited. Available study time, compute budget, customer access, data permissions, and potential training partners still need to be recorded in [progress](progress.md) as they become known. The first reading phase does not require GPUs.
+Systems expertise and hands-on AI engineering do not imply equal familiarity with every RL method. Use optional depth to address the relevant gaps. Compute budget, customer access, data permissions, and potential training partners still need to be recorded in [progress](progress.md) as they become known. The reading guide requires no GPUs.
 
 Revisit the scope when customer evidence changes the problem, an experiment rejects a key hypothesis, or the user changes priorities. Record the reason in [progress](progress.md), then update this document and affected plans. Preserve the reasoning so a fresh reader can understand the choice.

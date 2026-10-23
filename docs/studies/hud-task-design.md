@@ -20,4 +20,4 @@ This example suggests a useful commercial question: can we convert a customer's 
 
 ## Next check
 
-Apply [E1, verify the verifier](../01-study-plan.md#e1-verify-the-verifier), to one permitted workflow. Prepare a reference solution, a different valid solution, plausible failures, and a shortcut that exploits a superficial check. Have an expert inspect disagreements. Record what needed repair and the total authoring cost. Keep the result separate from any later claim that the task improves training.
+Apply [E1, verify the verifier](../experiments.md#e1-verify-the-verifier), to one permitted workflow. Prepare a reference solution, a different valid solution, plausible failures, and a shortcut that exploits a superficial check. Have an expert inspect disagreements. Record what needed repair and the total authoring cost. Keep the result separate from any later claim that the task improves training.

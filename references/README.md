@@ -1,12 +1,12 @@
 # Source register
 
-This register preserves the starting collection and records relevant teaching and research sources. **It is a reference library, not a curriculum. You do not need to read the foundational papers in order or finish them before experimenting.** Start with the [guided learning path](../docs/studies/foundations.md). Links were checked on 2026-10-14 unless noted. A source being listed does not mean all its experiments have been reviewed.
+This register preserves the starting collection and records relevant teaching and research sources. **It is a reference library, not a curriculum. You do not need to read the foundational papers in order or finish them before experimenting.** Use the [study guide](../docs/01-study-plan.md) for readings and videos by phase. Links were checked on 2026-10-14 unless noted. A source being listed does not mean all its experiments have been reviewed.
 
-**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study plan](../docs/01-study-plan.md) connects learning to decisions. The [study index](../docs/studies/README.md) links source analysis; the foundation guide owns resource selection and depth.
+**Review depth:** *orientation* means the abstract, overview, or selected introductory material was inspected; *selected methods* means relevant methods or results were checked; *page reviewed* means the main page text was read. None of these means reproduced. The [study guide](../docs/01-study-plan.md) owns resource selection, sequence, and depth. The [study index](../docs/studies/README.md) links source analysis; [Foundations](../docs/studies/foundations.md) provides concept reminders and a question-based paper index.
 
 ## Foundational sources
 
-F01–F14 are optional primary references for specific questions. F15–F18 provide the online teaching resources used in the learning path. Their numbering is an identifier, not a reading order. See [when to open papers](../docs/studies/foundations.md#when-to-open-the-foundational-papers).
+F01–F14 are optional primary references for specific questions. F15–F18 provide online explanations used in the study guide. Their numbering is an identifier, not a reading order. See [when to open papers](../docs/studies/foundations.md#when-to-open-the-foundational-papers).
 
 ### F01 RL foundations
 
@@ -66,11 +66,11 @@ Chen et al., *Evaluating Large Language Models Trained on Code*, 2021, [paper](h
 
 ### F15 RLHF teaching book
 
-Nathan Lambert, *Reinforcement Learning from Human Feedback*, [book](https://rlhfbook.com/) and [video course](https://rlhfbook.com/course). On 2026-10-19, checked the course syllabus and selected passages in [training overview](https://rlhfbook.com/c/03-training-overview), [reinforcement learning](https://rlhfbook.com/c/06-policy-gradients), and [evaluation](https://rlhfbook.com/c/16-evaluation). The [instruction-tuning chapter](https://rlhfbook.com/c/04-instruction-tuning) was also consulted in the earlier orientation. No complete book review or end-to-end viewing of the lectures. The foundation guide selects topics; the full course is optional.
+Nathan Lambert, *Reinforcement Learning from Human Feedback*, [book](https://rlhfbook.com/) and [video course](https://rlhfbook.com/course). On 2026-10-19, checked the course syllabus and selected passages in [training overview](https://rlhfbook.com/c/03-training-overview), [reinforcement learning](https://rlhfbook.com/c/06-policy-gradients), and [evaluation](https://rlhfbook.com/c/16-evaluation). The [instruction-tuning chapter](https://rlhfbook.com/c/04-instruction-tuning) was also consulted in the earlier orientation. No complete book review or end-to-end viewing of the lectures. The study guide selects topics; the full course is optional.
 
 ### F16 Spinning Up
 
-OpenAI, *Spinning Up in Deep RL*, [key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html). Introductory page reviewed for the foundation sequence. Teaching material for agent/environment interaction, policies, and trajectories; not a current language-model trainer recommendation.
+OpenAI, *Spinning Up in Deep RL*, [key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html). Introductory page reviewed for foundational orientation. Teaching material for agent/environment interaction, policies, and trajectories; not a current language-model trainer recommendation.
 
 ### F17 Language-model overview video
 
@@ -78,7 +78,7 @@ Andrej Karpathy, [Intro to Large Language Models](https://www.youtube.com/watch?
 
 ### F18 Agent execution introduction
 
-Hugging Face, [Agents Course, Unit 1](https://huggingface.co/learn/agents-course/en/unit1/introduction). Introductory concepts and [action–observation structure](https://huggingface.co/learn/agents-course/en/unit1/agent-steps-and-structure) reviewed on 2026-10-19. Use the conceptual sections; completing framework tutorials or certification is not part of our required path.
+Hugging Face, [Agents Course, Unit 1](https://huggingface.co/learn/agents-course/en/unit1/introduction). Introductory concepts and [action–observation structure](https://huggingface.co/learn/agents-course/en/unit1/agent-steps-and-structure) reviewed on 2026-10-19. Use the conceptual sections; the study guide assigns no tutorial work or certification.
 
 ## Provided papers
 
@@ -138,18 +138,18 @@ Checked on 2026-10-14. These are a narrower checked set than the leads in the or
 
 ## Learning resources added in review 2
 
-Checked on 2026-10-20. The learning path selects passages; this list does not add required courses. Videos were not watched and notebooks were not run.
+Checked on 2026-10-20. The study guide selects passages; this list does not add required courses. Videos were not watched and notebooks were not run.
 
 | Source | Review depth and use |
 | --- | --- |
-| 3Blue1Brown, [Large Language Models explained briefly](https://www.youtube.com/watch?v=LPZh9BOjkQs) | Original video page identified; short L1 alternative. No transcript-level review. |
-| SWE-agent team, [minimal agent tutorial](https://minimal-agent.com/) | Model-call, shell-execution, and loop examples read. L2 code-reading exercise; not an audited execution boundary. |
+| 3Blue1Brown, [Large Language Models explained briefly](https://www.youtube.com/watch?v=LPZh9BOjkQs) | Original video page identified; short overview alternative. No transcript-level review. |
+| SWE-agent team, [minimal agent tutorial](https://minimal-agent.com/) | Model-call, shell-execution, and loop examples read. Agent-loop code reference; not an audited execution boundary. |
 | Anthropic, [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), 2026 | Selected grader, repeated-attempt metric, and task-debugging passages reviewed. Primary practitioner guidance, not evidence that every zero-pass task is defective. |
 | METR, [Recent frontier models are reward hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/), 2025 | Concrete scoring/timing shortcuts and detection limits reviewed. Observations from METR's evaluations, not our reproduction or a universal frequency estimate. |
-| Anthropic, [A statistical approach to model evaluations](https://www.anthropic.com/research/statistical-approach-to-model-evals), 2024 | Error bars, sampling assumptions, and paired comparisons reviewed. L3 exercise uses invented counts, not a reported experiment. |
-| Unsloth, [RL guide and notebooks](https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide) | Notebook list and hardware discussion reviewed. Potential H2 route; compatibility and free resource availability not tested. |
+| Anthropic, [A statistical approach to model evaluations](https://www.anthropic.com/research/statistical-approach-to-model-evals), 2024 | Error bars, sampling assumptions, and paired comparisons reviewed. Supports interpreting repeated attempts and comparisons across tasks. |
+| Unsloth, [RL guide and notebooks](https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide) | Notebook list and hardware discussion reviewed. Implementation reference when training integration is relevant; compatibility and free resource availability not tested. |
 
-Lambert's official [course listing](https://rlhfbook.com/course) confirms lectures 11 and 12 and their topics. Their direct video links from review 2 could not be retrieved in this check; the learning path retains the course-page fallback. The RLHF training overview belongs in L4, not as a general language-model introduction. Epoch AI's environment-market report remains the M1 entry source; the market map labels additional supplier leads as unverified.
+Lambert's official [course listing](https://rlhfbook.com/course) confirms lectures 11 and 12 and their topics. Their direct video links from review 2 could not be retrieved in this check; the study guide retains the course-page fallback. The RLHF training overview covers training stages. Epoch AI's environment-market report provides commercial context; the market map labels additional supplier leads as unverified.
 
 ## Framework documentation
 
