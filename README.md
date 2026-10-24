@@ -8,7 +8,7 @@ We are studying how to create tasks, environments, and feedback that improve AI 
 
 ## Start here
 
-Read [Goals and scope](docs/00-goals.md) and [Progress and decisions](docs/progress.md) for direction and current state. The [study guide](docs/01-study-plan.md) organizes readings and videos into phases: models and agents, task quality, training, concrete improvement systems, and commercial offerings. It identifies useful sections and optional depth for engineering leaders.
+Read [Goals and scope](docs/00-goals.md) and [Progress and decisions](docs/progress.md) for direction and current state. The [study guide](docs/01-study-plan.md) organizes engineering articles, implementation references, and selected videos into phases: models and agents, task quality, training, concrete improvement systems, and commercial offerings. It identifies useful sections and optional depth for engineering leaders.
 
 Consult [Foundations](docs/studies/foundations.md) for concept reminders and optional papers, the [survey](docs/02-survey.md) for explanations, and the [opportunity comparison](docs/03-opportunities.md) for candidate buyers. [Research experiments](docs/experiments.md) preserves proposals to select when project questions warrant them.
 

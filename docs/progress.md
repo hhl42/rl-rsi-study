@@ -4,7 +4,7 @@ This is the current worklist and decision record. Keep it useful to someone star
 
 ## Current state
 
-As of 2026-10-23, the repository contains a survey, a reading and viewing guide, a source register, study notes, research experiment proposals, and a sourced initial market map. The [study guide](01-study-plan.md) now serves engineering leaders with deep systems expertise and existing hands-on AI work. It lists sources by phase and step, with selected sections and optional depth. Practice assignments and completion gates have been removed. Foundational papers remain optional references for concrete questions.
+As of 2026-10-23, the repository contains a survey, a reading and viewing guide, a source register, study notes, research experiment proposals, and a sourced initial market map. The [study guide](01-study-plan.md) serves engineering leaders with deep systems expertise and existing hands-on AI work. It now favors engineering articles, design reports, and implementation documentation, with selected sections and optional depth. Practice assignments and completion gates have been removed. Book chapters and foundational papers are references for concrete questions.
 
 The first [AutoEnvScaling code study](studies/autoenvscaling-code.md) inspected selected paths at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`. The [original record](records/2026-10-14-autoenvscaling-code/README.md) owns the offline tests and probes. The [independent review checks](records/2026-10-14-claude-review-checks/README.md) add a solver-side probe. The [review resolution](reviews/claude-init-review-1-resolution.md) records this follow-up's source checks, corrections, and recommendation-by-recommendation response.
 
@@ -98,5 +98,15 @@ The user wants readings and videos by phase and step, without exercises. The tea
 Made the study plan the single reading and viewing sequence, with focused sections, alternatives, and optional depth. Foundations now holds concept reminders and a question-based paper index. Removed H1/H2 practice assignments and the L/M/D course and decision sequences. Kept E1–E4 as separate research proposals, with their measures and resource boundaries. Actual work follows project questions and the active worklist.
 
 Updated goals, shared agent guidance, entry documents, and current links. Earlier reviews and dated records remain unchanged; compatibility links explain where proposals moved or assignments were retired. The commercial objective and AES/Third Moment priorities are unchanged. This is a documentation reorganization, not a new experiment or source revalidation.
+
+### 2026-10-23 Select engineering materials, not just a different format
+
+The user pointed out that the Hugging Face Agents Course still uses a course format. Removing exercises from our guide had left much of its beginner-oriented source selection intact.
+
+Replaced that course and the minimal-agent tutorial with architecture and control-flow readings. Removed course lectures, the long introductory-video expansion, Spinning Up, and notebook setup from the main sequence. Retained a choice of standalone overview videos and the evaluation articles, which address concrete engineering questions. Harbor's format and examples remain; its tutorial is no longer in the sequence.
+
+Training now starts from Ai2's Tülu 3 pipeline report and uses Tinker's interfaces to connect samples to updates. Selected Lambert passages remain optional concept lookups. Added the verifiers architecture article as a conditional comparison for task and trace contracts. These sources illustrate different implementations without selecting a provider or changing the AES/Third Moment priorities.
+
+The [source register](../references/README.md#engineering-readings) records the new source checks and their limits. Earlier sources and reviews remain available. No new implementation, training experiment, or commercial validation was performed.
 
 Add later decisions with their evidence and effect on the plan. Store completed experiments and interview records under `docs/records/`.

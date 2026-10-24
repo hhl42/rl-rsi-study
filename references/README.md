@@ -6,7 +6,7 @@ This register preserves the starting collection and records relevant teaching an
 
 ## Foundational sources
 
-F01–F14 are optional primary references for specific questions. F15–F18 provide online explanations used in the study guide. Their numbering is an identifier, not a reading order. See [when to open papers](../docs/studies/foundations.md#when-to-open-the-foundational-papers).
+F01–F14 are optional primary references for specific questions. F15–F18 record earlier overview and teaching resources; their current role is stated below. The guide now favors the [engineering readings](#engineering-readings). Numbering is an identifier, not a reading order. See [when to open papers](../docs/studies/foundations.md#when-to-open-the-foundational-papers).
 
 ### F01 RL foundations
 
@@ -66,11 +66,11 @@ Chen et al., *Evaluating Large Language Models Trained on Code*, 2021, [paper](h
 
 ### F15 RLHF teaching book
 
-Nathan Lambert, *Reinforcement Learning from Human Feedback*, [book](https://rlhfbook.com/) and [video course](https://rlhfbook.com/course). On 2026-10-19, checked the course syllabus and selected passages in [training overview](https://rlhfbook.com/c/03-training-overview), [reinforcement learning](https://rlhfbook.com/c/06-policy-gradients), and [evaluation](https://rlhfbook.com/c/16-evaluation). The [instruction-tuning chapter](https://rlhfbook.com/c/04-instruction-tuning) was also consulted in the earlier orientation. No complete book review or end-to-end viewing of the lectures. The study guide selects topics; the full course is optional.
+Nathan Lambert, *Reinforcement Learning from Human Feedback*, [book](https://rlhfbook.com/) and [video course](https://rlhfbook.com/course). On 2026-10-19, checked the course syllabus and selected passages in [training overview](https://rlhfbook.com/c/03-training-overview), [reinforcement learning](https://rlhfbook.com/c/06-policy-gradients), and [evaluation](https://rlhfbook.com/c/16-evaluation). The [instruction-tuning chapter](https://rlhfbook.com/c/04-instruction-tuning) was also consulted in the earlier orientation. No complete book review or end-to-end viewing of the lectures. Selected book passages remain concept lookups; the guide no longer uses the lecture sequence.
 
 ### F16 Spinning Up
 
-OpenAI, *Spinning Up in Deep RL*, [key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html). Introductory page reviewed for foundational orientation. Teaching material for agent/environment interaction, policies, and trajectories; not a current language-model trainer recommendation.
+OpenAI, *Spinning Up in Deep RL*, [key concepts](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html). Introductory page reviewed for foundational orientation. Retained for RL vocabulary lookup, outside the main study sequence; not a current language-model trainer recommendation.
 
 ### F17 Language-model overview video
 
@@ -78,7 +78,7 @@ Andrej Karpathy, [Intro to Large Language Models](https://www.youtube.com/watch?
 
 ### F18 Agent execution introduction
 
-Hugging Face, [Agents Course, Unit 1](https://huggingface.co/learn/agents-course/en/unit1/introduction). Introductory concepts and [action–observation structure](https://huggingface.co/learn/agents-course/en/unit1/agent-steps-and-structure) reviewed on 2026-10-19. Use the conceptual sections; the study guide assigns no tutorial work or certification.
+Hugging Face, [Agents Course, Unit 1](https://huggingface.co/learn/agents-course/en/unit1/introduction). Introductory concepts and [action–observation structure](https://huggingface.co/learn/agents-course/en/unit1/agent-steps-and-structure) reviewed on 2026-10-19. Rechecked the introduction on 2026-10-23: its quizzes, first-agent project, and certification make it a poor default for this team's guide. Removed from the reading sequence; this entry preserves the earlier source record.
 
 ## Provided papers
 
@@ -143,13 +143,41 @@ Checked on 2026-10-20. The study guide selects passages; this list does not add 
 | Source | Review depth and use |
 | --- | --- |
 | 3Blue1Brown, [Large Language Models explained briefly](https://www.youtube.com/watch?v=LPZh9BOjkQs) | Original video page identified; short overview alternative. No transcript-level review. |
-| SWE-agent team, [minimal agent tutorial](https://minimal-agent.com/) | Model-call, shell-execution, and loop examples read. Agent-loop code reference; not an audited execution boundary. |
+| SWE-agent team, [minimal agent tutorial](https://minimal-agent.com/) | Model-call, shell-execution, and loop examples read. Earlier introductory resource; replaced in the guide by the control-flow documentation below. No execution-boundary audit. |
 | Anthropic, [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), 2026 | Selected grader, repeated-attempt metric, and task-debugging passages reviewed. Primary practitioner guidance, not evidence that every zero-pass task is defective. |
 | METR, [Recent frontier models are reward hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/), 2025 | Concrete scoring/timing shortcuts and detection limits reviewed. Observations from METR's evaluations, not our reproduction or a universal frequency estimate. |
 | Anthropic, [A statistical approach to model evaluations](https://www.anthropic.com/research/statistical-approach-to-model-evals), 2024 | Error bars, sampling assumptions, and paired comparisons reviewed. Supports interpreting repeated attempts and comparisons across tasks. |
-| Unsloth, [RL guide and notebooks](https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide) | Notebook list and hardware discussion reviewed. Implementation reference when training integration is relevant; compatibility and free resource availability not tested. |
+| Unsloth, [RL guide and notebooks](https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide) | Notebook list and hardware discussion reviewed. Earlier setup lead, outside the main study sequence; compatibility and free resource availability not tested. |
 
-Lambert's official [course listing](https://rlhfbook.com/course) confirms lectures 11 and 12 and their topics. Their direct video links from review 2 could not be retrieved in this check; the study guide retains the course-page fallback. The RLHF training overview covers training stages. Epoch AI's environment-market report provides commercial context; the market map labels additional supplier leads as unverified.
+Lambert's official [course listing](https://rlhfbook.com/course) confirmed lectures 11 and 12 and their topics in the earlier check. Direct video retrieval failed then; the lectures are no longer part of the guide. Epoch AI's environment-market report remains the commercial context source. The market map labels additional supplier leads as unverified.
+
+## Engineering readings
+
+Selected on 2026-10-23 for engineering readers who already build AI systems. These replace introductory course and tutorial entries in the main guide. The notes below identify the inspected material; no code, SDK call, training run, or benchmark was executed for this selection.
+
+### Agent design
+
+Anthropic, [Building effective agents](https://www.anthropic.com/research/building-effective-agents), 2024-12-19. Reviewed workflow/agent distinctions, autonomy tradeoffs, execution patterns, and tool-interface guidance. A compact architecture account suited to selecting a control flow. The page has changed since publication and warns that its tooling discussion is dated; it is not our current framework comparison.
+
+### Agent control flow
+
+SWE-agent team, [Agent control flow](https://mini-swe-agent.com/v2/advanced/control_flow/), v2 documentation. Reviewed the diagram and selected default-agent methods for query, action execution, history, and termination. This directly exposes implementation boundaries. The documentation route identifies the major version but does not pin a code commit; no full implementation or isolation audit was performed.
+
+### Harness state across sessions
+
+Anthropic, [Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents), 2025-11-26. Reviewed session initialization, progress artifacts, incremental changes, and testing failures. Useful implementation experience for persistent work and recovery. The linked quickstart and reported performance were not independently tested.
+
+### A concrete post-training pipeline
+
+Ai2, [Tülu 3: The next era in open post-training](https://allenai.org/blog/tulu-3-technical), 2024-11-21. Reviewed the article's recipe, data curation, supervised training, preference tuning, verifiable-reward training, and evaluation sections. Connects each stage to its input data and checks. The linked paper, code, and numerical results were not audited; this is a historical pipeline example rather than a current capability ranking.
+
+### Training interfaces
+
+Thinking Machines Lab, [Tinker SDK cheatsheet](https://tinker-docs.thinkingmachines.ai/tinker/sdk-cheatsheet/) and [Loss Functions](https://tinker-docs.thinkingmachines.ai/tinker/losses/). Reviewed the supervised/RL flows, data preparation, sampling, gradient and update calls, and the loss-input explanation. These make token alignment, masks, sampling probabilities, and advantages concrete. They describe one provider's evolving interfaces; no SDK version, provider, or trainer has been selected for our project.
+
+### Environment architecture
+
+Prime Intellect, [verifiers v1: Decomposing Tasksets and Harnesses for Agentic RL & Evaluations](https://www.primeintellect.ai/blog/verifiers-v1), 2026-07-12. Reviewed the architecture and API passages on tasksets, harnesses, runtimes, interception, and traces with branches. The article describes a `verifiers.v1` preview introduced with package version `0.2.0`; the names should not be treated as interchangeable version numbers. Code behavior, isolation, scaling claims, and commercial terms remain unverified. This is an interface-design comparison, not a reuse decision.
 
 ## Framework documentation
 
