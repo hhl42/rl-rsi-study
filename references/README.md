@@ -131,7 +131,7 @@ Checked on 2026-10-14. These are a narrower checked set than the leads in the or
 | --- | --- |
 | Ivison et al., [Tmax](https://arxiv.org/abs/2606.23321), 2026, v1 | Abstract and metadata reviewed; baseline description also checked against AES. Full method and code study pending. See [AES](../docs/studies/autoenvscaling.md). |
 | METR, [OpenAI–Hugging Face incident investigation](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/), 2026-08-26 | Relevant incident findings and scope reviewed. Primary investigation, not our reproduction. See [Gottlieb and isolation](../docs/studies/eli-gottlieb-reference.md#a-documented-isolation-failure). |
-| Epoch AI, [The state of RL environments](https://epoch.ai/gradient-updates/state-of-rl-envs), 2026-01-12 | Interview report reviewed for prices, quality priorities, and internal construction. Reported observations, not transaction audits. See [market map](../docs/03-opportunities.md#market-map). |
+| Epoch AI, [An FAQ on reinforcement learning environments](https://epoch.ai/gradient-updates/state-of-rl-envs), 2026-01-12 | Report reviewed for prices, quality priorities, and internal construction. Rechecked 2026-10-24: evidence remains a January snapshot, from nine calls plus nine text/email contributors. See [market map](../docs/03-opportunities.md#market-map). |
 | Scale, [RL environments](https://scale.com/rlenvironments) | Public offer reviewed; vendor claims, no customer-result audit. |
 | Applied Compute, [company announcement](https://www.appliedcompute.com/company/fundraise) | Description of enterprise offering reviewed; no funding or customer-performance claims adopted from it. |
 | Modal, [pricing](https://modal.com/pricing); Daytona, [pricing](https://www.daytona.io/pricing) | CPU and memory price units checked for the market map. Not a workload-cost benchmark; recheck before a spending decision. |
@@ -159,6 +159,8 @@ Selected on 2026-10-23 for engineering readers who already build AI systems. The
 
 Anthropic, [Building effective agents](https://www.anthropic.com/research/building-effective-agents), 2024-12-19. Reviewed workflow/agent distinctions, autonomy tradeoffs, execution patterns, and tool-interface guidance. A compact architecture account suited to selecting a control flow. The page has changed since publication and warns that its tooling discussion is dated; it is not our current framework comparison.
 
+On 2026-10-24, followed that warning to [Scaling Managed Agents](https://www.anthropic.com/research/managed-agents), published 2026-04-08. Reviewed separation of session history, harness, and sandbox, and the account of model improvements making earlier context-reset logic unnecessary. The linked [product overview](https://platform.claude.com/docs/en/managed-agents/overview) was marked beta. This is a newer architectural account and an advertised service; neither code behavior nor reliability claims were independently tested.
+
 ### Agent control flow
 
 SWE-agent team, [Agent control flow](https://mini-swe-agent.com/v2/advanced/control_flow/), v2 documentation. Reviewed the diagram and selected default-agent methods for query, action execution, history, and termination. This directly exposes implementation boundaries. The documentation route identifies the major version but does not pin a code commit; no full implementation or isolation audit was performed.
@@ -166,6 +168,8 @@ SWE-agent team, [Agent control flow](https://mini-swe-agent.com/v2/advanced/cont
 ### Harness state across sessions
 
 Anthropic, [Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents), 2025-11-26. Reviewed session initialization, progress artifacts, incremental changes, and testing failures. Useful implementation experience for persistent work and recovery. The linked quickstart and reported performance were not independently tested.
+
+The [2026-03-24 follow-up](https://www.anthropic.com/research/harness-design-long-running-apps), checked 2026-10-24, describes removing context resets with Opus 4.5 and later simplifying orchestration with Opus 4.6. Reviewed those design-change passages; its demos, scores, and costs were not reproduced. Treat the earlier recipe as a model-specific case, not a standing requirement for agents.
 
 ### A concrete post-training pipeline
 
@@ -175,9 +179,13 @@ Ai2, [Tülu 3: The next era in open post-training](https://allenai.org/blog/tulu
 
 Thinking Machines Lab, [Tinker SDK cheatsheet](https://tinker-docs.thinkingmachines.ai/tinker/sdk-cheatsheet/) and [Loss Functions](https://tinker-docs.thinkingmachines.ai/tinker/losses/). Reviewed the supervised/RL flows, data preparation, sampling, gradient and update calls, and the loss-input explanation. These make token alignment, masks, sampling probabilities, and advantages concrete. They describe one provider's evolving interfaces; no SDK version, provider, or trainer has been selected for our project.
 
+**Documentation conflict found on 2026-10-24:** the cheatsheet's “Create clients” section still recommends `TINKER_SUBPROCESS_SAMPLING=1`. The [changelog](https://tinker-docs.thinkingmachines.ai/changelog/), SDK 0.27.1 dated 2026-09-04, says subprocess sampling was removed and the flag has no effect. This is an observed conflict between pages, not a runtime test. Retain the data-flow reading, but check snippets against the selected release before implementation.
+
 ### Environment architecture
 
-Prime Intellect, [verifiers v1: Decomposing Tasksets and Harnesses for Agentic RL & Evaluations](https://www.primeintellect.ai/blog/verifiers-v1), 2026-07-12. Reviewed the architecture and API passages on tasksets, harnesses, runtimes, interception, and traces with branches. The article describes a `verifiers.v1` preview introduced with package version `0.2.0`; the names should not be treated as interchangeable version numbers. Code behavior, isolation, scaling claims, and commercial terms remain unverified. This is an interface-design comparison, not a reuse decision.
+Prime Intellect, [verifiers v1: Decomposing Tasksets and Harnesses for Agentic RL & Evaluations](https://www.primeintellect.ai/blog/verifiers-v1), 2026-07-12. Reviewed the architecture and API passages on tasksets, harnesses, runtimes, interception, and traces with branches. It introduced the `verifiers.v1` preview in package `0.2.0`. Keep it for design history; that release state has been superseded.
+
+Checked on 2026-10-24: the [v0.4.0 release notes](https://github.com/PrimeIntellect-ai/verifiers/releases/tag/v0.4.0), dated October 12 on GitHub, remove the legacy v0 implementation. The [release announcement](https://www.primeintellect.ai/blog/prime-rl-0-10-verifiers-0-4) is dated October 19. The [current overview](https://docs.primeintellect.ai/verifiers/v1/overview) describes v1 interfaces. Release notes target Harbor 0.24.0 and reject its multi-step tasks, so compatibility needs checking at the feature level. These are documentation checks; code behavior, isolation, scaling, and commercial claims remain unverified.
 
 ## Framework documentation
 
@@ -186,6 +194,16 @@ Prime Intellect, [verifiers v1: Decomposing Tasksets and Harnesses for Agentic R
 | [Harbor task format](https://docs.harborframework.com/tasks/overview), [task tutorial](https://docs.harborframework.com/tutorials/create-a-task), [Terminal-Bench examples](https://github.com/harbor-framework/terminal-bench-2) | Task packaging, execution, and verification | Format, tutorial, and example repository reviewed on 2026-10-20; no task implementation or integration run completed |
 | [verl](https://verl.readthedocs.io/en/latest/) | RL training and rollout integration | Overview reviewed; no version selected |
 | [SkyRL](https://docs.skyrl.ai/docs) | Alternative training integration | Documentation entry page reviewed; detailed comparison pending |
+
+Harbor's task overview and [release policy](https://docs.harborframework.com/contributing/release-policy) were rechecked on 2026-10-24. The living task page includes multi-step tasks; the policy permits breaking changes in minor releases. Keep the packaging concepts, but match the chosen runner and adapter versions before reuse. No integration run or new review of the example repository was performed.
+
+## Currency check 2026-10-24
+
+This check assessed continued reading value and selected changing claims. It covered Anthropic's agent and evaluation articles and their newer follow-ups; Tülu 3's pipeline explanation; Harbor, Tinker, and verifiers documentation and release information; and Epoch and Third Moment public material. The relevant entries above and the [Third Moment study](../docs/studies/third-moment-research.md) record the findings.
+
+The statistical guide's clustering and paired-comparison reasoning remains useful under its assumptions. METR's June 2025 cases remain evidence of particular grader failures, without establishing current model frequencies. Tülu 3 remains an understandable historical pipeline. Newer harness accounts demonstrate that model-specific workarounds can lose value. Moving documentation can disagree with release notes, as the Tinker check shows.
+
+The check did not rewatch videos, audit newer AES/Harness² commits, reproduce paper results, revalidate the full vendor/pricing map, or test commercial claims. Prior source dates and pinned records still apply. This is not a blanket statement that every document is current.
 
 ## Integrity of supplied files
 

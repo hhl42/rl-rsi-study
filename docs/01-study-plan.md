@@ -4,7 +4,17 @@ Reading and viewing for engineering leaders with deep systems experience who alr
 
 Each step gives focused readings and optional depth. Prefer standalone engineering articles, design reports, and implementation documentation. Use a video for orientation and a book section when a specific concept needs more explanation. [Foundations](studies/foundations.md) provides concept reminders and a question-based paper index. [Research experiments](experiments.md) are separate proposals; [progress](progress.md) records current priorities.
 
-The engineering replacements were checked on 2026-10-23; earlier sources retain their recorded review dates. Videos were not watched end to end, and listing implementation documentation does not mean its code was run. The [source register](../references/README.md#engineering-readings) records what was reviewed.
+## How to interpret these readings
+
+Use this guide for concepts, design questions, and bounded implementation examples. It is not a continuously updated ranking of models, frameworks, or suppliers. The 2026-10-24 [currency check](../references/README.md#currency-check-2026-10-24) found useful older explanations alongside superseded implementation advice.
+
+| Read for | What carries forward |
+| --- | --- |
+| Concepts and measurement | Weights versus context, feedback loops, grader validity, and sampling uncertainty remain useful. Their assumptions still matter. |
+| Dated case studies | Mechanisms and failure modes suggest designs to test. Scores, workarounds, and costs apply to the reported models, tasks, budgets, and versions. |
+| Interfaces and commercial offerings | Documentation and product pages show a dated implementation or advertised offer. Check releases, compatibility, prices, and terms when making a decision. |
+
+**Recency and confidence are separate.** A recent official page can contain stale instructions. A source check confirms only the passages inspected; a pinned code check or local run supports only that revision or run. Reopening an old report does not update its underlying evidence. Review dates and limits live in the source register; videos have not been watched end to end.
 
 <a id="reading-sequence"></a>
 
@@ -17,23 +27,24 @@ The engineering replacements were checked on 2026-10-23; earlier sources retain 
 
 ### 2. Agent execution and the harness
 
-- **Read:** Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents). Focus on workflows versus agents, when added autonomy is useful, the execution loop, and tool-interface design in appendix 2. This is an architecture discussion; its 2024 publication date limits its value as a current tooling guide.
-- **Implementation reference:** mini-SWE-agent's [Agent control flow](https://mini-swe-agent.com/v2/advanced/control_flow/). Read the diagram and accompanying default-agent code for model calls, environment execution, message history, and termination. This exposes the interfaces without a build-your-first-agent tutorial.
-- **For work across sessions:** Anthropic's [Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents). Focus on environment initialization, persisted progress, recovery, and end-to-end checks. It is one team's implementation account, useful for separating harness responsibilities from model capability.
+- **Concepts:** Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents), December 2024. Keep the workflow/agent distinction, feedback loop, and tool-interface guidance in appendix 2. The author now explicitly flags its tooling landscape as outdated; skip the framework list as selection advice.
+- **Newer architecture account:** The linked [Managed Agents design](https://www.anthropic.com/research/managed-agents), April 2026. Read how session history, the harness, and execution are separated. This complements the older concepts with a service design. Its [product documentation](https://platform.claude.com/docs/en/managed-agents/overview) was still marked beta at our check; the design article is not a stable API contract.
+- **Implementation reference:** mini-SWE-agent's [Agent control flow](https://mini-swe-agent.com/v2/advanced/control_flow/). Read the diagram and default-agent code for model calls, environment execution, history, and termination. This is a v2 documentation example; pin a release before depending on exact behavior.
+- **Historical harness case:** [Effective harnesses for long-running agents](https://www.anthropic.com/research/effective-harnesses-for-long-running-agents), November 2025, for persisted progress and recovery. Pair it with the “Iterating on the harness” section of the [March 2026 follow-up](https://www.anthropic.com/research/harness-design-long-running-apps). The author removes earlier orchestration after model improvements. Keep the failure analysis; re-evaluate model-specific workarounds.
 
 ## Phase 2 — Tasks and trustworthy evaluation
 
 ### 3. Outcomes, graders, and uncertainty
 
-- **Read closely:** Anthropic's [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). Focus on tasks, trials, graders, repeated-attempt metrics, and interpreting failures.
-- **Read selected cases:** METR's [reward-hacking report](https://metr.org/blog/2025-06-05-recent-reward-hacking/), especially scoring and timing shortcuts. These show how a passing score can fail to represent the intended behavior.
-- **Read selected sections:** Anthropic's [statistical evaluation guide](https://www.anthropic.com/research/statistical-approach-to-model-evals), on error bars, sampling assumptions, and paired comparisons. This is the useful depth for judging claims from repeated, related, or small task sets.
+- **Read closely:** Anthropic's [Demystifying evals for AI agents](https://www.anthropic.com/research/demystifying-evals-for-ai-agents), January 2026. Focus on tasks, trials, graders, repeated-attempt metrics, and interpreting failures. The measurement structure is useful beyond its model examples; its framework appendix is a dated list.
+- **Read selected cases:** METR's [June 2025 reward-hacking report](https://metr.org/blog/2025-06-05-recent-reward-hacking/), especially scoring and timing shortcuts. These remain concrete grader failure cases. They do not estimate today's failure frequency across models.
+- **Read selected sections:** Anthropic's [statistical evaluation guide](https://www.anthropic.com/research/statistical-approach-to-model-evals), November 2024, on error bars, clustering, and paired comparisons. The statistical reasoning remains useful; check its sampling assumptions for related tasks and small pilots.
 
 ### 4. Task contracts and task production
 
 - **Read:** The [HUD task-design study](studies/hud-task-design.md) and [Gottlieb task-factory study](studies/eli-gottlieb-reference.md), then their linked originals for design details. Focus on intended capability, evidence available to the solver, valid alternatives, expert review, and isolation.
-- **Read closely:** Harbor's [task format](https://docs.harborframework.com/tasks/overview), with [Terminal-Bench examples](https://github.com/harbor-framework/terminal-bench-2) for concrete packaging and verifier code.
-- **Architecture comparison:** Prime Intellect's [verifiers v1 design](https://www.primeintellect.ai/blog/verifiers-v1). Read the separation of taskset, harness, and runtime, then the architecture sections on interception and traces. Useful when deciding which interfaces belong in our framework, including traces through compaction and subagents. The article describes a preview; its implementation has not been audited here.
+- **Read closely:** Harbor's [task format](https://docs.harborframework.com/tasks/overview), with [Terminal-Bench examples](https://github.com/harbor-framework/terminal-bench-2) for packaging and verifier code. These are living interfaces. Harbor's [release policy](https://docs.harborframework.com/contributing/release-policy) permits breaking changes in minor releases; match task, runner, and adapter versions before reuse.
+- **Architecture comparison:** Prime Intellect's [July 2026 verifiers v1 design](https://www.primeintellect.ai/blog/verifiers-v1), for taskset/harness/runtime separation and traces through compaction or subagents. Its preview status is historical: [v0.4.0 release notes](https://github.com/PrimeIntellect-ai/verifiers/releases/tag/v0.4.0) remove the legacy stack. Use the [current overview](https://docs.primeintellect.ai/verifiers/v1/overview) and selected-version release notes for implementation; compatibility is narrower than a general claim of Harbor support.
 - **Local synthesis:** The survey's [task-framework model](02-survey.md#3-what-a-task-framework-must-represent). Task and evaluation contracts deserve the deepest study because they determine whether our deliverable is usable.
 
 ## Phase 3 — How tasks become training inputs
@@ -46,11 +57,13 @@ The engineering replacements were checked on 2026-10-23; earlier sources retain 
 ### 6. RL updates and the task-to-trainer boundary
 
 - **Mechanism:** The survey's [worked training step](02-survey.md#a-worked-training-step), for attempts, rewards, relative advantages, and a weight update. It is a simplified explanation, not the complete GRPO loss.
-- **Implementation reference:** Thinking Machines' [Tinker SDK cheatsheet](https://tinker-docs.thinkingmachines.ai/tinker/sdk-cheatsheet/). Read the SFT/RL flow diagrams and the data preparation, sampling, gradient, and optimizer sections. Follow how collected samples become updates and how updated weights return to sampling.
+- **Implementation reference:** Thinking Machines' [Tinker SDK cheatsheet](https://tinker-docs.thinkingmachines.ai/tinker/sdk-cheatsheet/). Read the SFT/RL diagrams and data flow. A known inconsistency limits copying its snippets: the page still recommends subprocess sampling, while the [SDK 0.27.1 changelog](https://tinker-docs.thinkingmachines.ai/changelog/) says it was removed. Resolve API details against the selected SDK version.
 - **Data-contract detail:** Tinker's [Loss Functions](https://tinker-docs.thinkingmachines.ai/tinker/losses/), specifically “How it works,” for token alignment, sampling log-probabilities, advantages, and excluded tokens. These pages illustrate one provider's interfaces; they do not select our trainer.
 - **When the update math matters:** Lambert's [reinforcement learning chapter](https://rlhfbook.com/c/06-policy-gradients), limited to policy-gradient intuition and relative rewards in GRPO. Detailed optimizer derivations and distributed training internals remain conditional references.
 
 ## Phase 4 — Concrete improvement systems
+
+These studies describe the cited paper versions and pinned code. Their observed defects and reported gains do not establish the state of today's upstream code or models. Use mechanisms for design comparisons; consult current revisions before reuse. This currency check did not rerun the experiments or audit newer AES/Harness² code.
 
 ### 7. AutoEnvScaling: generating useful environments
 
@@ -76,9 +89,9 @@ Read this phase alongside the technical study. It connects framework choices to 
 
 ### 10. The environment market and managed improvement
 
-- **Read:** Epoch AI's [The state of RL environments](https://epoch.ai/gradient-updates/state-of-rl-envs), for reported buyer needs, task economics, and internal construction. Its interview evidence is not an audit of transactions.
-- **Read closely:** The [Third Moment Research study](studies/third-moment-research.md) and its linked first-party material. Focus on the public offering, the internal research case, and which commercial claims remain unverified.
-- **Read across alternatives:** The [market map](03-opportunities.md#market-map), including its source dates and unverified supplier leads. Compare task supply, quality review, failure-to-task services, managed improvement, and execution infrastructure.
+- **Historical market context:** Epoch AI's [An FAQ on reinforcement learning environments](https://epoch.ai/gradient-updates/state-of-rl-envs), January 2026. Useful for buyer questions and quality concerns. Prices, purchasing patterns, and supplier coverage remain a January snapshot even though the page was rechecked in October.
+- **Public-offer evidence:** The [Third Moment Research study](studies/third-moment-research.md). Product and hiring pages were rechecked on 2026-10-24; they establish advertised positioning. The October 14 internal-research case and customer-service claims remain different evidence, neither independently validated here.
+- **Alternatives to investigate:** The [market map](03-opportunities.md#market-map). Its vendor/pricing entries retain their October 14 check date and unverified leads. Use its categories to compare delivery models; refresh relevant offers and prices before ranking suppliers or estimating a business.
 
 ### 11. Adjacent product and integration models
 

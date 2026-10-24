@@ -2,7 +2,7 @@
 
 Third Moment Research is a useful case for comparing a task supplier with a managed improvement service. Our aim is to understand the customer problem and delivery requirements, then test whether a narrower opportunity fits this team.
 
-Sources checked on 2026-10-14 describe three different things. Keep their evidence separate.
+Sources first checked on 2026-10-14 describe three different things. The product and careers pages were rechecked on 2026-10-24 and still support the distinctions below; neither displays a publication or update date. The OpenAI case study is dated October 14. This refresh checks public positioning, not implementation, revenue, or customer outcomes. Keep those evidence limits separate from how recently a page was opened.
 
 ## Public offering
 

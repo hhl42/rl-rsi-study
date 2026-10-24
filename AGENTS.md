@@ -32,6 +32,8 @@ For every self-improvement claim, identify what changes: weights, memory, prompt
 
 Keep source files unchanged. Record versions for results that depend on them. Do not put credentials, customer traffic, or private source material into the shared repository. Record data permissions when they affect an experiment or product decision.
 
+Distinguish durable concepts from dated results, changing interfaces, and commercial claims. Follow the [currency and applicability rules](docs/research-method.md#currency-and-applicability). A recent retrieval date does not make old evidence current; explain what a reader can carry forward and what needs a new check.
+
 ## Write plain English
 
 These rules adapt the writing guidance from the related `ai-data-research` repository. They are self-contained here and apply to docs, code comments, commit messages, and error text.

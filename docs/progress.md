@@ -4,7 +4,7 @@ This is the current worklist and decision record. Keep it useful to someone star
 
 ## Current state
 
-As of 2026-10-23, the repository contains a survey, a reading and viewing guide, a source register, study notes, research experiment proposals, and a sourced initial market map. The [study guide](01-study-plan.md) serves engineering leaders with deep systems expertise and existing hands-on AI work. It now favors engineering articles, design reports, and implementation documentation, with selected sections and optional depth. Practice assignments and completion gates have been removed. Book chapters and foundational papers are references for concrete questions.
+As of 2026-10-24, the repository contains a survey, a reading and viewing guide, a source register, study notes, research experiment proposals, and a sourced initial market map. The [study guide](01-study-plan.md) serves engineering leaders with deep systems expertise and existing hands-on AI work. It favors engineering articles, design reports, and implementation documentation, with selected sections and optional depth. It now distinguishes durable concepts, dated case studies, and changing implementation or commercial details. Practice assignments and completion gates remain removed. Book chapters and foundational papers are references for concrete questions.
 
 The first [AutoEnvScaling code study](studies/autoenvscaling-code.md) inspected selected paths at commit `2b38259ac0ab5983c7de21df0f50696ab43e8869`. The [original record](records/2026-10-14-autoenvscaling-code/README.md) owns the offline tests and probes. The [independent review checks](records/2026-10-14-claude-review-checks/README.md) add a solver-side probe. The [review resolution](reviews/claude-init-review-1-resolution.md) records this follow-up's source checks, corrections, and recommendation-by-recommendation response.
 
@@ -108,5 +108,15 @@ Replaced that course and the minimal-agent tutorial with architecture and contro
 Training now starts from Ai2's Tülu 3 pipeline report and uses Tinker's interfaces to connect samples to updates. Selected Lambert passages remain optional concept lookups. Added the verifiers architecture article as a conditional comparison for task and trace contracts. These sources illustrate different implementations without selecting a provider or changing the AES/Third Moment priorities.
 
 The [source register](../references/README.md#engineering-readings) records the new source checks and their limits. Earlier sources and reviews remain available. No new implementation, training experiment, or commercial validation was performed.
+
+### 2026-10-24 Clarify which evidence stays useful
+
+The user asked whether fast-changing sources still make the documentation effective, citing Anthropic's warning about its 2024 tooling advice. The [currency check](../references/README.md#currency-check-2026-10-24) assessed reading value separately from present-day implementation and commercial claims.
+
+Retained older conceptual and measurement explanations with explicit scope. Paired the agent readings with newer architecture and harness accounts. Recorded a Tinker documentation/changelog conflict and the verifiers preview's replacement by v0.4.0. Added version and compatibility context for living framework documentation. No new runtime behavior was verified.
+
+Marked the market map as a dated comparison, corrected Epoch's contributor description and title, and rechecked Third Moment's public positioning. The underlying January market evidence and October 14 vendor/pricing checks were not made current by reopening some pages. AES/Harness² pinned findings remain intact; newer upstream code was not audited.
+
+The guide now states what readers can learn from each kind of evidence and where a fresh check is needed. The research method and shared guidance preserve that distinction for future edits. This changes interpretation and source maintenance, not the commercial objective, research priorities, or authorization for experiments.
 
 Add later decisions with their evidence and effect on the plan. Store completed experiments and interview records under `docs/records/`.

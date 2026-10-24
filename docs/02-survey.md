@@ -4,6 +4,8 @@ This survey explains the technical choices behind tasks, environments, and feedb
 
 The central question is how to turn useful work into repeatable learning opportunities with trustworthy feedback. A task framework must support that process. Which parts should become our product depends on who needs them, what they can already do, and what improvement they will pay for.
 
+Use the conceptual distinctions as a working model. Research comparisons apply to their cited versions and evaluation settings; proposed framework interfaces are design hypotheses. This survey is not a current model or supplier ranking. The [study guide](01-study-plan.md#how-to-interpret-these-readings) explains how to interpret sources that age at different rates.
+
 ## 1 From a language model to a working agent
 
 A language model produces tokens, which are pieces of text or structured output. Its learned numerical parameters are called **weights**. During ordinary inference, those weights stay fixed. The input context can change, so the same model can behave differently after seeing a tool result or a written reminder.

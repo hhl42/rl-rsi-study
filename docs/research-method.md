@@ -28,6 +28,16 @@ For a source that changes our view, record:
 
 Use a detailed study file only when the source merits one. Short notes can stay in the source register. Preserve provided PDFs. Link to additional papers rather than copying full articles into the repository. Track retrieval dates for changing web sources. Record exact revisions when inspecting implementation behavior.
 
+## Currency and applicability
+
+Separate the source's publication date, our check date, and the version or period its evidence describes. A page reopened today can still report an old experiment or market. A living documentation URL can change without changing its title.
+
+For each consequential reading, identify what remains useful: a concept, a result in a specified setting, or an implementation or offer that needs checking before use. Explain concrete limits beside the recommendation. Newer publication is not stronger validation, and an older source is not automatically obsolete.
+
+When an author flags outdated advice, follow the replacement or correction. For code reuse, compare the selected release's documentation, changelog, and implementation. If they conflict, record the conflict and avoid treating the snippet as verified. Reassess harness workarounds when the model, task, or execution setting changes. Refresh prices and commercial terms for the actual decision.
+
+The guide owns reader-facing context; the source register owns dated check details. Keep historical results and records intact. State the scope of each refresh rather than giving the whole repository a new freshness date. This is a rule for future edits, not a scheduled monitoring commitment.
+
 ## Experiment records
 
 Before running an experiment, state the hypothesis, intervention, baseline, budget, evaluation split, and decision it should inform. Name the primary metric and the tradeoffs that could reverse the conclusion. Choose decision thresholds after a small pilot if cost or variance is unknown; do not choose them after inspecting the final comparison.

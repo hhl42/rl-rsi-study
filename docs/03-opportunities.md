@@ -17,9 +17,9 @@ The [Third Moment study](studies/third-moment-research.md) informs managed impro
 
 ## Market map
 
-Public sources checked on 2026-10-14. This is an initial comparison, not a market census. Company pages establish what a vendor advertises; the entries do not verify customer outcomes. “No public price found” means none in the inspected source, not that no price exists.
+Vendor and pricing entries below retain their 2026-10-14 check date. This is an initial comparison, not a live supplier ranking or market census. Company pages establish advertised offers; the entries do not verify customer outcomes. “No public price found” refers to the inspected source at that date. Refresh the relevant offer, price, and terms before a product or spending decision.
 
-| Candidate and buyer | Named alternatives and current workaround | Price evidence and implication |
+| Candidate and buyer | Named alternatives and possible workaround | Price evidence and implication |
 | --- | --- | --- |
 | Task supply → model/post-training teams | [Scale](https://scale.com/rlenvironments) advertises expert-built environments. [MiMo](studies/mimo-rl.md) releases environments. Internal task construction is another option. | No public Scale task price found. Open artifacts raise the question of what a buyer needs beyond generic supply; inspect licenses and quality before treating them as reusable. |
 | Independent quality → training teams or suppliers | [HUD](https://www.hud.ai/research/what-is-a-good-task) describes task design and work with data vendors. Internal expert review and Harbor verifier tests can supply parts of the same function. | No standalone HUD audit price found. First establish whether buyers want a separate reviewer or expect QA within task supply. |
@@ -28,7 +28,7 @@ Public sources checked on 2026-10-14. This is an initial comparison, not a marke
 | Execution → training/evaluation infrastructure teams | [Modal](https://modal.com/pricing), [Daytona](https://www.daytona.io/pricing), and a customer's own container workers. | Modal lists US$0.0000131 per physical CPU core-second and US$0.00000222 per GiB-second. Daytona lists US$0.0504 per vCPU-hour and US$0.0162 per GiB-hour. Physical cores and vCPUs are different units; storage, GPU, and other charges are additional. Benchmark a full workload before comparing cost. |
 | Security audit → labs and environment suppliers | Internal security teams plus Harbor-based negative tests; Modal and Daytona supply infrastructure controls that may cover part of the need. These are substitutes, not verified independent audit offerings. | No comparable third-party audit price verified. First determine which checks customers already perform and whether independent evidence changes a purchase or release decision. |
 
-[Epoch AI's January 2026 interview report](https://epoch.ai/gradient-updates/state-of-rl-envs), based on 18 interviews, reports typical task prices of US$200–2,000, higher prices for exclusivity, and increased internal construction by labs. Respondents emphasize robustness against reward hacking. These are reported market observations, not audited transactions or quotes for our task family. They make buyer concentration and quality important questions; they do not settle which candidate wins.
+[Epoch AI's January 2026 report](https://epoch.ai/gradient-updates/state-of-rl-envs), based on input from 18 people through nine calls and nine text/email exchanges, reports typical task prices of US$200–2,000, higher prices for exclusivity, and increased internal construction by labs. Respondents emphasize robustness against reward hacking. Rechecking the page on 2026-10-24 did not update that January evidence. Use it for buyer and quality questions; it supplies neither current quotes for our task family nor audited transactions.
 
 ### Additional supplier leads
 
